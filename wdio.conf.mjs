@@ -1,5 +1,4 @@
 import allure from 'allure-commandline';
-// const allure = require("./node_modules/allure-commandline")
 
 export const config = {
     //
@@ -126,12 +125,21 @@ export const config = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
-    reporters: ['spec', ['allure', { outputDir: 'allure-results' }]],
-
+    reporters: ['spec', ['allure', {
+        outputDir: 'allure-results',
+        disableWebdriverStepsReporting: false
+    }]],
     // If you are using Cucumber you need to specify the location of your step definitions.
     cucumberOpts: {
         // <string[]> (file/dir) require files before executing features
         require: ['./src/step-definitions/*.js'],
+        format: ['@qavajs/format'],
+        tagExpression: '',
+        timeout: 60000,
+        strict: true,
+        formatOptions: {
+            stepDefinitions: true
+        },
         // <boolean> show full backtrace for errors
         backtrace: false,
         // <string[]> ("extension:module") require files with the given EXTENSION after requiring MODULE (repeatable)
@@ -170,8 +178,9 @@ export const config = {
      * @param {object} config wdio configuration object
      * @param {Array.<Object>} capabilities list of capabilities details
      */
-    // onPrepare: function (config, capabilities) {
-    // },
+    onPrepare: function (config, capabilities) {
+        allure(['generate', 'allure-results', '--clean']);
+    },
     /**
      * Gets executed before a worker process is spawned and can be used to initialize specific service
      * for that worker as well as modify runtime environments in an async fashion.
@@ -256,11 +265,11 @@ export const config = {
      * @param {number}             result.duration  duration of scenario in milliseconds
      * @param {object}             context          Cucumber World object
      */
-    afterStep: async function (step, scenario, result, context) {
-        if (result.error) {
-            await browser.saveScreenshot(`./screenshots/${scenario.name}_${step.text}.png`);
-          }
-    },
+    //afterStep: async function (step, scenario, result, context) {
+    //    if (result.error) {
+    //        await browser.saveScreenshot(`./screenshots/${scenario.name}_${step.text}.png`);
+    //      }
+    //},
     /**
      *
      * Runs after a Cucumber Scenario.
@@ -316,7 +325,7 @@ export const config = {
      * @param {Array.<Object>} capabilities list of capabilities details
      * @param {<Object>} results object containing test results
      */
-    onComplete: function(exitCode, config, capabilities, results) {
+    onComplete: function() {
         const reportError = new Error('Could not generate Allure report')
         const generation = allure(['generate', 'allure-results', '--clean'])
         return new Promise((resolve, reject) => {
