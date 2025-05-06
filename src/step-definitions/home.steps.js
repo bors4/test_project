@@ -6,20 +6,61 @@ const URLs = require('../config/constants');
 const basePage = new BasePage();
 const homePage = new HomePage();
 
-Given(/ссылка на сайт/, async () => {
-    homePage.getURL()
+/*
+Given
+-----------------------------------------------------------------------------------------
+*/
+
+Given(/^ссылка на сайт/, async () => {
+    await homePage.getURL();
 });
 
+/*
+When
+-----------------------------------------------------------------------------------------
+*/
+
 When(/я перехожу по ссылке/, async () => {
-    console.log('URL type:', typeof URLs.HOME); // Должно быть "string"
     await basePage.open(URLs.HOME)
 });
 
 When(/я нажимаю на ссылку "Каталог" в заголовке/, async () => {
-    await $(homePage.locators.href_catalog).click()
+    const selector = String(homePage.hrefCatalog);
+    await $(selector).click();
 })
 
+When(/я нажимаю на поле ввода для поиска товара/, async () => {
+    const searchInput = browser.$(homePage.searchInput)
+    await searchInput.click();
+})
+
+When(/я ввожу название товара/, async () => {
+    const searchInput = browser.$(homePage.searchInput)
+    const textToSearch = homePage.getTextFromSearchInput()
+    await searchInput.setValue(textToSearch)
+})
+
+/*
+Then
+-----------------------------------------------------------------------------------------
+*/
+
 Then(/я вижу лого сайта/, async () => {
-    const logo = browser.$(homePage.locators.main_logo)
+    const logo = browser.$(homePage.main_logo)
     expect(logo).toExist()
 });
+
+Then(/я вижу поле ввода для поиска товара/, async () => {
+    const searchInput = browser.$(homePage.searchInput)
+    expect(searchInput).toExist()
+})
+
+Then(/я вижу текст примера товара для поиска/, async () => {
+    const searchInput = browser.$(homePage.searchInput)
+    await expect(searchInput.toHaveAttr('placeholder', expect.stringContaining('Например')))
+})
+
+Then(/я вижу окно результатов поиска/, async () => {
+    $(homePage.modalSearch).isEnabled()
+})
+

@@ -6,29 +6,41 @@ class HomePage extends BasePage {
         return URLs.HOME;
     }
 
-    locators = {
-        main_logo:      '//div//a[@href="https://www.onliner.by"]/img',
+    constructor () {
+
+        super();
+        
+        this.main_logo = '//div//a[@href="https://www.onliner.by"]/img'
 
         //Ссылки в заголовке
-        href_catalog:   '//nav//a[contains(@href,"catalog")][2]//span[.="Каталог"]',
-        href_news:      '//nav//a[contains(@href,"onliner")][1]//span[.="Новости"]',
-        href_ab:        '//nav//a[contains(@href,"ab.")][1]//span[.="Автобарахолка"]',
-        href_r:         '//nav//a[contains(@href,"r.")][1]//span[.="Дома и квартиры"]',
-        href_s:         '//nav//a[contains(@href,"s.on")][1]/span[.="Услуги"]',
-        href_baraholka: '//nav//a[contains(@href,"baraholka")][1]//span[.="Барахолка"]',
-        href_forum:     '//nav//a[contains(@href,"forum")][1]//span[.="Форум"]',
-        href_kurs:      '//nav//a[contains(@href, "kurs")]',
-        href_pogoda:    '//nav//a[contains(@href, "pogoda")]',
+        this.hrefCatalog = '//nav//a[contains(@href,"catalog")][2]//span[.="Каталог"]'
+        this.hrefNews = '//nav//a[contains(@href,"onliner")][1]//span[.="Новости"]'
+        this.hrefAb = '//nav//a[contains(@href,"ab.")][1]//span[.="Автобарахолка"]'
+        this.hrefR = '//nav//a[contains(@href,"r.")][1]//span[.="Дома и квартиры"]'
+        this.hrefS = '//nav//a[contains(@href,"s.on")][1]/span[.="Услуги"]'
+        this.hrefBaraholka = '//nav//a[contains(@href,"baraholka")][1]//span[.="Барахолка"]'
+        this.hrefForum = '//nav//a[contains(@href,"forum")][1]//span[.="Форум"]'
+        this.hrefKurs = '//nav//a[contains(@href, "kurs")]'
+        this.hrefPogoda = '//nav//a[contains(@href, "pogoda")]'
         
         //Поиск
-        input_search: '//input[@name="query"]',
+        this.inputSearch = '//input[@name="query"]'
+        this.modalSearch = '//div[@id="search-page"]'
 
         //Контйнер кнопок авторизации/регистрации
-        button_enter:    '//*[@id="userbar"]//text()[.="Вход"]',
-        button_facebook: '//*[@id="userbar"]//*[@title="Facebook"]',
-        button_enter:    '//*[@id="userbar"]//*[@title="ВКонтакте"]',
-        button_enter:    '//*[@id="userbar"]//*[@title="Google"]',
-        button_cart:     '//*[@id="userbar"]//*[@title="Корзина"]'
+        this.buttonEnter = '//*[@id="userbar"]//text()[.="Вход"]'
+        this.buttonFacebook = '//*[@id="userbar"]//*[@title="Facebook"]'
+        this.buttonVk = '//*[@id="userbar"]//*[@title="ВКонтакте"]'
+        this.buttonGoogle = '//*[@id="userbar"]//*[@title="Google"]'
+        this.buttonCart = '//*[@id="userbar"]//*[@title="Корзина"]'
+    }
+
+    getTextFromSearchInput() {
+        searchExample = searchInput.getAttribute('placeholder')
+        startText = searchExample.indexOf("&quot;", 1)
+        endText = searchExample.indexOf("&quot;", 2)
+        textToSearch = searchExample.slice(startText + 1, endText)
+        return textToSearch
     }
 }
 

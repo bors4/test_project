@@ -4,14 +4,13 @@ const CatalogPage = require('../pageobjects/catalog.page');
 
 const catalogPage = new CatalogPage();
 
-
-
 Then(/я вижу заголовок раздела "Каталог"/, async () => {
-    const logo = browser.$(catalogPage.locators.h_catalog)
+    const logo = $(catalogPage.h_catalog)
+    console.log(typeof logo)
     expect(logo).toExist()
 });
 
 Then(/я вижу заголовок раздела "Популярные разделы"/, async () => {
-    const logo = browser.$(catalogPage.locators.h_popular)
+    const logo = $(catalogPage.h_popular)
     expect(logo).toExist()
 })
