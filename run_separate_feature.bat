@@ -1,0 +1,1 @@
+npm run test -- --spec search.catalog.feature

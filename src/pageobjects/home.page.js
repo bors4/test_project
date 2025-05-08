@@ -26,6 +26,7 @@ class HomePage extends BasePage {
         //Поиск
         this.inputSearch = '//input[@name="query"]'
         this.modalSearch = '//div[@id="search-page"]'
+        this.checkBoxToEqual = '//input[contains(@data-bind, "compare")]'
 
         //Контйнер кнопок авторизации/регистрации
         this.buttonEnter = '//*[@id="userbar"]//text()[.="Вход"]'
@@ -35,12 +36,15 @@ class HomePage extends BasePage {
         this.buttonCart = '//*[@id="userbar"]//*[@title="Корзина"]'
     }
 
-    getTextFromSearchInput() {
-        searchExample = searchInput.getAttribute('placeholder')
-        startText = searchExample.indexOf("&quot;", 1)
-        endText = searchExample.indexOf("&quot;", 2)
-        textToSearch = searchExample.slice(startText + 1, endText)
-        return textToSearch
+    async getTextFromSearchInput() {
+        const placeholderText = await $(this.inputSearch).getAttribute('placeholder');
+        console.log("Placeholder:" + placeholderText)
+        const start = placeholderText.indexOf('"');
+        const end = placeholderText.indexOf('"', start + 1);
+        console.log("Start:" + start)
+        console.log("End:" + end)
+        console.log("Placeholder:" + placeholderText.slice(start + 2, end))
+        return placeholderText.slice(start, end);
     }
 }
 

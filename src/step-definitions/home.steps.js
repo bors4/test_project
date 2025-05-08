@@ -27,18 +27,18 @@ When(/я перехожу по ссылке/, async () => {
 When(/я нажимаю на ссылку "Каталог" в заголовке/, async () => {
     const selector = String(homePage.hrefCatalog);
     await $(selector).click();
-})
+});
 
-When(/я нажимаю на поле ввода для поиска товара/, async () => {
-    const searchInput = browser.$(homePage.searchInput)
-    await searchInput.click();
-})
+When(/я нажимаю на поле ввода названия товара/, async () => {
+    await $('input[name="query"]').click();
+  });
 
 When(/я ввожу название товара/, async () => {
-    const searchInput = browser.$(homePage.searchInput)
-    const textToSearch = homePage.getTextFromSearchInput()
+    const searchInput = await browser.$(homePage.inputSearch)
+    const textToSearch = await homePage.getTextFromSearchInput()
+    console.log("textToSearch:" + textToSearch)
     await searchInput.setValue(textToSearch)
-})
+});
 
 /*
 Then
@@ -52,15 +52,23 @@ Then(/я вижу лого сайта/, async () => {
 
 Then(/я вижу поле ввода для поиска товара/, async () => {
     const searchInput = browser.$(homePage.searchInput)
-    expect(searchInput).toExist()
-})
+    await expect(searchInput).toExist()
+});
 
 Then(/я вижу текст примера товара для поиска/, async () => {
-    const searchInput = browser.$(homePage.searchInput)
+    const searchInput = await browser.$(homePage.searchInput)
     await expect(searchInput.toHaveAttr('placeholder', expect.stringContaining('Например')))
-})
+});
 
 Then(/я вижу окно результатов поиска/, async () => {
-    $(homePage.modalSearch).isEnabled()
-})
+    await browser.switchFrame($('iframe'))
+    const modalSearch = await browser.$(homePage.modalSearch)
+    console.log("modalSearch:" + modalSearch)
+    await modalSearch.waitForDisplayed({ timeout: 3000})
+    await expect(modalSearch).toExist()
+});
 
+Then(/я вижу чекбокс "К сравнению"/, async () => {
+    const checkBoxToEqual = browser.$(homePage.checkBoxToEqual)
+    await expect(checkBoxToEqual).toExist()
+})
