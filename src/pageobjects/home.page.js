@@ -6,10 +6,10 @@ class HomePage extends BasePage {
         return URLs.HOME;
     }
 
-    constructor () {
+    constructor() {
 
         super();
-        
+
         this.main_logo = '//div//a[@href="https://www.onliner.by"]/img'
 
         //Ссылки в заголовке
@@ -22,7 +22,7 @@ class HomePage extends BasePage {
         this.hrefForum = '//nav//a[contains(@href,"forum")][1]//span[.="Форум"]'
         this.hrefKurs = '//nav//a[contains(@href, "kurs")]'
         this.hrefPogoda = '//nav//a[contains(@href, "pogoda")]'
-        
+
         //Поиск
         this.inputSearch = '//input[@name="query"]'
         this.modalSearch = '//div[@id="search-page"]'
@@ -38,12 +38,8 @@ class HomePage extends BasePage {
 
     async getTextFromSearchInput() {
         const placeholderText = await $(this.inputSearch).getAttribute('placeholder');
-        console.log("Placeholder:" + placeholderText)
-        const start = placeholderText.indexOf('"');
+        const start = placeholderText.indexOf('"') + 1;
         const end = placeholderText.indexOf('"', start + 1);
-        console.log("Start:" + start)
-        console.log("End:" + end)
-        console.log("Placeholder:" + placeholderText.slice(start + 2, end))
         return placeholderText.slice(start, end);
     }
 }

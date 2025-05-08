@@ -36,7 +36,6 @@ When(/я нажимаю на поле ввода названия товара/,
 When(/я ввожу название товара/, async () => {
     const searchInput = await browser.$(homePage.inputSearch)
     const textToSearch = await homePage.getTextFromSearchInput()
-    console.log("textToSearch:" + textToSearch)
     await searchInput.setValue(textToSearch)
 });
 
@@ -63,7 +62,6 @@ Then(/я вижу текст примера товара для поиска/, a
 Then(/я вижу окно результатов поиска/, async () => {
     await browser.switchFrame($('iframe'))
     const modalSearch = await browser.$(homePage.modalSearch)
-    console.log("modalSearch:" + modalSearch)
     await modalSearch.waitForDisplayed({ timeout: 3000})
     await expect(modalSearch).toExist()
 });
