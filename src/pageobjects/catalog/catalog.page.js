@@ -1,4 +1,4 @@
-const BasePage = require('./base.page')
+const BasePage = require('../base.page')
 
 class CatalogPage extends BasePage {
     constructor() {

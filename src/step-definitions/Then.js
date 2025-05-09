@@ -1,12 +1,12 @@
 const {Then} = require('@wdio/cucumber-framework');
-const HomePage = require('../pageobjects/home.page');
-const CatalogPage = require('../pageobjects/catalog.page');
+const HomePage = require('../pageobjects/home/home.page');
+const CatalogPage = require('../pageobjects/catalog/catalog.page');
 
 const homePage = new HomePage();
 const catalogPage = new CatalogPage()
 
 Then(/я вижу лого сайта/, async () => {
-    const logo = browser.$(homePage.main_logo)
+    const logo = browser.$(homePage.mainLogo)
     expect(logo).toExist()
 });
 
@@ -33,7 +33,6 @@ Then(/я вижу чекбокс "К сравнению"/, async () => {
 
 Then(/я вижу заголовок раздела "Каталог"/, async () => {
     const logo = $(catalogPage.h_catalog)
-    console.log(typeof logo)
     expect(logo).toExist()
 });
 
