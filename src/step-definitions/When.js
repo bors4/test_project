@@ -1,28 +1,22 @@
 const {When} = require('@wdio/cucumber-framework');
-const BasePage = require('../pageobjects/base.page');
-const HomePage = require('../pageobjects/home/home.page');
+const BaseHeader = require('../pageobjects/BaseHeader');
 const URLs = require('../config/constants');
 
-const basePage = new BasePage();
-const homePage = new HomePage();
-
+const baseHeader = new BaseHeader();
 
 When(/я перехожу по ссылке/, async () => {
-    await basePage.open(URLs.HOME)
+    await baseHeader.open(URLs.HOME)
 });
 
-let a = /([^"]*)/
-
 When(/я нажимаю на ссылку "([^"]*)" в заголовке/, async (element) => {
-    element = homePage.hrefCatalog
-    console.log(element)
-    await homePage.hrefCatalogClick();
+    element = baseHeader.elements[element]
+    await baseHeader.hrefCatalogClick();
 });
 
 When(/я нажимаю на поле ввода названия товара/, async () => {
-    await $(homePage.inputSearch).click();
+    await $(baseHeader.inputSearch).click();
   });
 
 When(/я ввожу название товара/, async () => {
-    await homePage.setTextToSearch();
+    await baseHeader.setTextToSearch();
 });

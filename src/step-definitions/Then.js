@@ -1,33 +1,33 @@
 const {Then} = require('@wdio/cucumber-framework');
-const HomePage = require('../pageobjects/home/home.page');
+const BaseHeader = require('../pageobjects/BaseHeader');
 const CatalogPage = require('../pageobjects/catalog/catalog.page');
 
-const homePage = new HomePage();
+const baseHeader = new BaseHeader();
 const catalogPage = new CatalogPage()
 
 Then(/я вижу лого сайта/, async () => {
-    const logo = browser.$(homePage.mainLogo)
+    const logo = browser.$(baseHeader.mainLogo)
     expect(logo).toExist()
 });
 
 Then(/я вижу поле ввода для поиска товара/, async () => {
-    const searchInput = browser.$(homePage.searchInput)
+    const searchInput = browser.$(baseHeader.searchInput)
     await expect(searchInput).toExist()
 });
 
 Then(/я вижу текст примера товара для поиска/, async () => {
-    const searchInput = await browser.$(homePage.searchInput)
+    const searchInput = await browser.$(baseHeader.searchInput)
     await expect(searchInput.toHaveAttr('placeholder', expect.stringContaining('Например')))
 });
 
 Then(/я вижу окно результатов поиска/, async () => {
     await browser.switchFrame($('iframe'))
-    const modalSearch = await browser.$(homePage.modalSearch)
+    const modalSearch = await browser.$(baseHeader.modalSearch)
     await expect(modalSearch).toExist()
 });
 
 Then(/я вижу чекбокс "К сравнению"/, async () => {
-    const checkBoxToEqual = browser.$(homePage.checkBoxToEqual)
+    const checkBoxToEqual = browser.$(baseHeader.checkBoxToEqual)
     await expect(checkBoxToEqual).toExist()
 })
 
