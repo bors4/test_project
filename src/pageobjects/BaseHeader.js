@@ -1,13 +1,10 @@
 class BaseHeader {
-    async open(path) {
-        await browser.url(path);
-    }
 
     constructor () {
 
         this.elements = {
         'Лого':                         this.mainLogo,
-        'ссылка "Каталог"':             '//nav//a[contains(@href,"catalog")][2]//span[.="Каталог"]',
+        'ссылка Каталог':               '//nav//a[contains(@href,"catalog")][2]//span[.="Каталог"]',
         'ссылка "Новости"':             this.hrefNews,
         'ссылка "Автобарахолка"':       this.hrefAb,
         'ссылка "Дома и квартиры"':     this.hrefR,
@@ -34,8 +31,7 @@ class BaseHeader {
         'кнопка "Принять все cookie"':  this.buttonAcceptCookie,
         }
 
-        this.mainLogo           = '//div//a[@href="https://www.onliner.by"]/img',
-
+        this.mainLogo           = '//div//a[@href="https://www.onliner.by"]/img'
         //Ссылки в заголовке
         this.hrefCatalog        = '//nav//a[contains(@href,"catalog")][2]//span[.="Каталог"]'
         this.hrefNews           = '//nav//a[contains(@href,"onliner")][1]//span[.="Новости"]'
@@ -65,7 +61,7 @@ class BaseHeader {
         this.buttonAcceptCookie = '//a[@id="submit-button"]'
     }
 
-    /* 
+/* 
 get functions
 */
     async getTextFromSearchInput() {
@@ -87,10 +83,13 @@ set functions
 /* 
 other functions
 */
-    async hrefCatalogClick() {
-        const hrefCatalog = this.hrefCatalog;
-        console.log(hrefCatalog)
-        await $(hrefCatalog).click();
+    async open(path) {
+        await browser.url(path);
+    }
+
+    async hrefClick(hrefElement) {
+        const element = $(hrefElement);
+        await element.click();
     }
 
     async acceptCookie (){

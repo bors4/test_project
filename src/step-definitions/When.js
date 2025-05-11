@@ -8,9 +8,9 @@ When(/я перехожу по ссылке/, async () => {
     await baseHeader.open(URLs.HOME)
 });
 
-When(/я нажимаю на ссылку "([^"]*)" в заголовке/, async (element) => {
-    element = baseHeader.elements[element]
-    await baseHeader.hrefCatalogClick();
+When(/я нажимаю на "([^"]*)" в заголовке/, async (element) => {
+    const locator = baseHeader.elements[element];
+    await baseHeader.hrefClick(locator);
 });
 
 When(/я нажимаю на поле ввода названия товара/, async () => {

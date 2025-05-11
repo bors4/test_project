@@ -6,7 +6,7 @@ const baseHeader = new BaseHeader();
 const catalogPage = new CatalogPage()
 
 Then(/я вижу лого сайта/, async () => {
-    const logo = browser.$(baseHeader.mainLogo)
+    const logo = $(baseHeader.mainLogo)
     expect(logo).toExist()
 });
 
