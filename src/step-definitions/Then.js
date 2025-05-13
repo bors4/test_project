@@ -31,12 +31,7 @@ Then(/я вижу чекбокс "К сравнению"/, async () => {
     await expect(checkBoxToEqual).toExist()
 })
 
-Then(/я вижу заголовок раздела "Каталог"/, async () => {
-    const logo = $(catalogPage.h_catalog)
-    expect(logo).toExist()
+Then(/я вижу заголовок раздела "([^"]*)"/, async (element) => {
+    const section = catalogPage.elements[element]
+    await expect(section).toBeDisplayed()
 });
-
-Then(/я вижу заголовок раздела "Популярные разделы"/, async () => {
-    const logo = $(catalogPage.h_popular)
-    expect(logo).toExist()
-})

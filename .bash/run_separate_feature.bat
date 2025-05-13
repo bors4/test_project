@@ -1,1 +1,1 @@
-npm run test -- --spec open.catalog.feature
+npm run test -- --spec open.ab.feature

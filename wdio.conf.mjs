@@ -14,7 +14,19 @@ export const config = {
     maxInstances: 2,
 
     capabilities: [{
-        browserName: 'chrome'
+        browserName: 'chrome',
+        'goog:chromeOptions': {
+            prefs: {
+                'profile.managed_default_content_settings.images': 2,
+                'profile.managed_default_content_settings.fonts': 2,
+                'profile.default_content_setting_values.fonts': 2  
+            },
+            args: [
+                '--blink-settings=imagesEnabled=false',
+                '--disable-fonts',
+                '--blink-settings=fontsEnabled=false'
+            ]
+        }
     }],
 
 

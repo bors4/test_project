@@ -9,7 +9,7 @@ When(/я перехожу по ссылке/, async () => {
 });
 
 When(/я нажимаю на "([^"]*)" в заголовке/, async (element) => {
-    const locator = baseHeader.elements[element];
+    const locator = baseHeader.elements[element]
     await baseHeader.hrefClick(locator);
 });
 
