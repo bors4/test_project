@@ -21,7 +21,7 @@
     "test": "wdio run ./wdio.conf.mjs",
     "test_features": "wdio run ./wdio.conf.mjs --spec features/",
     "test:debug": "wdio run ./wdio.conf.cjs --logLevel=debug",
-    "test:catalog": "wdio run ./wdio.conf.cjs --cucumberOpts.tagExpression='@catalog'",
+    "test:tags": "npx wdio run ./wdio.conf.mjs --cucumberOpts.tags=",
     "test:open": "wdio run ./wdio.conf.cjs --spec ./test/login.test.js"
   }
 }
