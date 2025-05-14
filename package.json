@@ -20,8 +20,8 @@
   "scripts": {
     "test": "wdio run ./wdio.conf.mjs",
     "test_features": "wdio run ./wdio.conf.mjs --spec features/",
-    "test:debug": "wdio run ./wdio.conf.cjs --logLevel=debug",
+    "test:debug": "wdio run ./wdio.conf.mjs --logLevel=debug",
     "test:tags": "npx wdio run ./wdio.conf.mjs --cucumberOpts.tags=",
-    "test:open": "wdio run ./wdio.conf.cjs --spec ./test/login.test.js"
+    "test:open": "wdio run ./wdio.conf.mjs --spec ./test/login.test.js"
   }
 }

@@ -1,9 +1,9 @@
-const {Then} = require('@wdio/cucumber-framework');
-const BaseHeader = require('../pageobjects/BaseHeader');
-const CatalogPage = require('../pageobjects/catalog/catalog.page');
+const {Then} = require('@wdio/cucumber-framework')
+const BaseHeader = require('../pageobjects/BaseHeader')
+const PageObjects = require('../pageobjects/PageObjects')
 
-const baseHeader = new BaseHeader();
-const catalogPage = new CatalogPage()
+const baseHeader = new BaseHeader()
+const pageobjects = new PageObjects()
 
 Then(/я вижу лого сайта/, async () => {
     const logo = $(baseHeader.mainLogo)
@@ -31,7 +31,8 @@ Then(/я вижу чекбокс "К сравнению"/, async () => {
     await expect(checkBoxToEqual).toExist()
 })
 
-Then(/я вижу заголовок раздела "([^"]*)"/, async (element) => {
-    const section = catalogPage.elements[element]
-    await expect(section).toBeDisplayed()
+Then(/я вижу заголовок раздела "([^"]*)" на "([^"]*)"/, async (element, pageName) => {
+    const page = pageobjects.getPage(pageName)
+    const section = $(page.elements[element])
+    await expect(section).toExist()
 });
