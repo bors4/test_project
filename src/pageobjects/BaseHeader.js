@@ -3,16 +3,16 @@ class BaseHeader {
     constructor () {
 
         this.elements = {
-        'Лого':                         this.mainLogo,
+        'Лого сайта':                   '//div//a[@href="https://www.onliner.by"]/img',
         'ссылка Каталог':               '//nav//a[contains(@href,"catalog")][2]//span[.="Каталог"]',
-        'ссылка Новости':             this.hrefNews,
-        'ссылка Автобарахолка':       '//nav//a[contains(@href,"ab.")][1]//span[.="Автобарахолка"]',
-        'ссылка Дома и квартиры':     this.hrefR,
-        'ссылка Услуги':              this.hrefS,
-        'ссылка Барахолка':           this.hrefBaraholka,
-        'ссылка Форум':               this.hrefForum,
-        'ссылка Курс':                this.hrefKurs,
-        'ссылка Погода':              this.hrefPogoda,
+        'ссылка Новости':               this.hrefNews,
+        'ссылка Автобарахолка':         '//nav//a[contains(@href,"ab.")][1]//span[.="Автобарахолка"]',
+        'ссылка Дома и квартиры':       this.hrefR,
+        'ссылка Услуги':                this.hrefS,
+        'ссылка Барахолка':             this.hrefBaraholka,
+        'ссылка Форум':                 this.hrefForum,
+        'ссылка Курс':                  this.hrefKurs,
+        'ссылка Погода':                this.hrefPogoda,
         
         //Поиск
         'поле поиска':                  this.inputSearch,

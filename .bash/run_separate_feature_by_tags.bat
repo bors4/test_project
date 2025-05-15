@@ -1,1 +1,1 @@
-npm run test:tags @ab
+npm run test:tags
