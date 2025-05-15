@@ -5,9 +5,10 @@ const PageObjects = require('../pageobjects/PageObjects')
 const baseHeader = new BaseHeader()
 const pageobjects = new PageObjects()
 
-Then(/я вижу лого сайта/, async () => {
-    const logo = $(baseHeader.mainLogo)
-    expect(logo).toExist()
+Then(/я вижу "([^"]*)" на "([^"]*)"/, async (elementName, pageName) => {
+    const page = pageobjects.getPage(pageName)
+    const element = $(page.elements[elementName])
+    expect(element).toExist()
 });
 
 Then(/я вижу поле ввода для поиска товара/, async () => {
@@ -31,8 +32,8 @@ Then(/я вижу чекбокс "К сравнению"/, async () => {
     await expect(checkBoxToEqual).toExist()
 })
 
-Then(/я вижу заголовок раздела "([^"]*)" на "([^"]*)"/, async (element, pageName) => {
+Then(/я вижу заголовок раздела "([^"]*)" на "([^"]*)"/, async (elementName, pageName) => {
     const page = pageobjects.getPage(pageName)
-    const section = $(page.elements[element])
+    const section = $(page.elements[elementName])
     await expect(section).toExist()
 });
