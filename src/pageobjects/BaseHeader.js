@@ -3,69 +3,42 @@ class BaseHeader {
     constructor () {
 
         this.elements = {
-        'Лого':                         this.mainLogo,
+        'Лого сайта':                   '//div//a[@href="https://www.onliner.by"]/img',
         'ссылка Каталог':               '//nav//a[contains(@href,"catalog")][2]//span[.="Каталог"]',
-        'ссылка Новости':             this.hrefNews,
-        'ссылка Автобарахолка':       '//nav//a[contains(@href,"ab.")][1]//span[.="Автобарахолка"]',
-        'ссылка Дома и квартиры':     this.hrefR,
-        'ссылка Услуги':              this.hrefS,
-        'ссылка Барахолка':           this.hrefBaraholka,
-        'ссылка Форум':               this.hrefForum,
-        'ссылка Курс':                this.hrefKurs,
-        'ссылка Погода':              this.hrefPogoda,
+        'ссылка Новости':               '//nav//a[contains(@href,"onliner")][1]//span[.="Новости"]',
+        'ссылка Автобарахолка':         '//nav//a[contains(@href,"ab.")][1]//span[.="Автобарахолка"]',
+        'ссылка Дома и квартиры':       '//nav//a[contains(@href,"r.")][1]//span[.="Дома и квартиры"]',
+        'ссылка Услуги':                '//nav//a[contains(@href,"s.on")][1]/span[.="Услуги"]',
+        'ссылка Барахолка':             '//nav//a[contains(@href,"baraholka")][1]//span[.="Барахолка"]',
+        'ссылка Форум':                 '//nav//a[contains(@href,"forum")][1]//span[.="Форум"]',
+        'ссылка Курс':                  '//nav//a[contains(@href, "kurs")]',
+        'ссылка Погода':                '//nav//a[contains(@href, "pogoda")]',
         
         //Поиск
-        'поле поиска':                  this.inputSearch,
-        'модальное окно поиска':        this.modalSearch,
-        'чекбокс "К сравнению"':        this.checkBoxToEqual,
+        'поле поиска':                  '//input[@name="query"]',
+        'модальное окно поиска':        '//div[@id="search-page"]',
+        'К сравнению':        '//input[contains(@data-bind, "compare")]',
 
         //Контейнер кнопок авторизации/регистрации
-        'кнопка "Вход"':                this.buttonEnter,
-        'кнопка "Facebook"':            this.buttonFacebook,
-        'кнопка "Vkontakte"':           this.buttonVk,
-        'кнопка "Google"':              this.buttonGoogle,
+        'кнопка "Вход"':                '//*[@id="userbar"]//text()[.="Вход"]',
+        'кнопка "Facebook"':            '//*[@id="userbar"]//*[@title="Facebook"]',
+        'кнопка "Vkontakte"':           '//*[@id="userbar"]//*[@title="ВКонтакте"]',
+        'кнопка "Google"':              '//*[@id="userbar"]//*[@title="Google"]',
         
         //Корзина
-        'кнопка "Корзина"':             this.buttonCart,
+        'кнопка "Корзина"':             '//*[@id="userbar"]//*[@title="Корзина"]',
 
-        'кнопка "Принять все cookie"':  this.buttonAcceptCookie,
+        'кнопка "Принять все cookie"':  '//a[@id="submit-button"]',
         }
-
-        this.mainLogo           = '//div//a[@href="https://www.onliner.by"]/img'
-        //Ссылки в заголовке
-        this.hrefCatalog        = '//nav//a[contains(@href,"catalog")][2]//span[.="Каталог"]'
-        this.hrefNews           = '//nav//a[contains(@href,"onliner")][1]//span[.="Новости"]'
-        this.hrefAb             = '//nav//a[contains(@href,"ab.")][1]//span[.="Автобарахолка"]'
-        this.hrefR              = '//nav//a[contains(@href,"r.")][1]//span[.="Дома и квартиры"]'
-        this.hrefS              = '//nav//a[contains(@href,"s.on")][1]/span[.="Услуги"]'
-        this.hrefBaraholka      = '//nav//a[contains(@href,"baraholka")][1]//span[.="Барахолка"]'
-        this.hrefForum          = '//nav//a[contains(@href,"forum")][1]//span[.="Форум"]'
-        this.hrefKurs           = '//nav//a[contains(@href, "kurs")]'
-        this.hrefPogoda         = '//nav//a[contains(@href, "pogoda")]'
-
-        //Поиск
-        this.inputSearch        = '//input[@name="query"]'
-        this.modalSearch        = '//div[@id="search-page"]'
-        this.checkBoxToEqual    = '//input[contains(@data-bind, "compare")]'
-
-        //Контейнер кнопок авторизации/регистрации
-        this.buttonEnter        = '//*[@id="userbar"]//text()[.="Вход"]'
-        this.buttonFacebook     = '//*[@id="userbar"]//*[@title="Facebook"]'
-        this.buttonVk           = '//*[@id="userbar"]//*[@title="ВКонтакте"]'
-        this.buttonGoogle       = '//*[@id="userbar"]//*[@title="Google"]'
-        
-        //Корзина
-        this.buttonCart         = '//*[@id="userbar"]//*[@title="Корзина"]'
-
-        //Cookie
-        this.buttonAcceptCookie = '//a[@id="submit-button"]'
     }
 
 /* 
 get functions
 */
-    async getTextFromSearchInput() {
-        const placeholderText = await $(this.inputSearch).getAttribute('placeholder');
+   async getTextFromSearchInput(searchInput) {
+        console.log("searchInput: " + searchInput)
+        const placeholderText = await $(searchInput).getAttribute('placeholder');
+        console.log("placeholderText: " + placeholderText)
         const start = placeholderText.indexOf('"') + 1;
         const end = placeholderText.indexOf('"', start + 1);
         return placeholderText.slice(start, end);
@@ -74,10 +47,8 @@ get functions
 /* 
 set functions
 */
-    async setTextToSearch(){
-        const searchInput = await browser.$(this.inputSearch)
-        const textToSearch = await this.getTextFromSearchInput()
-        await searchInput.setValue(textToSearch)
+    async setTextToSearch(searchInput, textToSearch){
+        $(searchInput).setValue(textToSearch)
     }
 
 /* 
