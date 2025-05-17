@@ -11,6 +11,11 @@ Then(/я вижу "([^"]*)" на "([^"]*)"/, async (elementName, pageName) => {
     expect(element).toExist()
 });
 
+Then(/я вижу "([^"]*)"/, async (elementName) => {
+    const element = await $(baseHeader.elements[elementName])
+    expect(element).toExist()
+});
+
 Then(/я вижу поле ввода для поиска товара/, async () => {
     const searchInput = browser.$(baseHeader.searchInput)
     await expect(searchInput).toExist()
@@ -27,10 +32,10 @@ Then(/я вижу окно результатов поиска/, async () => {
     await expect(modalSearch).toExist()
 });
 
-Then(/я вижу чекбокс "К сравнению"/, async () => {
-    const checkBoxToEqual = browser.$(baseHeader.checkBoxToEqual)
-    await expect(checkBoxToEqual).toExist()
-})
+Then(/я вижу чекбокс "([^"]*)"/, async (elementName) => {
+    const element = await $(baseHeader.elements[elementName])
+    expect(element).toExist()
+});
 
 Then(/я вижу заголовок раздела "([^"]*)" на "([^"]*)"/, async (elementName, pageName) => {
     const page = pageobjects.getPage(pageName)
