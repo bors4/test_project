@@ -18,7 +18,7 @@ class BaseHeader {
         'поле поиска':                  '//input[@name="query"]',
         'модальное окно поиска':        '//div[@id="search-page"]',
         'К сравнению':                  '//input[contains(@data-bind, "compare")]',
-        'Ничего не найдено':            '//div[@id="search-page"]',//'//div[@class="search__bar"]//div/following-sibling::div[contains(text(), "Ничего не найдено")]',
+        'Ничего не найдено':            '//div[@class="search__bar"]//div/following-sibling::div[contains(text(), "Ничего не найдено")]',//'//div[@id="search-page"]',//'//div[@class="search__bar"]//div/following-sibling::div[contains(text(), "Ничего не найдено")]',
                                 
         //Контейнер кнопок авторизации/регистрации
         'кнопка "Вход"':                '//*[@id="userbar"]//text()[.="Вход"]',
