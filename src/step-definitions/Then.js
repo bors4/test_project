@@ -1,19 +1,19 @@
-const {Then} = require('@wdio/cucumber-framework')
+const { Then } = require('@wdio/cucumber-framework')
 const BaseHeader = require('../pageobjects/BaseHeader')
 const PageObjects = require('../pageobjects/PageObjects')
 
 const baseHeader = new BaseHeader()
 const pageobjects = new PageObjects()
 
-Then(/я вижу "([^"]*)" на "([^"]*)"/, async (elementName, pageName) => {
+Then(/я вижу элемент "([^"]*)" на "([^"]*)"/, async (elementName, pageName) => {
     const page = pageobjects.getPage(pageName)
     const element = $(page.elements[elementName])
     expect(element).toExist()
 });
 
 Then(/я вижу "([^"]*)"/, async (elementName) => {
-    const element = await $(baseHeader.elements[elementName])
-    expect(element).toExist()
+    const element = $(baseHeader.elements[elementName])
+    await element.isDisplayed()
 });
 
 Then(/я вижу поле ввода для поиска товара/, async () => {
@@ -35,6 +35,18 @@ Then(/я вижу окно результатов поиска/, async () => {
 Then(/я вижу чекбокс "([^"]*)"/, async (elementName) => {
     const element = await $(baseHeader.elements[elementName])
     expect(element).toExist()
+});
+
+Then(/я вижу текст "([^"]*)" в "([^"]*)"/, async (text, elementName) => {
+    const searchInput = $(baseHeader.elements[elementName])
+    if (text.includes('Например'))
+        await expect(searchInput.toHaveAttr('placeholder', expect.stringContaining('Например')))
+    else {
+        //conbaseHeader.elements['Ничего не найдено'].getText()
+        //await expect($(baseHeader.elements['Ничего не найдено'])).toHaveText('Ничего не найдено')
+        //await searchInput.waitForExist({ timeout: 5000 }); // Ожидаем появления
+        console.log(await $(baseHeader.elements['Ничего не найдено']).getText())
+    }
 });
 
 Then(/я вижу заголовок раздела "([^"]*)" на "([^"]*)"/, async (elementName, pageName) => {
