@@ -1,4 +1,4 @@
-const {When} = require('@wdio/cucumber-framework');
+const { When } = require('@wdio/cucumber-framework');
 const BaseHeader = require('../pageobjects/BaseHeader');
 const URLs = require('../config/constants');
 const PageObjects = require('../pageobjects/PageObjects');
@@ -18,10 +18,15 @@ When(/я нажимаю на "([^"]*)" в заголовке/, async (element) =
 When(/я нажимаю на "([^"]*)" на "([^"]*)"/, async (elementName, pageName) => {
     const element = pageobjects.getElement(elementName, pageName)
     await $(element).click();
-  });
+});
 
-When(/я ввожу название товара в "([^"]*)" на "([^"]*)"/, async (elementName, pageName) => {
+When(/я ввожу "([^"]*)" в "([^"]*)" на "([^"]*)"/, async (text, elementName, pageName) => {
     const element = pageobjects.getElement(elementName, pageName)
-    const textToSearch = await baseHeader.getTextFromSearchInput(element);
-    await baseHeader.setTextToSearch(element, textToSearch)
+    if (text == 'text') {
+        const textToSearch = await baseHeader.getTextFromSearchInput(element);
+        await baseHeader.setTextToSearch(element, textToSearch)
+    }
+    else {
+        await baseHeader.setTextToSearch(element, text)
+    }
 });
