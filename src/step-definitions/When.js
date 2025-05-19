@@ -22,11 +22,12 @@ When(/я нажимаю на "([^"]*)" на "([^"]*)"/, async (elementName, page
 
 When(/я ввожу "([^"]*)" в "([^"]*)" на "([^"]*)"/, async (text, elementName, pageName) => {
     const element = pageobjects.getElement(elementName, pageName)
-    if (text == 'text') {
-        const textToSearch = await baseHeader.getTextFromSearchInput(element);
+    const textToSearch = await baseHeader.getTextFromSearchInput(element);
+    if (text.includes('text')) {
         await baseHeader.setTextToSearch(element, textToSearch)
     }
     else {
         await baseHeader.setTextToSearch(element, text)
     }
+    await browser.setTimeout({ 'implicit': 5000 })
 });

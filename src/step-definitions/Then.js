@@ -8,7 +8,7 @@ const pageobjects = new PageObjects()
 Then(/я вижу элемент "([^"]*)" на "([^"]*)"/, async (elementName, pageName) => {
     const page = pageobjects.getPage(pageName)
     const element = $(page.elements[elementName])
-    expect(element).toExist()
+    element.isDisplayed()
 });
 
 Then(/я вижу "([^"]*)"/, async (elementName) => {
@@ -18,7 +18,7 @@ Then(/я вижу "([^"]*)"/, async (elementName) => {
 
 Then(/я вижу поле ввода для поиска товара/, async () => {
     const searchInput = browser.$(baseHeader.searchInput)
-    await expect(searchInput).toExist()
+    await searchInput.isDisplayed()
 });
 
 Then(/я вижу текст примера товара для поиска/, async () => {
@@ -29,12 +29,13 @@ Then(/я вижу текст примера товара для поиска/, a
 Then(/я вижу окно результатов поиска/, async () => {
     await browser.switchFrame($('iframe'))
     const modalSearch = await browser.$(baseHeader.modalSearch)
-    await expect(modalSearch).toExist()
+    await modalSearch.isDisplayed()
 });
 
 Then(/я вижу чекбокс "([^"]*)"/, async (elementName) => {
     const element = await $(baseHeader.elements[elementName])
-    expect(element).toExist()
+    await browser.switchFrame($('iframe'))
+    await element.isDisplayed()
 });
 
 Then(/я вижу текст "([^"]*)" в "([^"]*)"/, async (text, elementName) => {
@@ -42,15 +43,13 @@ Then(/я вижу текст "([^"]*)" в "([^"]*)"/, async (text, elementName) 
     if (text.includes('Например'))
         await expect(searchInput.toHaveAttr('placeholder', expect.stringContaining('Например')))
     else {
-        //conbaseHeader.elements['Ничего не найдено'].getText()
-        //await expect($(baseHeader.elements['Ничего не найдено'])).toHaveText('Ничего не найдено')
-        //await searchInput.waitForExist({ timeout: 5000 }); // Ожидаем появления
-        console.log(await $(baseHeader.elements['Ничего не найдено']).getText())
+        await browser.switchFrame($('iframe'))
+        expect(await $(baseHeader.elements['Ничего не найдено'])).toHaveText('Ничего не найдено')
     }
 });
 
 Then(/я вижу заголовок раздела "([^"]*)" на "([^"]*)"/, async (elementName, pageName) => {
     const page = pageobjects.getPage(pageName)
     const section = $(page.elements[elementName])
-    await expect(section).toExist()
+    await section.isDisplayed()
 });
