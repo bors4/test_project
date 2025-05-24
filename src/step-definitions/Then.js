@@ -11,8 +11,13 @@ Then(/я вижу элемент "([^"]*)" на "([^"]*)"/, async (elementName, 
     element.isDisplayed()
 });
 
-Then(/я вижу "([^"]*)"/, async (elementName) => {
+Then(/я вижу компонент "([^"]*)"/, async (elementName) => {
     const element = $(baseHeader.elements[elementName])
+    await element.isDisplayed()
+});
+
+Then(/я вижу "([^"]*)" на "([^"]*)"/, async (elementName, pageName) => {
+    const element = $(pageobjects.getElement(elementName, pageName))
     await element.isDisplayed()
 });
 

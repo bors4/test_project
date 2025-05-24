@@ -7,12 +7,7 @@ const baseHeader = new BaseHeader();
 const pageobjects = new PageObjects()
 
 When(/я перехожу по ссылке/, async () => {
-    await baseHeader.open(URLs.HOME)
-});
-
-When(/я нажимаю на "([^"]*)" в заголовке/, async (element) => {
-    const locator = baseHeader.elements[element]
-    await baseHeader.hrefClick(locator);
+    await pageobjects.open(URLs.HOME)
 });
 
 When(/я нажимаю на "([^"]*)" на "([^"]*)"/, async (elementName, pageName) => {
@@ -23,11 +18,9 @@ When(/я нажимаю на "([^"]*)" на "([^"]*)"/, async (elementName, page
 When(/я ввожу "([^"]*)" в "([^"]*)" на "([^"]*)"/, async (text, elementName, pageName) => {
     const element = pageobjects.getElement(elementName, pageName)
     const textToSearch = await baseHeader.getTextFromSearchInput(element);
-    if (text.includes('text')) {
-        await baseHeader.setTextToSearch(element, textToSearch)
-    }
-    else {
-        await baseHeader.setTextToSearch(element, text)
-    }
-    await browser.setTimeout({ 'implicit': 5000 })
+    (text.includes('text')) ? await baseHeader.setTextToSearch(element, textToSearch) : await baseHeader.setTextToSearch(element, text)
 });
+
+When (/я переключаю контекст на "([^"]*)", вызванный из "([^"]*)"/, async (elementName, sourceContext) => {
+    await pageobjects.switchContextTo(elementName, sourceContext)
+})

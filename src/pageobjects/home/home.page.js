@@ -1,15 +1,12 @@
-const BaseHeader = require('../BaseHeader')
 const URLs = require('../../config/constants')
 
-class HomePage extends BaseHeader {
+class HomePage {
     getURL() {
         return URLs.HOME;
     }
 
-    constructor() {     
-        super()   
+    constructor() {
     }
-
 }
 
 module.exports = HomePage;
