@@ -1,8 +1,8 @@
 const BaseHeader = require('../BaseHeader')
 
 class AbPage {
-    constructor (){
 
+    constructor (){
         this.elements = {
             'Автобарахолка': '//h1[contains(text(), "Автобарахолка")]'
         }

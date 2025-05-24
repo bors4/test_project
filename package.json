@@ -13,6 +13,7 @@
     "reflect-metadata": "^0.2.2"
   },
   "dependencies": {
+    "@qavajs/console-formatter": "^1.0.0",
     "urlpattern-polyfill": "^10.1.0",
     "webdriverio": "^9.14.0"
   },
