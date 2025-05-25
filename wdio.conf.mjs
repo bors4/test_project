@@ -22,7 +22,7 @@ export const config = {
         }
     }],
 
-    logLevel: 'info',
+    logLevel: 'warn',
     bail: 0,
     waitforTimeout: 10000,
     connectionRetryTimeout: 120000,
@@ -46,9 +46,7 @@ export const config = {
 
     cucumberOpts: {
         require: ['./src/step-definitions/*.js'],
-        format: [
-            '@qavajs/console-formatter'
-        ],
+        format: [],
         formatOptions: {
             console: {
                 showLogs: true,

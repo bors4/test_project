@@ -8,6 +8,7 @@ class PageObjects {
 
         this.elements = {
             'кнопка Принять все cookie': '//a[@id="submit-button"]',
+            'фрейм окно поиска': '//*[@id="fast-search-modal"]/div/div/iframe'
         }
 
         this.pages = {
@@ -23,20 +24,32 @@ class PageObjects {
     };
 
     getElement(elementName, pageName) {
-        console.log("element:" + elementName + "And pageName:" + pageName)
-        console.log("element:" + this.getPage(pageName).elements[elementName])
+        //console.log("element:" + elementName + "And pageName:" + pageName)
+        //console.log("element:" + this.getPage(pageName).elements[elementName])
         return this.getPage(pageName).elements[elementName]
     }
 
     async open(path) {
-        await browser.url(path);
+        await browser.url(path)
     }
 
-    async switchContextTo(elementName, sourceContext) {
-        const element = await $('//*[@id="fast-search-modal"]/div/div/iframe');
-
-        await element.waitForExist();
-        await browser.switchToFrame(element);
+    async switchContextTo(sourceContext) {
+        console.log(sourceContext)
+        
+        if (sourceContext != "родительский") {
+            console.log('Переключение контекста')
+            const iframe = await $(this.elements[sourceContext])
+            await iframe.waitForDisplayed({ timeout: 3000 })
+            await browser.switchFrame(iframe)
+        }
+        else {
+            console.log('Переключение контекста на родительский')
+            await browser.switchToParentFrame();
+        }
+        const currentContext = await browser.execute(() => {
+            return window.self === window.top ? 'main' : 'iframe'
+        });
+        console.log(`Текущий контекст: ${currentContext}`)
     }
 
 }

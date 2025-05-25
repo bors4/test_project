@@ -21,6 +21,6 @@ When(/я ввожу "([^"]*)" в "([^"]*)" на "([^"]*)"/, async (text, element
     (text.includes('text')) ? await baseHeader.setTextToSearch(element, textToSearch) : await baseHeader.setTextToSearch(element, text)
 });
 
-When (/я переключаю контекст на "([^"]*)", вызванный из "([^"]*)"/, async (elementName, sourceContext) => {
-    await pageobjects.switchContextTo(elementName, sourceContext)
+When(/я переключаю контекст на "([^"]*)"/, async (sourceContext) => {
+    await pageobjects.switchContextTo(sourceContext)
 })
