@@ -43,14 +43,13 @@ Then(/я вижу чекбокс "([^"]*)"/, async (elementName) => {
     await element.isDisplayed()
 });
 
-Then(/я вижу текст "([^"]*)" в "([^"]*)"/, async (text, elementName) => {
-    const searchInput = $(baseHeader.elements[elementName])
+Then(/я вижу текст "([^"]*)" в "([^"]*)" для "([^"]*)"/, async (text, elementName, pageName) => {
+    const searchInput = $(pageobjects.getElement(elementName, pageName))
+    console.log(pageobjects.getElement(elementName, pageName))
     if (text.includes('Например'))
         await expect(searchInput.toHaveAttr('placeholder', expect.stringContaining('Например')))
-    else {
-        await browser.switchFrame($('iframe'))
-        expect(await $(baseHeader.elements['Ничего не найдено'])).toHaveText('Ничего не найдено')
-    }
+    else
+        expect(await $(pageobjects.getElement('Ничего не найдено', pageName))).toHaveText('Ничего не найдено')
 });
 
 Then(/я вижу заголовок раздела "([^"]*)" на "([^"]*)"/, async (elementName, pageName) => {
