@@ -13,7 +13,7 @@ class BaseHeader {
             'ссылка Форум': '//nav//a[contains(@href,"forum")][1]//span[.="Форум"]',
             'ссылка Курс': '//nav//a[contains(@href, "kurs")]',
             'ссылка Погода': '//nav//a[contains(@href, "pogoda")]',
-            
+
             //Поиск
             'поле поиска': '//input[@name="query"]',
             'модальное окно поиска': '//div[@id="search-page"]',
