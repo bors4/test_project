@@ -68,7 +68,6 @@ export const config = {
     },
 
     before: function (capabilities, specs) {
-        console.log('Cucumber formatters initialized:', this.cucumberOpts.format);
         browser.setWindowSize(1920, 1080);
     },
 

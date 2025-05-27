@@ -45,7 +45,6 @@ Then(/я вижу чекбокс "([^"]*)"/, async (elementName) => {
 
 Then(/я вижу текст "([^"]*)" в "([^"]*)" для "([^"]*)"/, async (text, elementName, pageName) => {
     const searchInput = $(pageobjects.getElement(elementName, pageName))
-    console.log(pageobjects.getElement(elementName, pageName))
     if (text.includes('Например'))
         await expect(searchInput.toHaveAttr('placeholder', expect.stringContaining('Например')))
     else

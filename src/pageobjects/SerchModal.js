@@ -1,3 +1,5 @@
+const { switchToIFrame, switchToParent } = require('../utils/frameUtils')
+const { setExecuteTimeout } = require('../utils/pageUtils')
 class SearchModal {
     constructor() {
         this.elements = {
@@ -8,9 +10,19 @@ class SearchModal {
         }
     }
 
-    async closeSearchModal (){
+    async closeSearchModal() {
         await $(this.elements["закрыть окно поиска"]).click()
     }
+
+    async switchContextTo(sourceContext) {
+        if (sourceContext != 'родительский') {
+            await switchToIFrame(sourceContext)
+        }
+        else {
+            await switchToParent()
+        }
+    }
+
 }
 
 module.exports = SearchModal
