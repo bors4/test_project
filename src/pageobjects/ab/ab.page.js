@@ -1,10 +1,9 @@
 class AbPage {
-
-    constructor() {
-        this.elements = {
-            'Автобарахолка': '//h1[contains(text(), "Автобарахолка")]'
-        }
-    }
+	constructor() {
+		this.elements = {
+			'Автобарахолка': '//h1[contains(text(), "Автобарахолка")]',
+		};
+	}
 }
 
-module.exports = AbPage
+module.exports = AbPage;

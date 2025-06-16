@@ -1,12 +1,11 @@
-const URLs = require('../../config/constants')
+const URLs = require("../../config/constants");
 
 class HomePage {
-    getURL() {
-        return URLs.HOME;
-    }
+	getURL() {
+		return URLs.HOME;
+	}
 
-    constructor() {
-    }
+	constructor() {}
 }
 
 module.exports = HomePage;
