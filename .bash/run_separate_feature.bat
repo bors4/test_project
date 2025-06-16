@@ -1,1 +1,1 @@
-npm run test -- --spec open.r.page.feature
+npm run test -- --spec open.forum.page.feature
