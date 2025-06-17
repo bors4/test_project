@@ -30,6 +30,10 @@ When(/я переключаю контекст на "([^"]*)"/, async (sourceCon
 	await searchmodal.switchContextTo(sourceContext);
 });
 
+When(/я навожу указатель мыши на "([^"]*)" на "([^"]*)"/, async (element, pageName) => {
+    await pageobjects.hoverElement(element, pageName)
+});
+
 When(/я обновляю страницу/, async () => {
 	browser.refresh();
 });
