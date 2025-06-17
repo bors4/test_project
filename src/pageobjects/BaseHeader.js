@@ -16,6 +16,7 @@ class BaseHeader {
 			"ссылка Форум": '//nav//a[contains(@href,"forum")][1]//span[.="Форум"]',
 			"ссылка Курс": '//nav//a[contains(@href, "kurs")]',
 			"ссылка Погода": '//nav//a[contains(@href, "pogoda")]',
+            "дропдаун Новости": '//*[contains(@class, "b-main-navigation__dropdown_visible")]',
 
 			//Поиск
 			"поле поиска": '//input[@name="query"]',
