@@ -2,7 +2,7 @@ const { When } = require("@wdio/cucumber-framework");
 const BaseHeader = require("../pageobjects/BaseHeader");
 const URLs = require("../config/constants");
 const PageObjects = require("../pageobjects/PageObjects");
-const SearchModal = require("../pageobjects/SerchModal");
+const SearchModal = require("../pageobjects/SearchModal");
 
 const baseHeader = new BaseHeader();
 const pageobjects = new PageObjects();
