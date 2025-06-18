@@ -4,7 +4,7 @@ const elements = {
 
 export async function switchToIFrame(sourceContext) {
 	const iframe = await $(elements[sourceContext]);
-	await iframe.waitForDisplayed({ timeout: 3000 });
+	await iframe.waitForDisplayed();
 	await browser.switchFrame(iframe);
 	const currentContext = await browser.execute(() => {
 		return window.self === window.top ? "main" : "iframe";

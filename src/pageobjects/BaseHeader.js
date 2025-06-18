@@ -14,9 +14,11 @@ class BaseHeader {
 			"ссылка Барахолка":
 				'//nav//a[contains(@href,"baraholka")][1]//span[.="Барахолка"]',
 			"ссылка Форум": '//nav//a[contains(@href,"forum")][1]//span[.="Форум"]',
+			"ссылка Onliner Клевер": '//nav/a[contains(@href,"clever")]',
 			"ссылка Курс": '//nav//a[contains(@href, "kurs")]',
 			"ссылка Погода": '//nav//a[contains(@href, "pogoda")]',
-            "дропдаун Новости": '//*[contains(@class, "b-main-navigation__dropdown_visible")]',
+			"дропдаун Новости":
+				'//*[contains(@class, "b-main-navigation__dropdown_visible")]',
 
 			//Поиск
 			"поле поиска": '//input[@name="query"]',
@@ -30,30 +32,23 @@ class BaseHeader {
 			//Корзина
 			'кнопка "Корзина"': '//*[@id="userbar"]//*[@title="Корзина"]',
 		};
-	}
 
+		this.searchInput = this.elements["поле поиска"];
+	}
 	/* 
     get functions
     */
-	async getTextFromSearchInput(searchInput) {
-		const placeholderText = await $(searchInput).getAttribute("placeholder");
-		const start = placeholderText.indexOf('"') + 1;
-		const end = placeholderText.indexOf('"', start + 1);
-		return placeholderText.slice(start, end);
-	}
-
-	/* 
-    set functions
-    */
-	async setTextToSearch(searchInput, textToSearch) {
-		$(searchInput).setValue(textToSearch);
-	}
-
-	/* 
-    other functions
-    */
-	async acceptCookie() {
-		$(this.buttonAcceptCookie).click();
+	async getTextFromSearchInput() {
+		try {
+			const placeholderText = await $(this.searchInput).getAttribute(
+				"placeholder",
+			);
+			const start = placeholderText.indexOf('"') + 1;
+			const end = placeholderText.indexOf('"', start + 1);
+			return placeholderText.slice(start, end);
+		} catch (error) {
+			throw new Error("Текст для поиска не определён");
+		}
 	}
 }
 

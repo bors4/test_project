@@ -32,15 +32,17 @@ class PageObjects {
 		return this.pages[pageName];
 	}
 
-	getElement(elementName, pageName) {
+	async getElement(elementName, pageName) {
 		//console.log("element:" + elementName + "And pageName:" + pageName)
 		//console.log("element:" + this.getPage(pageName).elements[elementName])
-		return $(this.getPage(pageName).elements[elementName]);
+		const element = await $(this.getPage(pageName).elements[elementName]);
+		await element.waitForExist();
+		return element;
 	}
 
 	async hoverElement(elementName, pageName) {
-		const element = this.getElement(elementName, pageName);
-		await element.waitForDisplayed({ timeout: 10000 });
+		const element = await this.getElement(elementName, pageName);
+		await element.waitForDisplayed();
 		await element.moveTo();
 	}
 
@@ -56,16 +58,27 @@ class PageObjects {
 			),
 		);
 		try {
-			element.waitForDisplayed({ timeout: 3000 });
+			element.waitForDisplayed();
 		} catch (error) {
 			throw new Error("Логотип отсутствует");
 		}
 	}
 
 	async clickOnElement(elementName, pageName) {
-		const element = this.getElement(elementName, pageName);
-		await element.waitForClickable({ timeout: 10000 });
+		const element = await this.getElement(elementName, pageName);
+		await element.waitForClickable();
 		await element.click();
+	}
+
+	async setTextTo(elementName, pageName, textToInsert) {
+		const element = await this.getElement(elementName, pageName);
+		try {
+			console.log(`Вставляемый текст: ${textToInsert}`);
+			await element.waitForDisplayed();
+			await element.setValue(textToInsert);
+		} catch (error) {
+			throw new Error("Текст не был вставлен");
+		}
 	}
 }
 
