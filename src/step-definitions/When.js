@@ -18,21 +18,23 @@ When(/я нажимаю на "([^"]*)" на "([^"]*)"/, async (elementName, page
 When(
 	/я ввожу "([^"]*)" в "([^"]*)" на "([^"]*)"/,
 	async (text, elementName, pageName) => {
-		const element = pageobjects.getElement(elementName, pageName);
-		const textToSearch = await baseHeader.getTextFromSearchInput(element);
+		const textToSearch = await baseHeader.getTextFromSearchInput();
 		text.includes("text")
-			? await baseHeader.setTextToSearch(element, textToSearch)
-			: await baseHeader.setTextToSearch(element, text);
-	},
+			? await pageobjects.setTextTo(elementName, pageName, textToSearch)
+			: await pageobjects.setTextTo(elementName, pageName, text);
+	}
 );
 
 When(/я переключаю контекст на "([^"]*)"/, async (sourceContext) => {
 	await searchmodal.switchContextTo(sourceContext);
 });
 
-When(/я навожу указатель мыши на "([^"]*)" на "([^"]*)"/, async (element, pageName) => {
-    await pageobjects.hoverElement(element, pageName)
-});
+When(
+	/я навожу указатель мыши на "([^"]*)" на "([^"]*)"/,
+	async (element, pageName) => {
+		await pageobjects.hoverElement(element, pageName);
+	},
+);
 
 When(/я обновляю страницу/, async () => {
 	browser.refresh();

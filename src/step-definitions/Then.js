@@ -13,12 +13,11 @@ Then(/я вижу элемент "([^"]*)" на "([^"]*)"/, async (elementName, 
 
 Then(/я вижу компонент "([^"]*)"/, async (elementName) => {
 	const element = $(baseHeader.elements[elementName]);
-	//await element.waitForExist({timeout: 3000})
 	await element.isDisplayed();
 });
 
 Then(/я вижу "([^"]*)" на "([^"]*)"/, async (elementName, pageName) => {
-	const element = $(pageobjects.getElement(elementName, pageName));
+	const element = await pageobjects.getElement(elementName, pageName);
 	await element.isDisplayed();
 });
 
@@ -49,16 +48,16 @@ Then(/я вижу чекбокс "([^"]*)"/, async (elementName) => {
 Then(
 	/я вижу текст "([^"]*)" в "([^"]*)" для "([^"]*)"/,
 	async (text, elementName, pageName) => {
-		const searchInput = $(pageobjects.getElement(elementName, pageName));
+		const searchInput = pageobjects.getElement(elementName, pageName);
 		if (text.includes("Например"))
 			await expect(
 				searchInput.toHaveAttr("placeholder", expect.stringContaining("Например")),
 			);
 		else
 			expect(
-				await $(pageobjects.getElement("Ничего не найдено", pageName)),
+				await pageobjects.getElement("Ничего не найдено", pageName),
 			).toHaveText("Ничего не найдено");
-	},
+	}
 );
 
 Then(
@@ -67,5 +66,9 @@ Then(
 		const page = pageobjects.getPage(pageName);
 		const section = $(page.elements[elementName]);
 		await section.isDisplayed();
-	},
+	}
 );
+
+Then(/я вижу тайтл страницы "([^"]*)"/, async () => {
+
+});
