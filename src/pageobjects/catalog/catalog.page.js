@@ -5,7 +5,7 @@ class CatalogPage extends BasePage {
 		super();
 
 		this.elements = {
-			'Каталог': '//h1[contains(text(), "Каталог")]',
+			"Каталог": '//h1[contains(text(), "Каталог")]',
 			"Популярные категории": '//h2[contains(text(), "Популярные категории")]',
 		};
 	}

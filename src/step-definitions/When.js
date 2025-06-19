@@ -1,40 +1,32 @@
 const { When } = require("@wdio/cucumber-framework");
 const BaseHeader = require("../pageobjects/BaseHeader");
-const URLs = require("../config/constants");
 const PageObjects = require("../pageobjects/PageObjects");
 const SearchModal = require("../pageobjects/SearchModal");
 
 const baseHeader = new BaseHeader();
 const pageobjects = new PageObjects();
 const searchmodal = new SearchModal();
-When(/я перехожу по ссылке/, async () => {
-	await pageobjects.open(URLs.HOME);
-});
 
 When(/я нажимаю на "([^"]*)" на "([^"]*)"/, async (elementName, pageName) => {
 	await pageobjects.clickOnElement(elementName, pageName);
 });
 
-When(
-	/я ввожу "([^"]*)" в "([^"]*)" на "([^"]*)"/,
-	async (text, elementName, pageName) => {
-		const textToSearch = await baseHeader.getTextFromSearchInput();
-		text.includes("text")
-			? await pageobjects.setTextTo(elementName, pageName, textToSearch)
-			: await pageobjects.setTextTo(elementName, pageName, text);
-	}
-);
+When(/я беру текст из примера в плейсхолдере поля поиска и ввожу в "([^"]*)" в "([^"]*)"/, async (elementName, pageName) => {
+	const textToSearch = await baseHeader.getTextFromSearchInput();
+	pageobjects.setTextTo(elementName, pageName, textToSearch);
+});
+
+When(/я ввожу "([^"]*)" в "([^"]*)" на "([^"]*)"/, async (text, elementName, pageName) => {
+	await pageobjects.setTextTo(elementName, pageName, text);
+});
 
 When(/я переключаю контекст на "([^"]*)"/, async (sourceContext) => {
 	await searchmodal.switchContextTo(sourceContext);
 });
 
-When(
-	/я навожу указатель мыши на "([^"]*)" на "([^"]*)"/,
-	async (element, pageName) => {
-		await pageobjects.hoverElement(element, pageName);
-	},
-);
+When(/я навожу указатель мыши на "([^"]*)" на "([^"]*)"/, async (element, pageName) => {
+	await pageobjects.hoverElement(element, pageName);
+});
 
 When(/я обновляю страницу/, async () => {
 	browser.refresh();

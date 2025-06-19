@@ -1,7 +1,7 @@
 class TasksPage {
 	constructor() {
 		this.elements = {
-			'Заказы': '//div[contains(text(), "Заказы")]',
+			"Заказы": '//div[contains(text(), "Заказы")]',
 		};
 	}
 }

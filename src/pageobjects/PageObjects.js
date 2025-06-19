@@ -13,7 +13,7 @@ class PageObjects {
 	constructor() {
 		this.elements = {
 			"кнопка Принять все cookie": '//a[@id="submit-button"]',
-			"фрейм окно поиска": '//*[@id="fast-search-modal"]/div/div/iframe',
+			"фрейм окно поиска": '//*[@id="fast-search-modal"]/div/div/iframe'
 		};
 
 		this.pages = {
@@ -24,7 +24,7 @@ class PageObjects {
 			"страница Дома и квартиры": new RPage(),
 			"страница Услуги": new TasksPage(),
 			"страница Форум": new ForumPage(),
-			"модальное окно поиска": new SearchModal(),
+			"модальное окно поиска": new SearchModal()
 		};
 	}
 
@@ -51,12 +51,7 @@ class PageObjects {
 		const element = $(page.elements["Лого сайта"]);
 		await browser.url(page.getURL());
 		const currentUrl = await browser.getUrl();
-		assert(
-			currentUrl.includes(
-				page.getURL(),
-				`Ожидался URL: ${page.getURL()}, но получен: ${currentUrl}`,
-			),
-		);
+		assert(currentUrl.includes(page.getURL(), `Ожидался URL: ${page.getURL()}, но получен: ${currentUrl}`));
 		try {
 			element.waitForDisplayed();
 		} catch (error) {
