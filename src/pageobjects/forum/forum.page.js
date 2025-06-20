@@ -1,7 +1,7 @@
 class ForumPage {
 	constructor() {
 		this.elements = {
-			"Форум": '//h1[contains(text(), "Форум")]',
+			"заголовок раздела Форум": '//h1[contains(text(), "Форум")]',
 		};
 	}
 }
