@@ -1,5 +1,5 @@
 const { Then } = require("@wdio/cucumber-framework");
-const BaseHeader = require("../pageobjects/BaseHeader");
+const BaseHeader = require("../pageobjects/header/BaseHeader");
 const PageObjects = require("../pageobjects/PageObjects");
 
 const baseHeader = new BaseHeader();
@@ -10,7 +10,7 @@ Then(/я вижу компонент "([^"]*)"/, async (elementName) => {
 	await element.isDisplayed();
 });
 
-Then(/я вижу элемент "([^"]*)" на "([^"]*)"/, async (elementName, pageName) => {
+Then(/я вижу "([^"]*)" на "([^"]*)"/, async (elementName, pageName) => {
 	const element = await pageobjects.getElement(elementName, pageName);
 	await element.isDisplayed();
 });
@@ -33,5 +33,3 @@ Then(/я вижу заголовок раздела "([^"]*)" на "([^"]*)"/, a
 	const section = $(page.elements[elementName]);
 	await section.isDisplayed();
 });
-
-Then(/я вижу тайтл страницы "([^"]*)"/, async () => {});

@@ -1,5 +1,4 @@
-const { switchToIFrame, switchToParent } = require("../utils/frameUtils");
-const { setExecuteTimeout } = require("../utils/pageUtils");
+const { switchToIFrame, switchToParent } = require("../../../utils/frameUtils");
 class SearchModal {
 	constructor() {
 		this.elements = {

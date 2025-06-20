@@ -1,11 +1,11 @@
-const BasePage = require("../BaseHeader");
+const BasePage = require("../header/BaseHeader");
 
 class CatalogPage extends BasePage {
 	constructor() {
 		super();
 
 		this.elements = {
-			"Каталог": '//h1[contains(text(), "Каталог")]',
+			"заголовок раздела Каталог": '//h1[contains(text(), "Каталог")]',
 			"Популярные категории": '//h2[contains(text(), "Популярные категории")]',
 		};
 	}

@@ -10,7 +10,7 @@ class BaseHeader {
 			"ссылка Барахолка": '//nav//a[contains(@href,"baraholka")][1]//span[.="Барахолка"]',
 			"ссылка Форум": '//nav//a[contains(@href,"forum")][1]//span[.="Форум"]',
 			"ссылка Onliner Клевер": '//nav/a[contains(@href,"clever")]',
-			"ссылка Курс": '//nav//a[contains(@href, "kurs")]',
+			"ссылка Курсы валют": '//nav//a[contains(@href, "kurs")]',
 			"ссылка Погода": '//nav//a[contains(@href, "pogoda")]',
 			"дропдаун Новости": '//*[contains(@class, "b-main-navigation__dropdown_visible")]',
 
@@ -24,7 +24,10 @@ class BaseHeader {
 			'кнопка "Google"': '//*[@id="userbar"]//*[@title="Google"]',
 
 			//Корзина
-			'кнопка "Корзина"': '//*[@id="userbar"]//*[@title="Корзина"]'
+			'кнопка Корзина': '//*[@id="userbar"]//*[@title="Корзина"]',
+
+			//Другое
+			"18+": '//nav/div[contains(text(), "18+")]',
 		};
 
 		this.searchInput = this.elements["поле поиска"];

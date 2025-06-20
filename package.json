@@ -1,6 +1,7 @@
 {
   "name": "test_project",
   "devDependencies": {
+    "@faker-js/faker": "^9.8.0",
     "@wdio/allure-reporter": "^9.14.0",
     "@wdio/cli": "^9.14.0",
     "@wdio/cucumber-framework": "^9.14.0",
@@ -14,7 +15,10 @@
   },
   "dependencies": {
     "@qavajs/console-formatter": "^1.0.0",
+    "axios": "^1.10.0",
+    "undici": "^7.10.0",
     "urlpattern-polyfill": "^10.1.0",
+    "uuid": "^11.1.0",
     "webdriverio": "^9.14.0"
   },
   "scripts": {
