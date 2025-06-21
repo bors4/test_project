@@ -10,5 +10,5 @@ Given(/^ссылка на сайт/, async () => {
 });
 
 Given(/я нахожусь на странице "([^"]*)"/, async (pageName) => {
-	pageobjects.open(pageName);
+	pageobjects.openPageByName(pageName);
 });
