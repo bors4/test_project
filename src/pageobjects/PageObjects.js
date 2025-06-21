@@ -9,6 +9,11 @@ const CleverPage = require("./header/clever/clever.page");
 const KursPage = require("./kurs/kurs.page");
 const PogodaPage = require("./pogoda/pogoda.page");
 const CartPage = require("./cart/cart.page");
+const AutoPage = require("./auto/auto.page");
+const PeoplePage = require("./people/people.page");
+const MoneyPage = require("./money/money.page");
+const TechPage = require("./tech/tech.page");
+const RealtPage = require("./realt/realt.page");
 const SearchModal = require("./header/search/SearchModal");
 
 const assert = require("assert");
@@ -33,17 +38,22 @@ class PageObjects {
 			"страница Курсы валют": new KursPage(),
 			"страница Погода": new PogodaPage(),
 			"страница Корзина": new CartPage(),
+			"страница Люди": new PeoplePage(),
+			"страница Авто": new AutoPage(),
+			"страница Кошелек": new MoneyPage(),
+			"страница Технологии": new TechPage(),
+			"страница Недвижемость": new RealtPage()
 		};
 	}
 
-	getPage(pageName) {
+	getPageObject(pageName) {
 		return this.pages[pageName];
 	}
 
 	async getElement(elementName, pageName) {
 		//console.log("element:" + elementName + "And pageName:" + pageName)
 		//console.log("element:" + this.getPage(pageName).elements[elementName])
-		const element = await $(this.getPage(pageName).elements[elementName]);
+		const element = await $(this.getPageObject(pageName).elements[elementName]);
 		await element.waitForExist();
 		return element;
 	}
@@ -54,8 +64,8 @@ class PageObjects {
 		await element.moveTo();
 	}
 
-	async open(pageName) {
-		const page = this.getPage(pageName);
+	async openPageByName(pageName) {
+		const page = this.getPageObject(pageName);
 		const element = $(page.elements["Лого сайта"]);
 		await browser.url(page.getURL());
 		const currentUrl = await browser.getUrl();
@@ -70,6 +80,11 @@ class PageObjects {
 		} catch (error) {
 			throw new Error("Логотип отсутствует");
 		}
+	}
+
+	async getUrlByPageName(pageName) {
+		const page = this.getPageObject(pageName);
+		return page.getURL();
 	}
 
 	async clickOnElement(elementName, pageName) {

@@ -21,15 +21,42 @@ Then(/я вижу чекбокс "([^"]*)"/, async (elementName) => {
 	await element.isDisplayed();
 });
 
-Then(/я вижу текст "([^"]*)" в "([^"]*)" для "([^"]*)"/, async (text, elementName, pageName) => {
-	const searchInput = pageobjects.getElement(elementName, pageName);
-	if (text.includes("Например"))
-		await expect(searchInput.toHaveAttr("placeholder", expect.stringContaining("Например")));
-	else expect(await pageobjects.getElement("Ничего не найдено", pageName)).toHaveText("Ничего не найдено");
+Then(
+	/я вижу текст "([^"]*)" в "([^"]*)" для "([^"]*)"/,
+	async (text, elementName, pageName) => {
+		const searchInput = pageobjects.getElement(elementName, pageName);
+		if (text.includes("Например"))
+			await expect(
+				searchInput.toHaveAttr("placeholder", expect.stringContaining("Например"))
+			);
+		else
+			expect(
+				await pageobjects.getElement("Ничего не найдено", pageName)
+			).toHaveText("Ничего не найдено");
+	}
+);
+
+Then(
+	/я вижу заголовок раздела "([^"]*)" на "([^"]*)"/,
+	async (elementName, pageName) => {
+		const page = pageobjects.getPage(pageName);
+		const section = $(page.elements[elementName]);
+		await section.isDisplayed();
+	}
+);
+
+Then(/я проверяю что нахожусь на странице "([^"]*)"/, async (pageName) => {
+	expect(browser).toHaveUrl(
+		expect.stringContaining(await pageobjects.getUrlByPageName(pageName))
+	);
 });
 
-Then(/я вижу заголовок раздела "([^"]*)" на "([^"]*)"/, async (elementName, pageName) => {
-	const page = pageobjects.getPage(pageName);
-	const section = $(page.elements[elementName]);
-	await section.isDisplayed();
-});
+Then(
+	/я вижу что "([^"]*)" на "([^"]*)" имеет цвет "([^"]*)"/,
+	async (elementName, pageName, color) => {
+		const element = await pageobjects.getElement(elementName, pageName);
+		const colora = await element.getCSSProperty('text-decoration-color');
+		const hexColor = colora.parsed.hex;
+		expect(hexColor.includes(color));
+	}
+);
