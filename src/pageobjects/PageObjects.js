@@ -42,7 +42,7 @@ class PageObjects {
 			"страница Авто": new AutoPage(),
 			"страница Кошелек": new MoneyPage(),
 			"страница Технологии": new TechPage(),
-			"страница Недвижемость": new RealtPage()
+			"страница Недвижимость": new RealtPage()
 		};
 	}
 
@@ -82,7 +82,7 @@ class PageObjects {
 		}
 	}
 
-	async getUrlByPageName(pageName) {
+	getUrlByPageName(pageName) {
 		const page = this.getPageObject(pageName);
 		return page.getURL();
 	}

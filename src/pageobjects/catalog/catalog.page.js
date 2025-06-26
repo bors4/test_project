@@ -7,7 +7,7 @@ class CatalogPage extends BasePage {
 
 		this.elements = {
 			"заголовок раздела Каталог": '//h1[contains(text(), "Каталог")]',
-			"Популярные категории": '//h2[contains(text(), "Популярные категории")]'
+			"заголовок раздела Популярные категории": '//h2[contains(text(), "Популярные категории")]'
 		};
 	}
 	getURL() {

@@ -8,7 +8,7 @@ class TechPage {
 	}
 
 	getURL() {
-		return SiteUrls.AUTO;
+		return SiteUrls.TECH;
 	}
 }
 

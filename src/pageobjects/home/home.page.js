@@ -9,7 +9,7 @@ class HomePage {
 			"раздел Кошелек": '//header/h2/a[contains(text(), "Кошелек")]',
 			"раздел Авто": '//header/h2/a[contains(text(), "Авто")]',
 			"раздел Технологии": '//header/h2/a[contains(text(), "Технологии")]',
-			"раздел Недвижимость": '//header/h2/a[contains(text(), "Недвижемость")]',
+			"раздел Недвижимость": '//header/h2/a[contains(text(), "Недвижимость")]',
 			"раздел Форум": '//header/h2/a[contains(text(), "Форум")]'
 		};
 	}

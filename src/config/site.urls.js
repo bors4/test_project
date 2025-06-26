@@ -1,6 +1,6 @@
 class SiteUrls {
 	static HOME = "https://www.onliner.by/";
-	static CATALOG = "https://www.onliner.by/catalog";
+	static CATALOG = "https://catalog.onliner.by/";
 	static PEOPLE = "https://people.onliner.by/";
 	static MONEY = "https://money.onliner.by/";
 	static AUTO = "https://auto.onliner.by/";

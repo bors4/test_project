@@ -39,15 +39,15 @@ Then(
 Then(
 	/я вижу заголовок раздела "([^"]*)" на "([^"]*)"/,
 	async (elementName, pageName) => {
-		const page = pageobjects.getPage(pageName);
+		const page = pageobjects.getPageObject(pageName);
 		const section = $(page.elements[elementName]);
 		await section.isDisplayed();
 	}
 );
 
 Then(/я проверяю что нахожусь на странице "([^"]*)"/, async (pageName) => {
-	expect(browser).toHaveUrl(
-		expect.stringContaining(await pageobjects.getUrlByPageName(pageName))
+	await expect(browser).toHaveUrl(
+		expect.stringContaining(pageobjects.getUrlByPageName(pageName))
 	);
 });
 
