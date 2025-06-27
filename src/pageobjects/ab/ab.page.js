@@ -1,12 +1,15 @@
-const BaseHeader = require('../BaseHeader')
+const SiteUrls = require("../../config/site.urls");
 
 class AbPage {
-    constructor (){
+	constructor() {
+		this.elements = {
+			"Автобарахолка": '//h1[contains(text(), "Автобарахолка")]'
+		};
+	}
 
-        this.elements = {
-            'Автобарахолка': '//h1[contains(text(), "Автобарахолка")]'
-        }
-    }
+	getURL() {
+		return SiteUrls.AB;
+	}
 }
 
-module.exports = AbPage
+module.exports = AbPage;
