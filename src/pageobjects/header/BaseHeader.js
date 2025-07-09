@@ -11,8 +11,11 @@ class BaseHeader {
 			"ссылка Форум": '//nav//a[contains(@href,"forum")][1]//span[.="Форум"]',
 			"ссылка Onliner Клевер": '//nav/a[contains(@href,"clever")]',
 			"ссылка Курсы валют": '//nav//a[contains(@href, "kurs")]',
+			"текст курс доллара": '//nav//a[contains(@href, "kurs")]/span',
 			"ссылка Погода": '//nav//a[contains(@href, "pogoda")]',
 			"дропдаун Новости": '//*[contains(@class, "b-main-navigation__dropdown_visible")]',
+			"дропдаун Автобарахолка": '//*[contains(@class, "b-main-navigation__dropdown_visible")]',
+			"дропдаун Дома и квартиры": '//*[contains(@class, "b-main-navigation__dropdown_visible")]',
 
 			//Поиск
 			"поле поиска": '//input[@name="query"]',

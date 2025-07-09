@@ -15,8 +15,7 @@ const MoneyPage = require("./money/money.page");
 const TechPage = require("./tech/tech.page");
 const RealtPage = require("./realt/realt.page");
 const SearchModal = require("./header/search/SearchModal");
-
-const assert = require("assert");
+const {expect, assert} = require("chai")
 
 class PageObjects {
 	constructor() {
@@ -42,7 +41,7 @@ class PageObjects {
 			"страница Авто": new AutoPage(),
 			"страница Кошелек": new MoneyPage(),
 			"страница Технологии": new TechPage(),
-			"страница Недвижемость": new RealtPage()
+			"страница Недвижимость": new RealtPage()
 		};
 	}
 
@@ -56,6 +55,13 @@ class PageObjects {
 		const element = await $(this.getPageObject(pageName).elements[elementName]);
 		await element.waitForExist();
 		return element;
+	}
+
+	async getElementText(elementName, pageName) {
+		const element = await this.getElement(elementName, pageName);
+		const elementText = await element.getText();
+		assert.isNotEmpty(elementText);
+		return elementText;
 	}
 
 	async hoverElement(elementName, pageName) {
@@ -82,7 +88,7 @@ class PageObjects {
 		}
 	}
 
-	async getUrlByPageName(pageName) {
+	getUrlByPageName(pageName) {
 		const page = this.getPageObject(pageName);
 		return page.getURL();
 	}

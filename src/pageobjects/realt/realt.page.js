@@ -3,7 +3,7 @@ const SiteUrls = require("../../config/site.urls");
 class RealtPage {
 	constructor() {
 		this.elements = {
-			"таб навигации Недвижемость": '//a/span[.="Недвижемость"]'
+			"таб навигации Недвижимость": '//a/span[.="Недвижимость"]'
 		};
 	}
 

@@ -5,11 +5,6 @@ const PageObjects = require("../pageobjects/PageObjects");
 const baseHeader = new BaseHeader();
 const pageobjects = new PageObjects();
 
-Then(/я вижу компонент "([^"]*)"/, async (elementName) => {
-	const element = $(baseHeader.elements[elementName]);
-	await element.isDisplayed();
-});
-
 Then(/я вижу "([^"]*)" на "([^"]*)"/, async (elementName, pageName) => {
 	const element = await pageobjects.getElement(elementName, pageName);
 	await element.isDisplayed();
@@ -39,24 +34,34 @@ Then(
 Then(
 	/я вижу заголовок раздела "([^"]*)" на "([^"]*)"/,
 	async (elementName, pageName) => {
-		const page = pageobjects.getPage(pageName);
+		const page = pageobjects.getPageObject(pageName);
 		const section = $(page.elements[elementName]);
 		await section.isDisplayed();
 	}
 );
 
 Then(/я проверяю что нахожусь на странице "([^"]*)"/, async (pageName) => {
-	expect(browser).toHaveUrl(
-		expect.stringContaining(await pageobjects.getUrlByPageName(pageName))
+	await expect(browser).toHaveUrl(
+		expect.stringContaining(pageobjects.getUrlByPageName(pageName))
 	);
 });
 
 Then(
-	/я вижу что "([^"]*)" на "([^"]*)" имеет цвет "([^"]*)"/,
-	async (elementName, pageName, color) => {
+	/я вижу что "([^"]*)" на "([^"]*)" имеет атрибут "([^"]*)" со значением "([^"]*)"/,
+	async (elementName, pageName, attributeName, attributeValue) => {
 		const element = await pageobjects.getElement(elementName, pageName);
-		const colora = await element.getCSSProperty('text-decoration-color');
-		const hexColor = colora.parsed.hex;
-		expect(hexColor.includes(color));
+		const attribute = await element.getCSSProperty(attributeName);
+		switch (attributeValue) {
+			case attributeValue.includes("#"):
+				const hexColor = attribute.parsed.hex;
+				expect(hexColor.includes(attributeValue));
+				break;
+		}
 	}
 );
+
+Then(/я вижу что курсы валют равны/, function () {
+	expect(
+		this.elementText.includes(String(this.apiExchangeRate).replace(".", ","))
+	);
+});
