@@ -3,7 +3,7 @@ const SiteUrls = require("../../config/site.urls");
 class TasksPage {
 	constructor() {
 		this.elements = {
-			"Заказы": '//div[contains(text(), "Заказы")]',
+			"заголовок раздела Заказы": '//div[contains(text(), "Заказы")]',
 		};
 	}
 

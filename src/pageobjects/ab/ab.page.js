@@ -3,7 +3,7 @@ const SiteUrls = require("../../config/site.urls");
 class AbPage {
 	constructor() {
 		this.elements = {
-			"Автобарахолка": '//h1[contains(text(), "Автобарахолка")]'
+			"заголовок раздела Автобарахолка": '//h1[contains(text(), "Автобарахолка")]'
 		};
 	}
 

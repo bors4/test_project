@@ -3,6 +3,7 @@ const BaseHeader = require("../pageobjects/header/BaseHeader");
 const PageObjects = require("../pageobjects/PageObjects");
 const SearchModal = require("../pageobjects/header/search/SearchModal");
 const BrowserUtils = require("../utils/browserUtils");
+const APIUtils = require("../utils/APIUtils");
 
 const baseHeader = new BaseHeader();
 const pageobjects = new PageObjects();
@@ -58,3 +59,17 @@ When(/я обновляю страницу/, async () => {
 When(/я нажимаю на кнопку "([^"]*)" браузера/, async (actionName) => {
 	browserUtils.browserAction(actionName);
 });
+
+When(
+	/я с помощью API НБ РБ получаю курс "([^"]*)" на "([^"]*)"/,
+	async function (currencyName, onDate) {
+		this.apiExchangeRate = await APIUtils.getExchangeRate(currencyName, onDate);
+	}
+);
+
+When(
+	/я получаю содержимое элемента "([^"]*)" на "([^"]*)"/,
+	async function (elementName, pageName) {
+		this.elementText = await pageobjects.getElementText(elementName, pageName);
+	}
+);
