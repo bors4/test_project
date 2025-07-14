@@ -1,5 +1,5 @@
 const elements = {
-	"фрейм окно поиска": '//*[@id="fast-search-modal"]/div/div/iframe'
+	'фрейм окно поиска': '//*[@id="fast-search-modal"]/div/div/iframe',
 };
 
 export async function switchToIFrame(sourceContext) {
@@ -7,7 +7,7 @@ export async function switchToIFrame(sourceContext) {
 	await iframe.waitForDisplayed();
 	await browser.switchFrame(iframe);
 	const currentContext = await browser.execute(() => {
-		return window.self === window.top ? "main" : "iframe";
+		return window.self === window.top ? 'main' : 'iframe';
 	});
 	console.log(`Текущий контекст: ${currentContext}`);
 }

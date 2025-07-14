@@ -1,9 +1,9 @@
-const SiteUrls = require("../../config/site.urls");
+const SiteUrls = require('../../config/site.urls');
 
 class MoneyPage {
 	constructor() {
 		this.elements = {
-			"таб навигации Кошелек": '//a/span[.="Кошелек"]'
+			'таб навигации Кошелек': '//a/span[.="Кошелек"]',
 		};
 	}
 

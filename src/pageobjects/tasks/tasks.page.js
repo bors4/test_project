@@ -1,13 +1,13 @@
-const SiteUrls = require("../../config/site.urls");
+const SiteUrls = require('../../config/site.urls');
 
 class TasksPage {
 	constructor() {
 		this.elements = {
-			"заголовок раздела Заказы": '//div[contains(text(), "Заказы")]',
+			'заголовок раздела Заказы': '//div[contains(text(), "Заказы")]',
 		};
 	}
 
-		getURL() {
+	getURL() {
 		return SiteUrls.TASKS;
 	}
 }

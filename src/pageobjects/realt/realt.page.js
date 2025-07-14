@@ -1,9 +1,9 @@
-const SiteUrls = require("../../config/site.urls");
+const SiteUrls = require('../../config/site.urls');
 
 class RealtPage {
 	constructor() {
 		this.elements = {
-			"таб навигации Недвижимость": '//a/span[.="Недвижимость"]'
+			'таб навигации Недвижимость': '//a/span[.="Недвижимость"]',
 		};
 	}
 

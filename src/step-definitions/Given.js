@@ -1,6 +1,6 @@
-const { Given } = require("@wdio/cucumber-framework");
-const HomePage = require("../pageobjects/home/home.page");
-const PageObjects = require("../pageobjects/PageObjects");
+const { Given } = require('@wdio/cucumber-framework');
+const HomePage = require('../pageobjects/home/home.page');
+const PageObjects = require('../pageobjects/PageObjects');
 
 const pageobjects = new PageObjects();
 const homePage = new HomePage();

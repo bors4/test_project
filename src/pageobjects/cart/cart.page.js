@@ -1,13 +1,13 @@
-const SiteUrls = require("../../config/site.urls");
+const SiteUrls = require('../../config/site.urls');
 
 class CartPage {
-    constructor() {
-        this.elements = {
-            "заголовок раздела Корзина": '//div[contains(text(), "Корзина")]'
-        }
-    }
+	constructor() {
+		this.elements = {
+			'заголовок раздела Корзина': '//div[contains(text(), "Корзина")]',
+		};
+	}
 
-    	getURL() {
+	getURL() {
 		return SiteUrls.CART;
 	}
 }

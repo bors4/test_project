@@ -1,5 +1,5 @@
-const axios = require("axios");
-const apiConfig = require("../config/apiConfig");
+const axios = require('axios');
+const apiConfig = require('../config/apiConfig');
 
 export async function getExchangeRate(currencyName, onDate) {
 	const response = await axios.get(apiConfig.EXCHANGE_RATE);

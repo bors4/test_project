@@ -6,22 +6,20 @@ class BrowserUtils {
 		const windowID = await browser.getWindowHandles();
 		try {
 			if (windowID.lenght < 2) {
-				throw new Error("Новая вкладка не открыта");
+				throw new Error('Новая вкладка не открыта');
 			}
-			windowID[1] == parrentWindow
-				? await browser.switchWindow(windowID[0])
-				: await browser.switchWindow(windowID[1]);
+			windowID[1] == parrentWindow ? await browser.switchWindow(windowID[0]) : await browser.switchWindow(windowID[1]);
 			await browser.executeAsync((done) => {
-				setTimeout(done, 10000);
+				setTimeout(done, 5000);
 			});
 		} catch (error) {
-			throw new Error("Переход на новую вкладку не выполнен");
+			throw new Error('Переход на новую вкладку не выполнен');
 		}
 	}
 
 	async setExecuteTimeout(timeToWait) {
 		await browser.executeAsync((done) => {
-			setTimeout(done, timeToWait);
+			setTimeout(done, 3000);
 		});
 	}
 
@@ -32,13 +30,13 @@ class BrowserUtils {
 
 	async browserAction(action) {
 		switch (action) {
-			case "обновить":
+			case 'обновить':
 				browser.refresh();
 				break;
-			case "назад":
+			case 'назад':
 				browser.back();
 				break;
-			case "вперёд":
+			case 'вперёд':
 				browser.forward();
 				break;
 		}
