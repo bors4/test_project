@@ -13,8 +13,8 @@ class APIConfig {
     
     Подробнее об API по ссылке https://www.nbrb.by/apihelp/exrates
     */
-	static CURRENCY_INFO = "https://api.nbrb.by/exrates/currencies";
-	static EXCHANGE_RATE = "https://api.nbrb.by/exrates/rates?periodicity=0";
+	static CURRENCY_INFO = 'https://api.nbrb.by/exrates/currencies';
+	static EXCHANGE_RATE = 'https://api.nbrb.by/exrates/rates?periodicity=0';
 }
 
-module.exports = APIConfig
+module.exports = APIConfig;
