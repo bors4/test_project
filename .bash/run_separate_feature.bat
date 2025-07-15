@@ -1,1 +1,1 @@
-npm run test -- --spec check.change.weather.city.feature
+npm run test -- --spec add.to.cart.feature

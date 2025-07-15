@@ -28,7 +28,7 @@ Then(/я вижу что "([^"]*)" на "([^"]*)" содержит текст "(
 	expectChai(text).to.include(elementText);
 });
 
-Then(/я проверяю что нахожусь на странице "([^"]*)"/, async (pageName) => {
+Then(/я проверяю что нахожусь на "([^"]*)"/, async (pageName) => {
 	await expect(browser).toHaveUrl(expect.stringContaining(pageobjects.getUrlByPageName(pageName)));
 });
 
@@ -47,5 +47,10 @@ Then(
 );
 
 Then(/я вижу что курсы валют равны/, function () {
-	expect(this.elementText.includes(String(this.apiExchangeRate).replace('.', ',')));
+	expectChai(this.elementText).to.equal('$ ' + String(this.apiExchangeRate).replace('.', ','));
+});
+
+Then(/я вижу что "([^"]*)"\[(\d+)\] на "([^"]*)" равен сохранённому/, async function (elementName, index, pageName) {
+	const elementText = await pageobjects.getElementTextByIndex(elementName, index, pageName);
+	expectChai(elementText).to.equal(this.elementText);
 });

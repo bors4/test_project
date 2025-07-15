@@ -5,6 +5,7 @@ class CatalogMobileCat {
 		this.elements = {
 			'раздел Мобильные телефоны': '//h1[contains(text(),"Мобильные телефоны")]',
 			'кнопка предложения': '//a[contains(text(),"предложени")]',
+			'названия товара': '//a[contains(@class,"catalog-form__link_font-weight_semibold")]',
 		};
 	}
 
