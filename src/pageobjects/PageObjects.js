@@ -16,6 +16,7 @@ const TechPage = require('./tech/tech.page');
 const RealtPage = require('./realt/realt.page');
 const SearchModal = require('./header/search/SearchModal');
 const CatalogMobileCat = require('./catalog/cat/electronics/catalog.mobile.page');
+const CatalogPricesPage = require('./catalog/catalog.prices.page');
 
 const frameUtils = require('../utils/frameUtils');
 
@@ -46,7 +47,8 @@ class PageObjects {
 			'страница Кошелек': new MoneyPage(),
 			'страница Технологии': new TechPage(),
 			'страница Недвижимость': new RealtPage(),
-			'страница Мобильные телефоны': new CatalogMobileCat(),
+			'страница каталог Мобильные телефоны': new CatalogMobileCat(),
+			'страница Предложения продавцов': new CatalogPricesPage(),
 		};
 	}
 
@@ -71,13 +73,25 @@ class PageObjects {
 	}
 
 	async getElements(elementName, pageName) {
-		const element = await $$(this.getPageObject(pageName).elements[elementName]);
-		return element;
+		const elements = await $$(this.getPageObject(pageName).elements[elementName]);
+		await browser.waitUntil(async () => (await elements).length > 0, {
+			timeout: 10000, // Увеличьте таймаут
+			timeoutMsg: `Элементы "${elementName}" не найдены после скролла`,
+			interval: 500,
+		});
+		return elements;
 	}
 
 	async getElementText(elementName, pageName) {
 		const element = await this.getElement(elementName, pageName);
 		const elementText = await element.getText();
+		assert.isNotEmpty(elementText);
+		return elementText;
+	}
+
+	async getElementTextByIndex(elementName, index, pageName) {
+		const elements = await this.getElements(elementName, pageName);
+		const elementText = await elements[index].getText();
 		assert.isNotEmpty(elementText);
 		return elementText;
 	}
@@ -114,7 +128,7 @@ class PageObjects {
 
 	async clickOnElementByIndex(elementName, index, pageName) {
 		const elements = await this.getElements(elementName, pageName);
-		await elements[index].waitForClickable();
+		await browser.waitUntil(async () => (await elements).length > 0, { timeout: 5000, timeoutMsg: `Элементы "${elementName}" не найдены` });
 		await elements[index].click();
 	}
 

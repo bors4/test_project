@@ -14,6 +14,11 @@ When(/я принимаю cookie/, async () => {
 	await pageobjects.cookieAccept();
 });
 
+When(/я жду \[(\d+)\] секунд/, async (timeToWait) => {
+	browser.pause(5000);
+	//await browserUtils.setExecuteTimeout(3000);
+});
+
 When(/я нажимаю на "([^"]*)" на "([^"]*)"/, async (elementName, pageName) => {
 	await pageobjects.clickOnElement(elementName, pageName);
 });
@@ -60,6 +65,10 @@ When(/я с помощью API НБ РБ получаю курс "([^"]*)" на 
 	this.apiExchangeRate = await APIUtils.getExchangeRate(currencyName, onDate);
 });
 
-When(/я получаю содержимое элемента "([^"]*)" на "([^"]*)"/, async function (elementName, pageName) {
+When(/я сохраняю текст элемента "([^"]*)" на "([^"]*)"/, async function (elementName, pageName) {
 	this.elementText = await pageobjects.getElementText(elementName, pageName);
+});
+
+When(/я сохраняю текст элемента "([^"]*)"\[(\d+)\] на "([^"]*)"/, async function (elementName, index, pageName) {
+	this.elementText = await pageobjects.getElementTextByIndex(elementName, index, pageName);
 });
