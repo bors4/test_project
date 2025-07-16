@@ -1,18 +1,19 @@
+const SiteUrls = require('../../config/site.urls');
 class BaseHeader {
 	constructor() {
 		this.elements = {
-			'Лого сайта': '//div//a[@href="https://www.onliner.by"]/img',
-			'ссылка Каталог': '//nav//a[contains(@href,"catalog")][2]//span[.="Каталог"]',
-			'ссылка Новости': '//nav//a[contains(@href,"onliner")][1]//span[.="Новости"]',
-			'ссылка Автобарахолка': '//nav//a[contains(@href,"ab.")][1]//span[.="Автобарахолка"]',
-			'ссылка Дома и квартиры': '//nav//a[contains(@href,"r.")][1]//span[.="Дома и квартиры"]',
-			'ссылка Услуги': '//nav//a[contains(@href,"s.on")][1]/span[.="Услуги"]',
-			'ссылка Барахолка': '//nav//a[contains(@href,"baraholka")][1]//span[.="Барахолка"]',
-			'ссылка Форум': '//nav//a[contains(@href,"forum")][1]//span[.="Форум"]',
+			'Лого сайта': `//div//a[@href="${SiteUrls.HOME}"]/img`,
+			'ссылка Каталог': `//nav//a[@href="${SiteUrls.CATALOG}"]`,
+			'ссылка Новости': `//div//a[@href="${SiteUrls.HOME}""]//span[.="Новости"]`,
+			'ссылка Автобарахолка': `//nav//a[@href="${SiteUrls.AB}"]//span[.="Автобарахолка"]`,
+			'ссылка Дома и квартиры': `//nav//a[@href="${SiteUrls.R}"]//span[.="Дома и квартиры"]`,
+			'ссылка Услуги': `//nav//a[@href="${SiteUrls.TASKS}"]/span[.="Услуги"]`,
+			'ссылка Барахолка': `//nav//a[@href="${SiteUrls.BARAHOLKA}"]//span[.="Барахолка"]`,
+			'ссылка Форум': `//nav//a[@href="${SiteUrls.FORUM}"][1]//span[.="Форум"]`,
 			'ссылка Onliner Клевер': '//nav/a[contains(@href,"clever")]',
-			'ссылка Курсы валют': '//nav//a[contains(@href, "kurs")]',
-			'текст курс доллара': '//nav//a[contains(@href, "kurs")]/span',
-			'ссылка Погода': '//nav//a[contains(@href, "pogoda")]',
+			'ссылка Курсы валют': `//nav//a[@href="${SiteUrls.KURS}"]`,
+			'ссылка Погода': `//nav//a[@href="${SiteUrls.POGODA}"]`,
+			'текст курс доллара': '//nav//span[contains(text(),"$ ")]',
 			'дропдаун Новости': '//*[contains(@class, "b-main-navigation__dropdown_visible")]',
 			'дропдаун Автобарахолка': '//*[contains(@class, "b-main-navigation__dropdown_visible")]',
 			'дропдаун Дома и квартиры': '//*[contains(@class, "b-main-navigation__dropdown_visible")]',
@@ -21,10 +22,10 @@ class BaseHeader {
 			'поле поиска': '//input[@name="query"]',
 			'модальное окно поиска': '//div[@id="fast-search-modal"]',
 			//Контейнер кнопок авторизации/регистрации
-			'кнопка "Вход"': '//*[@id="userbar"]//text()[.="Вход"]',
-			'кнопка "Facebook"': '//*[@id="userbar"]//*[@title="Facebook"]',
-			'кнопка "Vkontakte"': '//*[@id="userbar"]//*[@title="ВКонтакте"]',
-			'кнопка "Google"': '//*[@id="userbar"]//*[@title="Google"]',
+			'кнопка Вход': '//div[text()="Вход"]',
+			'кнопка Facebook': '//*[@id="userbar"]//*[@title="Facebook"]',
+			'кнопка Vkontakte': '//*[@id="userbar"]//*[@title="ВКонтакте"]',
+			'кнопка Google': '//*[@id="userbar"]//*[@title="Google"]',
 
 			//Корзина
 			'кнопка Корзина': '//*[@id="userbar"]//*[@title="Корзина"]',
