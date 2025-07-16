@@ -17,10 +17,12 @@ const RealtPage = require('./realt/realt.page');
 const SearchModal = require('./header/search/SearchModal');
 const CatalogMobileCat = require('./catalog/cat/electronics/catalog.mobile.page');
 const CatalogPricesPage = require('./catalog/catalog.prices.page');
+const AutorizationModal = require('./home/auth.modal');
 
 const frameUtils = require('../utils/frameUtils');
 
 const { expect, assert } = require('chai');
+require('dotenv').config();
 
 class PageObjects {
 	constructor() {
@@ -49,6 +51,7 @@ class PageObjects {
 			'страница Недвижимость': new RealtPage(),
 			'страница каталог Мобильные телефоны': new CatalogMobileCat(),
 			'страница Предложения продавцов': new CatalogPricesPage(),
+			'модальное окно авторизации': new AutorizationModal(),
 		};
 	}
 
@@ -98,8 +101,12 @@ class PageObjects {
 
 	async hoverElement(elementName, pageName) {
 		const element = await this.getElement(elementName, pageName);
-		await element.waitForDisplayed();
 		await element.moveTo();
+		try {
+			await element.isDisplayedInViewport();
+		} catch (error) {
+			throw new Error(`Элемент "${element}" не находится в области видимости`);
+		}
 	}
 
 	async openPageByName(pageName) {
@@ -134,12 +141,22 @@ class PageObjects {
 
 	async setTextTo(elementName, pageName, textToInsert) {
 		const element = await this.getElement(elementName, pageName);
-		try {
-			console.log(`Вставляемый текст: ${textToInsert}`);
-			await element.waitForDisplayed();
-			await element.setValue(textToInsert);
-		} catch (error) {
-			throw new Error('Текст не был вставлен');
+		await element.waitForDisplayed();
+		if (textToInsert === 'login' || textToInsert === 'password') {
+			textToInsert === 'login' ? await element.setValue(process.env.TEST_USER_LOGIN) : await element.setValue(process.env.TEST_USER_PASSWORD);
+			try {
+				console.log(`Вставляемый текст: ${textToInsert}`);
+				await element.setValue(textToInsert);
+			} catch (error) {
+				throw new Error('Текст не был вставлен');
+			}
+		} else {
+			try {
+				console.log(`Вставляемый текст: ${textToInsert}`);
+				await element.setValue(textToInsert);
+			} catch (error) {
+				throw new Error('Текст не был вставлен');
+			}
 		}
 	}
 }

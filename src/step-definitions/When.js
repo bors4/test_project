@@ -72,3 +72,7 @@ When(/я сохраняю текст элемента "([^"]*)" на "([^"]*)"/,
 When(/я сохраняю текст элемента "([^"]*)"\[(\d+)\] на "([^"]*)"/, async function (elementName, index, pageName) {
 	this.elementText = await pageobjects.getElementTextByIndex(elementName, index, pageName);
 });
+
+When(/я прохожу капчу/, async function () {
+	true;
+});

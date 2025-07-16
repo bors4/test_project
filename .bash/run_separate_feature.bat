@@ -1,1 +1,1 @@
-npm run test -- --spec add.to.cart.feature
+npm run test -- --spec autorization.feature
