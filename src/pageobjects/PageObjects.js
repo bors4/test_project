@@ -78,8 +78,8 @@ class PageObjects {
 	async getElements(elementName, pageName) {
 		const elements = await $$(this.getPageObject(pageName).elements[elementName]);
 		await browser.waitUntil(async () => (await elements).length > 0, {
-			timeout: 10000, // Увеличьте таймаут
-			timeoutMsg: `Элементы "${elementName}" не найдены после скролла`,
+			timeout: 10000,
+			timeoutMsg: `Элементы "${elementName}" не обнаружен`,
 			interval: 500,
 		});
 		return elements;
@@ -103,7 +103,7 @@ class PageObjects {
 		const element = await this.getElement(elementName, pageName);
 		await element.moveTo();
 		try {
-			await element.isDisplayedInViewport();
+			await element.isDisplayed({ withinViewport: true });
 		} catch (error) {
 			throw new Error(`Элемент "${element}" не находится в области видимости`);
 		}
