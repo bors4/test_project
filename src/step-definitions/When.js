@@ -14,9 +14,8 @@ When(/я принимаю cookie/, async () => {
 	await pageobjects.cookieAccept();
 });
 
-When(/я жду \[(\d+)\] секунд/, async (timeToWait) => {
-	browser.pause(5000);
-	//await browserUtils.setExecuteTimeout(3000);
+When(/я ожидаю \[(\d+)\] секунд/, async (timeToWait) => {
+	await browser.pause(timeToWait * 1000);
 });
 
 When(/я нажимаю на "([^"]*)" на "([^"]*)"/, async (elementName, pageName) => {
