@@ -144,12 +144,7 @@ class PageObjects {
 		await element.waitForDisplayed();
 		if (textToInsert === 'login' || textToInsert === 'password') {
 			textToInsert === 'login' ? await element.setValue(process.env.TEST_USER_LOGIN) : await element.setValue(process.env.TEST_USER_PASSWORD);
-			try {
-				console.log(`Вставляемый текст: ${textToInsert}`);
-				await element.setValue(textToInsert);
-			} catch (error) {
-				throw new Error('Текст не был вставлен');
-			}
+			console.log(`Вставляемый текст: ${textToInsert}`);
 		} else {
 			try {
 				console.log(`Вставляемый текст: ${textToInsert}`);
