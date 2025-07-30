@@ -1,9 +1,9 @@
 const { When } = require('@wdio/cucumber-framework');
-const BaseHeader = require('../pageobjects/header/BaseHeader');
-const PageObjects = require('../pageobjects/PageObjects');
-const SearchModal = require('../pageobjects/header/search/SearchModal');
-const BrowserUtils = require('../utils/browserUtils');
-const APIUtils = require('../utils/APIUtils');
+const BaseHeader = require('../page-objects/header/base-header');
+const PageObjects = require('../page-objects/page-objects');
+const SearchModal = require('../page-objects/header/search/search-modal');
+const BrowserUtils = require('../utils/browser-utils');
+const APIUtils = require('../utils/api-utils');
 
 const baseHeader = new BaseHeader();
 const pageobjects = new PageObjects();
@@ -70,8 +70,4 @@ When(/я сохраняю текст элемента "([^"]*)" на "([^"]*)"/,
 
 When(/я сохраняю текст элемента "([^"]*)"\[(\d+)\] на "([^"]*)"/, async function (elementName, index, pageName) {
 	this.elementText = await pageobjects.getElementTextByIndex(elementName, index, pageName);
-});
-
-When(/я прохожу капчу/, async function () {
-	true;
 });

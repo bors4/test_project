@@ -1,1 +1,1 @@
-npm run test -- --spec autorization.feature
+npm run test -- --spec search.catalog.in.modal.feature
