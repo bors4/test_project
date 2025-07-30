@@ -1,6 +1,6 @@
 const { Then } = require('@wdio/cucumber-framework');
-const BaseHeader = require('../pageobjects/header/BaseHeader');
-const PageObjects = require('../pageobjects/PageObjects');
+const BaseHeader = require('../page-objects/header/base-header');
+const PageObjects = require('../page-objects/page-objects');
 const { expect: expectChai } = require('chai');
 
 const baseHeader = new BaseHeader();
@@ -20,7 +20,7 @@ Then(/я вижу чекбокс "([^"]*)"/, async (elementName) => {
 Then(/я вижу текст "([^"]*)" в "([^"]*)" для "([^"]*)"/, async (text, elementName, pageName) => {
 	const searchInput = pageobjects.getElement(elementName, pageName);
 	if (text.includes('Например')) expect(searchInput.toHaveAttr('placeholder', expect.stringContaining('Например')));
-	else expect(await pageobjects.getElement('Ничего не найдено', pageName)).toHaveText('Ничего не найдено');
+	else expect(await pageobjects.getElement('Текст Ничего не найдено', pageName)).toHaveText('Ничего не найдено');
 });
 
 Then(/я вижу что "([^"]*)" на "([^"]*)" содержит текст "([^"]*)"/, async (elementName, pageName, elementText) => {
@@ -47,7 +47,7 @@ Then(
 );
 
 Then(/я вижу что курсы валют равны/, function () {
-	expectChai(this.elementText).to.equal('$ ' + String(this.apiExchangeRate).replace('.', ','));
+	expectChai(this.elementText).to.equal('$ ' + this.apiExchangeRate.replace('.', ','));
 });
 
 Then(/я вижу что "([^"]*)"\[(\d+)\] на "([^"]*)" равен сохранённому/, async function (elementName, index, pageName) {

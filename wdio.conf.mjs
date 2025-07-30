@@ -4,7 +4,7 @@ export const config = {
 	runner: 'local',
 	specs: ['./features/**/*.feature'],
 	exclude: [],
-	maxInstances: 1,
+	maxInstances: 5,
 
 	capabilities: [
 		{

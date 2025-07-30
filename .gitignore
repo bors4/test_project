@@ -2,3 +2,5 @@ node_modules
 allure*
 screen*
 *.env
+jsdoc.config.json
+package-lock.json

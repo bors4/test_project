@@ -1,6 +1,6 @@
 const { Given } = require('@wdio/cucumber-framework');
-const HomePage = require('../pageobjects/home/home.page');
-const PageObjects = require('../pageobjects/PageObjects');
+const HomePage = require('../page-objects/home/home-page');
+const PageObjects = require('../page-objects/page-objects');
 
 require('dotenv').config();
 
@@ -13,10 +13,11 @@ Given(/^ссылка на сайт/, async () => {
 	homePage.getURL();
 });
 
-Given(/я нахожусь на странице "([^"]*)"/, async (pageName) => {
+Given(/я нахожусь на "([^"]*)"/, async (pageName) => {
 	pageobjects.openPageByName(pageName);
 });
 
-Given(/я авторизован на сайте/, async (pageName) => {
-	pageobjects.openPageByName(homePage.getURL());
+Given(/устанавливаю cookie региона доставки "([^"]*)"/, async (regionName) => {
+	regionName = '17030';
+	await browser.setCookies({ name: 'delivery-region-id', value: regionName, domain: '.onliner.by' });
 });
