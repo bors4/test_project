@@ -28,7 +28,7 @@ class PageObjects {
 	constructor() {
 		this.elements = {
 			'Кнопка Принять все cookie': this.buttonAcceptAllCookies,
-			'Фрейм Окно поиска': this.frameSearchModal,
+			'Модальное окно поиска': this.frameSearchModal,
 		};
 
 		this.pages = {

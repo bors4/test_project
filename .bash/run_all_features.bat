@@ -1,1 +1,1 @@
-npm run test -- --spec ./*.feature
+npm run test -- --spec
