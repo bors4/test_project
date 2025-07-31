@@ -95,7 +95,7 @@ class BaseHeader {
 	}
 
 	get modalSearch() {
-		return '//div[@id="fast-search-modal"]';
+		return '//div[@id="fast-search-modal"]//iframe';
 	}
 
 	get buttonLogin() {
