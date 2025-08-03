@@ -49,7 +49,7 @@ export const config = {
 
 	cucumberOpts: {
 		require: ['./src/step-definitions/*.js'],
-		format: [],
+		format: ['json:./reports/cucumber-report.json'],
 		formatOptions: {
 			console: {
 				showLogs: true,

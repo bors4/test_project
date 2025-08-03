@@ -11,12 +11,6 @@ Then(/я вижу "([^"]*)" на "([^"]*)"/, async (elementName, pageName) => {
 	await element.isDisplayed();
 });
 
-Then(/я вижу чекбокс "([^"]*)"/, async (elementName) => {
-	const element = await $(baseHeader.elements[elementName]);
-	await browser.switchFrame($('iframe'));
-	await element.isDisplayed();
-});
-
 Then(/я вижу текст "([^"]*)" в "([^"]*)" для "([^"]*)"/, async (text, elementName, pageName) => {
 	const searchInput = pageobjects.getElement(elementName, pageName);
 	if (text.includes('Например')) expect(searchInput.toHaveAttr('placeholder', expect.stringContaining('Например')));

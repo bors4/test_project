@@ -21,7 +21,7 @@ const AuthorizationModal = require('./home/auth-modal');
 
 const frameUtils = require('../utils/frame-utils');
 
-const { expect, assert } = require('chai');
+const { expectChai, assert } = require('chai');
 require('dotenv').config();
 
 class PageObjects {
@@ -67,13 +67,6 @@ class PageObjects {
 		return this.pages[pageName];
 	}
 
-	async cookieAccept() {
-		const cookieButton = await $(this.buttonAcceptAllCookies);
-		await cookieButton.waitForClickable({ timeout: 10000 });
-		await cookieButton.click();
-		await cookieButton.waitForDisplayed({ reverse: true, timeout: 10000 });
-	}
-
 	async getElement(elementName, pageName) {
 		const element = await $(this.getPageObject(pageName).elements[elementName]);
 		await element.waitForExist();
@@ -88,15 +81,14 @@ class PageObjects {
 	async getElementText(elementName, pageName) {
 		const element = await this.getElement(elementName, pageName);
 		const elementText = await element.getText();
-		assert.isNotEmpty(elementText);
+		assert.isNotEmpty(elementText, `Для "${elementName}" на "${pageName}" текст не определён`);
 		return elementText;
 	}
 
 	async getElementTextByIndex(elementName, index, pageName) {
 		const elements = await this.getElements(elementName, pageName);
 		const elementText = await elements[index].getText();
-		console.log(elementText);
-		assert.isNotEmpty(elementText);
+		assert.isNotEmpty(elementText, `Для "${elementName}"[${index}] на "${pageName}" текст не определён`);
 		return elementText;
 	}
 
@@ -115,7 +107,7 @@ class PageObjects {
 		const element = $(page.siteLogo);
 		await browser.url(page.getURL());
 		const currentUrl = await browser.getUrl();
-		assert(currentUrl.includes(page.getURL(), `Ожидался URL: ${page.getURL()}, но получен: ${currentUrl}`));
+		assert(currentUrl.includes(page.getURL(), `Для ${pageName} ожидался URL: ${page.getURL()}, но получен: ${currentUrl}`));
 		try {
 			element.waitForDisplayed();
 		} catch (error) {
@@ -125,7 +117,9 @@ class PageObjects {
 
 	getUrlByPageName(pageName) {
 		const page = this.getPageObject(pageName);
-		return page.getURL();
+		const pageURL = page.getURL();
+		assert.isNotEmpty(pageURL, `Для ${pageName} не удалось определить URL`);
+		return pageURL;
 	}
 
 	async clickOnElement(elementName, pageName) {
@@ -154,6 +148,13 @@ class PageObjects {
 				throw new Error(`Текст не был вставлен: ${error}`);
 			}
 		}
+	}
+
+	async cookieAccept() {
+		const cookieButton = await $(this.buttonAcceptAllCookies);
+		await cookieButton.waitForClickable({ timeout: 10000 });
+		await cookieButton.click();
+		await cookieButton.waitForDisplayed({ reverse: true, timeout: 10000 });
 	}
 }
 

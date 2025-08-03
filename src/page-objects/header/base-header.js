@@ -137,7 +137,7 @@ class BaseHeader {
 			const end = placeholderText.indexOf('"', start + 1);
 			return placeholderText.slice(start, end);
 		} catch (error) {
-			throw new Error(`Текст для поиска не определён: ${error}`);
+			throw new Error(`Текст для поиска на основе плейсхолдера не определён: ${error}`);
 		}
 	}
 }
