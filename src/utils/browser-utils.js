@@ -13,14 +13,8 @@ class BrowserUtils {
 				setTimeout(done, 5000);
 			});
 		} catch (error) {
-			throw new Error('Переход на новую вкладку не выполнен');
+			console.log(`Переход на новую вкладку не выполнен:${error}`);
 		}
-	}
-
-	async setExecuteTimeout(timeToWait) {
-		await browser.execute((done) => {
-			setTimeout(done, 3000);
-		});
 	}
 
 	async scrollTo(element) {

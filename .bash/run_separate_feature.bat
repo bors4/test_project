@@ -1,1 +1,1 @@
-npm run test -- --spec search.catalog.in.modal.feature
+npm run test -- --spec ab.filter.product.feature

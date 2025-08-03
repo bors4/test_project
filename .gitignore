@@ -4,3 +4,4 @@ screen*
 *.env
 jsdoc.config.json
 package-lock.json
+reports
