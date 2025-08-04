@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width,initial-scale=1" />
-		<title>utils/frame-utils.js - Documentation</title>
+		<title>AbPage - Documentation</title>
 
 		<script src="scripts/prettify/prettify.js"></script>
 		<script src="scripts/prettify/lang-css.js"></script>
@@ -43,38 +43,39 @@
 		</nav>
 
 		<div id="main">
-			<h1 class="page-title">utils/frame-utils.js</h1>
+			<h1 class="page-title">AbPage</h1>
 
 			<section>
+				<header>
+					<h2>AbPage</h2>
+
+					<div class="class-description">
+						Класс для использования на странице "Автобарахолка". На страницу можно перейти по URL - https://ab.onliner.by
+					</div>
+				</header>
+
 				<article>
-					<pre class="prettyprint source linenums"><code>const elements = {
-	'Фрейм Окно поиска': '//*[@id="fast-search-modal"]//iframe',
-};
+					<div class="container-overview">
+						<div class="section-method">
+							<h2>Constructor</h2>
 
-/**
- * Функция `switchToIFrame` проверяет в каком контексте находится фокус и переключает на противоположный.
- * @param {string} sourceContext - параметр `sourceContext` принимает в качестве значения "iframe" или "родительский"
- * описывающие контекст, на который необходимо переключиться.
- */
+							<h4 class="name" id="AbPage">
+								<span class="type-signature"></span>new AbPage<span class="signature">()</span><span class="type-signature"></span>
+							</h4>
 
-export async function switchToIFrame(sourceContext) {
-	const iframe = await $(elements[sourceContext]);
-	await iframe.waitForDisplayed({ timeout: 10000 });
-	await browser.switchFrame(iframe);
-	const currentContext = await browser.execute(() => {
-		return window.self === window.top ? 'main' : 'iframe';
-	});
-	console.log(`Текущий контекст: ${currentContext}`);
-}
-
-/**
- * Функция `switchToParent` служит для переключения на родительский контекст при обращении к iframe
- */
-export async function switchToParent() {
-	await browser.switchToParentFrame();
-	console.log(`Текущий контекст: родительский`);
-}
-</code></pre>
+							<dl class="details">
+								<dt class="tag-source">Source:</dt>
+								<dd class="tag-source">
+									<ul class="dummy">
+										<li>
+											<a href="page-objects_ab_ab-page.js.html">page-objects/ab/ab-page.js</a>,
+											<a href="page-objects_ab_ab-page.js.html#line8">line 8</a>
+										</li>
+									</ul>
+								</dd>
+							</dl>
+						</div>
+					</div>
 				</article>
 			</section>
 		</div>

@@ -72,16 +72,7 @@ When(/я сохраняю текст элемента "([^"]*)"\[(\d+)\] на "(
 	this.elementText = await pageobjects.getElementTextByIndex(elementName, index, pageName);
 });
 
-When (/я кручу колесо мыши вниз/, async () => {
-	await browser.action('pointer')
-		.move({ x: 700, y: 700 })
-		.perform();
-	await browser.action('wheel')
-		.scroll({
-			deltaX: 0,
-			deltaY: 100,
-			duration: 500
-		})
-		.perform();
-	await browser.pause(5000);
-})
+When(/я выбираю из списка "([^"]*)" для "([^"]*)" на "([^"]*)"/, async function (selectOption, elementName, pageName) {
+	const element = await pageobjects.getElement(elementName, pageName);
+	await element.selectByVisibleText(selectOption);
+});
