@@ -1,10 +1,12 @@
 const { Then } = require('@wdio/cucumber-framework');
-const BaseHeader = require('../page-objects/header/base-header');
 const PageObjects = require('../page-objects/page-objects');
 const { expect: expectChai } = require('chai');
 
-const baseHeader = new BaseHeader();
 const pageobjects = new PageObjects();
+
+/**
+ * @example Then я вижу "Модальное окно авторизации" на "Главная страница"
+ */
 
 Then(/я вижу "([^"]*)" на "([^"]*)"/, async (elementName, pageName) => {
 	const element = await pageobjects.getElementByName(elementName, pageName);
