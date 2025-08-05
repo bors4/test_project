@@ -48,7 +48,7 @@ When(/я перехожу на неактивную вкладку в брауз
 });
 
 When(/я скролю к "([^"]*)" на "([^"]*)"/, async (elementName, pageName) => {
-	const element = await pageobjects.getElement(elementName, pageName);
+	const element = await pageobjects.getElementByName(elementName, pageName);
 	await browserUtils.scrollTo(element);
 });
 
@@ -73,6 +73,6 @@ When(/я сохраняю текст элемента "([^"]*)"\[(\d+)\] на "(
 });
 
 When(/я выбираю из списка "([^"]*)" для "([^"]*)" на "([^"]*)"/, async function (selectOption, elementName, pageName) {
-	const element = await pageobjects.getElement(elementName, pageName);
+	const element = await pageobjects.getElementByName(elementName, pageName);
 	await element.selectByVisibleText(selectOption);
 });

@@ -67,33 +67,33 @@ class PageObjects {
 		return this.pages[pageName];
 	}
 
-	async getElement(elementName, pageName) {
+	async getElementByName(elementName, pageName) {
 		const element = await $(this.getPageObject(pageName).elements[elementName]);
 		await element.waitForExist();
 		return element;
 	}
 
-	async getElements(elementName, pageName) {
+	async getElementsByName(elementName, pageName) {
 		const elements = await $$(this.getPageObject(pageName).elements[elementName]);
 		return elements;
 	}
 
 	async getElementText(elementName, pageName) {
-		const element = await this.getElement(elementName, pageName);
+		const element = await this.getElementByName(elementName, pageName);
 		const elementText = await element.getText();
 		assert.isNotEmpty(elementText, `Для "${elementName}" на "${pageName}" текст не определён`);
 		return elementText;
 	}
 
 	async getElementTextByIndex(elementName, index, pageName) {
-		const elements = await this.getElements(elementName, pageName);
+		const elements = await this.getElementsByName(elementName, pageName);
 		const elementText = await elements[index].getText();
 		assert.isNotEmpty(elementText, `Для "${elementName}"[${index}] на "${pageName}" текст не определён`);
 		return elementText;
 	}
 
 	async hoverElement(elementName, pageName) {
-		const element = await this.getElement(elementName, pageName);
+		const element = await this.getElementByName(elementName, pageName);
 		await element.moveTo();
 		try {
 			await element.isDisplayed({ withinViewport: true });
@@ -123,19 +123,19 @@ class PageObjects {
 	}
 
 	async clickOnElement(elementName, pageName) {
-		const element = await this.getElement(elementName, pageName);
+		const element = await this.getElementByName(elementName, pageName);
 		await element.waitForClickable();
 		await element.click();
 	}
 
 	async clickOnElementByIndex(elementName, index, pageName) {
-		const elements = await this.getElements(elementName, pageName);
+		const elements = await this.getElementsByName(elementName, pageName);
 		await elements[index].waitForClickable();
 		await elements[index].click();
 	}
 
 	async setTextTo(elementName, pageName, textToInsert) {
-		const element = await this.getElement(elementName, pageName);
+		const element = await this.getElementByName(elementName, pageName);
 		await element.waitForDisplayed();
 		if (textToInsert === 'login' || textToInsert === 'password') {
 			textToInsert === 'login' ? await element.setValue(process.env.TEST_USER_LOGIN) : await element.setValue(process.env.TEST_USER_PASSWORD);

@@ -7,12 +7,12 @@ const baseHeader = new BaseHeader();
 const pageobjects = new PageObjects();
 
 Then(/я вижу "([^"]*)" на "([^"]*)"/, async (elementName, pageName) => {
-	const element = await pageobjects.getElement(elementName, pageName);
+	const element = await pageobjects.getElementByName(elementName, pageName);
 	await element.isDisplayed();
 });
 
 Then(/я вижу текст "([^"]*)" в "([^"]*)" для "([^"]*)"/, async (text, elementName, pageName) => {
-	const searchInput = pageobjects.getElement(elementName, pageName);
+	const searchInput = pageobjects.getElementByName(elementName, pageName);
 	if (text.includes('Например')) expect(searchInput.toHaveAttr('placeholder', expect.stringContaining('Например')));
 	else expect(await pageobjects.getElement('Текст Ничего не найдено', pageName)).toHaveText('Ничего не найдено');
 });
@@ -29,7 +29,7 @@ Then(/я проверяю что нахожусь на "([^"]*)"/, async (pageNa
 Then(
 	/я вижу что "([^"]*)" на "([^"]*)" имеет атрибут "([^"]*)" со значением "([^"]*)"/,
 	async (elementName, pageName, attributeName, attributeValue) => {
-		const element = await pageobjects.getElement(elementName, pageName);
+		const element = await pageobjects.getElementByName(elementName, pageName);
 		const attribute = await element.getCSSProperty(attributeName);
 		switch (attributeValue) {
 			case attributeValue.includes('#'):
@@ -47,4 +47,15 @@ Then(/я вижу что курсы валют равны/, function () {
 Then(/я вижу что "([^"]*)"\[(\d+)\] на "([^"]*)" равен сохранённому/, async function (elementName, index, pageName) {
 	const elementText = await pageobjects.getElementTextByIndex(elementName, index, pageName);
 	expectChai(elementText).to.equal(this.elementText);
+});
+
+/**
+ * @todo доработать шаг: добавить обработку операторов сравнения
+ */
+
+Then(/я вижу что кол-во "([^"]*)" на "([^"]*)" "([^"]*)" "(\d+)"/, async function (elementName, pageName, operator, itemCount) {
+	const elements = await pageobjects.getElementsByName(elementName, pageName);
+	console.log(elements.length);
+	await browser.pause(5000);
+	expectChai(elements.length, `Условие не удовлетворяет ${elements.length} меньше ${itemCount}`).to.be.lessThan(itemCount);
 });

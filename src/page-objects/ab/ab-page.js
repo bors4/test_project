@@ -23,6 +23,9 @@ class AbPage {
 			'Поле стоимости авто До': this.inputAutoPriceLess,
 			'Тайтл Год выпуска': this.titleYearMade,
 			'Список Год выпуска С': this.selectYearMadeOptions,
+			'Чекбокс Тип двигателя Бензин': this.checkboxPetrolEngine,
+			'Список Тегов фильтра': this.listFilterTags,
+			'Карточка продаваемого авто': this.vehicleOfferItem,
 		};
 	}
 
@@ -84,6 +87,18 @@ class AbPage {
 
 	get selectYearMadeOptions() {
 		return '//div[normalize-space()="с"]/following-sibling::select';
+	}
+
+	get checkboxPetrolEngine() {
+		return '//div[normalize-space()="Бензин"]/../../div[@class="i-checkbox__faux"]';
+	}
+
+	get vehicleOfferItem() {
+		return '//div[@class="vehicle-form__offers-item"]';
+	}
+
+	get listFilterTags() {
+		return '//div[contains(@class,"vehicle-form__button_tag")]';
 	}
 
 	getURL() {
