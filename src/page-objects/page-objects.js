@@ -69,7 +69,7 @@ class PageObjects {
 
 	async getElementByName(elementName, pageName) {
 		const element = await $(this.getPageObject(pageName).elements[elementName]);
-		await element.waitForExist();
+		await element.waitForExist({ timeout: 10000 });
 		return element;
 	}
 

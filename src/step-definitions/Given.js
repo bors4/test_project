@@ -18,6 +18,9 @@ Given(/я нахожусь на "([^"]*)"/, async (pageName) => {
 });
 
 Given(/устанавливаю cookie региона доставки "([^"]*)"/, async (regionName) => {
-	regionName = '17030';
-	await browser.setCookies({ name: 'delivery-region-id', value: regionName, domain: '.onliner.by' });
+	await browser.setCookies({
+		name: 'delivery-region-id',
+		value: regionName,
+		domain: '.onliner.by',
+	});
 });

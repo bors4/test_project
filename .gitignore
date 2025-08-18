@@ -5,3 +5,5 @@ screen*
 jsdoc.config.json
 package-lock.json
 reports
+.allure/history.jsonl
+.prettierignore
