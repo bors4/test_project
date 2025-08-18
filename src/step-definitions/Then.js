@@ -16,7 +16,7 @@ Then(/я вижу "([^"]*)" на "([^"]*)"/, async (elementName, pageName) => {
 Then(/я вижу текст "([^"]*)" в "([^"]*)" для "([^"]*)"/, async (text, elementName, pageName) => {
 	const searchInput = pageobjects.getElementByName(elementName, pageName);
 	if (text.includes('Например')) expect(searchInput.toHaveAttr('placeholder', expect.stringContaining('Например')));
-	else expect(await pageobjects.getElement('Текст Ничего не найдено', pageName)).toHaveText('Ничего не найдено');
+	else expect(await pageobjects.getElementsByName('Текст Ничего не найдено', pageName)).toHaveText('Ничего не найдено');
 });
 
 Then(/я вижу что "([^"]*)" на "([^"]*)" содержит текст "([^"]*)"/, async (elementName, pageName, elementText) => {
@@ -58,6 +58,5 @@ Then(/я вижу что "([^"]*)"\[(\d+)\] на "([^"]*)" равен сохра
 Then(/я вижу что кол-во "([^"]*)" на "([^"]*)" "([^"]*)" "(\d+)"/, async function (elementName, pageName, operator, itemCount) {
 	const elements = await pageobjects.getElementsByName(elementName, pageName);
 	console.log(elements.length);
-	await browser.pause(5000);
 	expectChai(elements.length, `Условие не удовлетворяет ${elements.length} меньше ${itemCount}`).to.be.lessThan(itemCount);
 });

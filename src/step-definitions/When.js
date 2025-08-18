@@ -28,7 +28,7 @@ When(/я нажимаю на "([^"]*)"\[(\d+)\] на "([^"]*)"/, async (elementN
 
 When(/я беру текст из примера в плейсхолдере поля поиска и ввожу в "([^"]*)" в "([^"]*)"/, async (elementName, pageName) => {
 	const textToSearch = await baseHeader.getTextFromSearchInput();
-	pageobjects.setTextTo(elementName, pageName, textToSearch);
+	await pageobjects.setTextTo(elementName, pageName, textToSearch);
 });
 
 When(/я ввожу "([^"]*)" в "([^"]*)" на "([^"]*)"/, async (text, elementName, pageName) => {
@@ -53,7 +53,7 @@ When(/я скролю к "([^"]*)" на "([^"]*)"/, async (elementName, pageName
 });
 
 When(/я обновляю страницу/, async () => {
-	browser.refresh();
+	await browser.refresh();
 });
 
 When(/я нажимаю на кнопку "([^"]*)" браузера/, async (actionName) => {
