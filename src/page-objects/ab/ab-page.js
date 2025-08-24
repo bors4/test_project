@@ -6,104 +6,106 @@ const SiteUrls = require('../../config/site-urls');
  */
 
 class AbPage {
-	constructor() {
-		this.elements = {
-			'Заголовок раздела Автобарахолка': this.headerAbSection,
-			'Поле ввода страны раздела фильтра': this.inputCountryFilterSection,
-			'Дропдаун списка стран для фильтра': this.dropdownCountriesList,
-			'Контейнер дропдауна списка марок авто для фильтра': this.containerDropdownCarModelList,
-			'Поле ввода названия страны фильтра': this.inputCountryFilter,
-			'Список стран фильтра': this.listCountries,
-			'Марка авто BMW': this.carBrandBMW,
-			'Поле ввода марки авто раздела фильтра': this.inputCarBrandFilterSection,
-			'Тайтл фильтра Местонахождение': this.titleLocation,
-			'Тайтл фильтра Марка': this.titleCarBrand,
-			'Тайтл Цена': this.titlePrice,
-			'Ссылка валюты покупки USD': this.linkCurrencyUSD,
-			'Поле стоимости авто До': this.inputAutoPriceLess,
-			'Тайтл Год выпуска': this.titleYearMade,
-			'Список Год выпуска С': this.selectYearMadeOptions,
-			'Чекбокс Тип двигателя Бензин': this.checkboxPetrolEngine,
-			'Список Тегов фильтра': this.listFilterTags,
-			'Карточка продаваемого авто': this.vehicleOfferItem,
-		};
-	}
+  static SiteUrls = SiteUrls;
 
-	get headerAbSection() {
-		return '//h1[contains(text(), "Автобарахолка")]';
-	}
+  constructor() {
+    this.elements = {
+      'Заголовок раздела Автобарахолка': AbPage.headerAbSection,
+      'Поле ввода страны раздела фильтра': AbPage.inputCountryFilterSection,
+      'Дропдаун списка стран для фильтра': AbPage.dropdownCountriesList,
+      'Контейнер дропдауна списка марок авто для фильтра': AbPage.containerDropdownCarModelList,
+      'Поле ввода названия страны фильтра': AbPage.inputCountryFilter,
+      'Список стран фильтра': AbPage.listCountries,
+      'Марка авто BMW': AbPage.carBrandBMW,
+      'Поле ввода марки авто раздела фильтра': AbPage.inputCarBrandFilterSection,
+      'Тайтл фильтра Местонахождение': AbPage.titleLocation,
+      'Тайтл фильтра Марка': AbPage.titleCarBrand,
+      'Тайтл Цена': AbPage.titlePrice,
+      'Ссылка валюты покупки USD': AbPage.linkCurrencyUSD,
+      'Поле стоимости авто До': AbPage.inputAutoPriceLess,
+      'Тайтл Год выпуска': AbPage.titleYearMade,
+      'Список Год выпуска С': AbPage.selectYearMadeOptions,
+      'Чекбокс Тип двигателя Бензин': AbPage.checkboxPetrolEngine,
+      'Список Тегов фильтра': AbPage.listFilterTags,
+      'Карточка продаваемого авто': AbPage.vehicleOfferItem,
+    };
+  }
 
-	get inputCountryFilterSection() {
-		return '(//div[contains(@class,"vehicle-form__line")]/div/div[1])[1]/div[1]';
-	}
+  static get headerAbSection() {
+    return '//h1[contains(text(), "Автобарахолка")]';
+  }
 
-	get inputCarBrandFilterSection() {
-		return '(//div[contains(@class,"vehicle-form__line")]/div/div[1])[5]/div[1]';
-	}
+  static get inputCountryFilterSection() {
+    return '(//div[contains(@class,"vehicle-form__line")]/div/div[1])[1]/div[1]';
+  }
 
-	get dropdownCountriesList() {
-		return '(//div[contains(@class,"vehicle-form__line")]/div/div[1])[1]/div[1]//div[contains(@class,"dropdown-style_right")]';
-	}
+  static get inputCarBrandFilterSection() {
+    return '(//div[contains(@class,"vehicle-form__line")]/div/div[1])[5]/div[1]';
+  }
 
-	get inputCountryFilter() {
-		return '//input[@placeholder="Найти страну"]';
-	}
+  static get dropdownCountriesList() {
+    return '(//div[contains(@class,"vehicle-form__line")]/div/div[1])[1]/div[1]//div[contains(@class,"dropdown-style_right")]';
+  }
 
-	get listCountries() {
-		return `(//div[contains(@class,"dropdown-style_right")])[1]//ul[@tabindex="0"]/li`;
-	}
+  static get inputCountryFilter() {
+    return '//input[@placeholder="Найти страну"]';
+  }
 
-	get carBrandBMW() {
-		return '//div[text()="BMW"]';
-	}
+  static get listCountries() {
+    return `(//div[contains(@class,"dropdown-style_right")])[1]//ul[@tabindex="0"]/li`;
+  }
 
-	get titleLocation() {
-		return '//div[contains(text(),"Местонахождение")]';
-	}
+  static get carBrandBMW() {
+    return '//div[text()="BMW"]';
+  }
 
-	get titleCarBrand() {
-		return '//div[contains(text(),"Марка")]';
-	}
+  static get titleLocation() {
+    return '//div[contains(text(),"Местонахождение")]';
+  }
 
-	get titlePrice() {
-		return '(//div[contains(text(),"Цена")])[1]';
-	}
+  static get titleCarBrand() {
+    return '//div[contains(text(),"Марка")]';
+  }
 
-	get containerDropdownCarModelList() {
-		return '(//div[@class="dropdown-style__container"])[4]';
-	}
+  static get titlePrice() {
+    return '(//div[contains(text(),"Цена")])[1]';
+  }
 
-	get linkCurrencyUSD() {
-		return '(//div/a[contains(@class,"vehicle-form__link_base")])[2]';
-	}
+  static get containerDropdownCarModelList() {
+    return '(//div[@class="dropdown-style__container"])[4]';
+  }
 
-	get inputAutoPriceLess() {
-		return '(//input[@placeholder="до"])[1]';
-	}
+  static get linkCurrencyUSD() {
+    return '(//div/a[contains(@class,"vehicle-form__link_base")])[2]';
+  }
 
-	get titleYearMade() {
-		return '//div[text()="Год выпуска"]';
-	}
+  static get inputAutoPriceLess() {
+    return '(//input[@placeholder="до"])[1]';
+  }
 
-	get selectYearMadeOptions() {
-		return '//div[normalize-space()="с"]/following-sibling::select';
-	}
+  static get titleYearMade() {
+    return '//div[text()="Год выпуска"]';
+  }
 
-	get checkboxPetrolEngine() {
-		return '//div[normalize-space()="Бензин"]/../../div[@class="i-checkbox__faux"]';
-	}
+  static get selectYearMadeOptions() {
+    return '//div[normalize-space()="с"]/following-sibling::select';
+  }
 
-	get vehicleOfferItem() {
-		return '//div[@class="vehicle-form__offers-item"]';
-	}
+  static get checkboxPetrolEngine() {
+    return '//div[normalize-space()="Бензин"]/../../div[@class="i-checkbox__faux"]';
+  }
 
-	get listFilterTags() {
-		return '//div[contains(@class,"vehicle-form__button_tag")]';
-	}
+  static get vehicleOfferItem() {
+    return '//div[@class="vehicle-form__offers-item"]';
+  }
 
-	getURL() {
-		return SiteUrls.AB;
-	}
+  static get listFilterTags() {
+    return '//div[contains(@class,"vehicle-form__button_tag")]';
+  }
+
+  static getURL() {
+    return SiteUrls.AB;
+  }
 }
 
 module.exports = AbPage;

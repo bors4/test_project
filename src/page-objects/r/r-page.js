@@ -1,24 +1,26 @@
 const SiteUrls = require('../../config/site-urls');
 
 class RPage {
-	constructor() {
-		this.elements = {
-			'Блок Карта недвижимости': this.blockRealtyMap,
-			'Блок Список квартир': this.blockApartmentsList,
-		};
-	}
+  static SiteUrls = SiteUrls;
 
-	get blockRealtyMap() {
-		return '//div[@id="map"]';
-	}
+  constructor() {
+    this.elements = {
+      'Блок Карта недвижимости': RPage.blockRealtyMap,
+      'Блок Список квартир': RPage.blockApartmentsList,
+    };
+  }
 
-	get blockApartmentsList() {
-		return '//div[@id="search-filter-results"]';
-	}
+  static get blockRealtyMap() {
+    return '//div[@id="map"]';
+  }
 
-	getURL() {
-		return SiteUrls.R;
-	}
+  static get blockApartmentsList() {
+    return '//div[@id="search-filter-results"]';
+  }
+
+  static getURL() {
+    return SiteUrls.R;
+  }
 }
 
 module.exports = RPage;

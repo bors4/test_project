@@ -1,19 +1,21 @@
 const SiteUrls = require('../../config/site-urls');
 
 class MoneyPage {
-	constructor() {
-		this.elements = {
-			'Таб навигации Кошелек': this.tabWallet,
-		};
-	}
+  static SiteUrls = SiteUrls;
 
-	get tabWallet() {
-		return '//a/span[.="Кошелек"]';
-	}
+  constructor() {
+    this.elements = {
+      'Таб навигации Кошелек': MoneyPage.tabWallet,
+    };
+  }
 
-	getURL() {
-		return SiteUrls.MONEY;
-	}
+  static get tabWallet() {
+    return '//a/span[.="Кошелек"]';
+  }
+
+  static getURL() {
+    return SiteUrls.MONEY;
+  }
 }
 
 module.exports = MoneyPage;

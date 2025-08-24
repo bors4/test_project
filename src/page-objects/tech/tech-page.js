@@ -1,19 +1,21 @@
 const SiteUrls = require('../../config/site-urls');
 
 class TechPage {
-	constructor() {
-		this.elements = {
-			'Таб навигации Технологии': this.tabTechNavigation,
-		};
-	}
+  static SiteUrls = SiteUrls;
 
-	get tabTechNavigation() {
-		return '//a/span[.="Технологии"]';
-	}
+  constructor() {
+    this.elements = {
+      'Таб навигации Технологии': TechPage.tabTechNavigation,
+    };
+  }
 
-	getURL() {
-		return SiteUrls.TECH;
-	}
+  static get tabTechNavigation() {
+    return '//a/span[.="Технологии"]';
+  }
+
+  static getURL() {
+    return SiteUrls.TECH;
+  }
 }
 
 module.exports = TechPage;

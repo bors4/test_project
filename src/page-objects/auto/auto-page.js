@@ -1,19 +1,21 @@
 const SiteUrls = require('../../config/site-urls');
 
 class AutoPage {
-	constructor() {
-		this.elements = {
-			'Таб навигации Авто': this.tabAutoNavigation,
-		};
-	}
+  static SiteUrls = SiteUrls;
 
-	get tabAutoNavigation() {
-		return '//a/span[.="Авто"]';
-	}
+  constructor() {
+    this.elements = {
+      'Таб навигации Авто': AutoPage.tabAutoNavigation,
+    };
+  }
 
-	getURL() {
-		return SiteUrls.AUTO;
-	}
+  static get tabAutoNavigation() {
+    return '//a/span[.="Авто"]';
+  }
+
+  static getURL() {
+    return SiteUrls.AUTO;
+  }
 }
 
 module.exports = AutoPage;

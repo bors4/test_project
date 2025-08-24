@@ -1,145 +1,149 @@
 const SiteUrls = require('../../config/site-urls');
+
 class BaseHeader {
-	constructor() {
-		this.elements = {
-			'Лого сайта': this.siteLogo,
-			'Ссылка Каталог': this.linkCatalog,
-			'Ссылка Новости': this.linkNews,
-			'Ссылка Автобарахолка': this.linkAb,
-			'Ссылка Дома и квартиры': this.linkRealty,
-			'Ссылка Услуги': this.linkTasks,
-			'Ссылка Барахолка': this.linkBaraholka,
-			'Ссылка Форум': this.linkForum,
-			'Ссылка Onliner Клевер': this.linkClever,
-			'Ссылка Курсы валют': this.linkCurrency,
-			'Ссылка Погода': this.linkWeather,
-			'Текст курс доллара': this.textCurrencyRate,
-			'Дропдаун Новости': this.dropdownNews,
-			'Дропдаун Автобарахолка': this.dropdownAb,
-			'Дропдаун Дома и квартиры': this.dropdownRealty,
-			'Поле поиска': this.inputSearch,
-			'Модальное окно поиска': this.modalSearch,
-			'Кнопка Вход': this.buttonLogin,
-			'Кнопка Facebook': this.buttonFacebook,
-			'Кнопка Vkontakte': this.buttonVk,
-			'Кнопка Google': this.buttonGoogle,
-			'Кнопка Корзина': this.buttonCart,
-			'Аватар профиля': this.profileAvatar,
-			'Меню профиля': this.menuProfile,
-			'18+': this.labelAdultContent,
-		};
-	}
+  static SiteUrls = SiteUrls;
 
-	get siteLogo() {
-		return `//div//a[@href="${SiteUrls.HOME}"]/img`;
-	}
+  constructor() {
+    this.elements = {
+      'Лого сайта': BaseHeader.siteLogo,
+      'Ссылка Каталог': BaseHeader.linkCatalog,
+      'Ссылка Новости': BaseHeader.linkNews,
+      'Ссылка Автобарахолка': BaseHeader.linkAb,
+      'Ссылка Дома и квартиры': BaseHeader.linkRealty,
+      'Ссылка Услуги': BaseHeader.linkTasks,
+      'Ссылка Барахолка': BaseHeader.linkBaraholka,
+      'Ссылка Форум': BaseHeader.linkForum,
+      'Ссылка Onliner Клевер': BaseHeader.linkClever,
+      'Ссылка Курсы валют': BaseHeader.linkCurrency,
+      'Ссылка Погода': BaseHeader.linkWeather,
+      'Текст курс доллара': BaseHeader.textCurrencyRate,
+      'Дропдаун Новости': BaseHeader.dropdownNews,
+      'Дропдаун Автобарахолка': BaseHeader.dropdownAb,
+      'Дропдаун Дома и квартиры': BaseHeader.dropdownRealty,
+      'Поле поиска': BaseHeader.inputSearch,
+      'Модальное окно поиска': BaseHeader.modalSearch,
+      'Кнопка Вход': BaseHeader.buttonLogin,
+      'Кнопка Facebook': BaseHeader.buttonFacebook,
+      'Кнопка Vkontakte': BaseHeader.buttonVk,
+      'Кнопка Google': BaseHeader.buttonGoogle,
+      'Кнопка Корзина': BaseHeader.buttonCart,
+      'Аватар профиля': BaseHeader.profileAvatar,
+      'Меню профиля': BaseHeader.menuProfile,
+      '18+': BaseHeader.labelAdultContent,
+    };
+  }
 
-	get linkCatalog() {
-		return `//nav//a[@href="${SiteUrls.CATALOG}"]`;
-	}
+  static get siteLogo() {
+    return `//div//a[@href="${SiteUrls.HOME}"]/img`;
+  }
 
-	get linkNews() {
-		return `//div//a[@href="${SiteUrls.HOME}"]//span[.="Новости"]`;
-	}
+  static get linkCatalog() {
+    return `//nav//a[@href="${SiteUrls.CATALOG}"]`;
+  }
 
-	get linkAb() {
-		return `//nav//a[@href="${SiteUrls.AB}"]//span[.="Автобарахолка"]`;
-	}
+  static get linkNews() {
+    return `//div//a[@href="${SiteUrls.HOME}"]//span[.="Новости"]`;
+  }
 
-	get linkRealty() {
-		return `//nav//li/a[@href="${SiteUrls.R}/pk"]`;
-	}
+  static get linkAb() {
+    return `//nav//a[@href="${SiteUrls.AB}"]//span[.="Автобарахолка"]`;
+  }
 
-	get linkTasks() {
-		return `//nav//a[@href="${SiteUrls.TASKS}"]/span[.="Услуги"]`;
-	}
+  static get linkRealty() {
+    return `//nav//li/a[@href="${SiteUrls.R}/pk"]`;
+  }
 
-	get linkBaraholka() {
-		return `//nav//a[@href="${SiteUrls.BARAHOLKA}"]//span[.="Барахолка"]`;
-	}
+  static get linkTasks() {
+    return `//nav//a[@href="${SiteUrls.TASKS}"]/span[.="Услуги"]`;
+  }
 
-	get linkForum() {
-		return `//nav//a[@href="${SiteUrls.FORUM}/"]`;
-	}
+  static get linkBaraholka() {
+    return `//nav//a[@href="${SiteUrls.BARAHOLKA}"]//span[.="Барахолка"]`;
+  }
 
-	get linkClever() {
-		return '//nav/a[contains(@href,"clever")]';
-	}
+  static get linkForum() {
+    return `//nav//a[@href="${SiteUrls.FORUM}/"]`;
+  }
 
-	get linkCurrency() {
-		return `//nav//a[@href="${SiteUrls.KURS}/"]`;
-	}
+  static get linkClever() {
+    return '//nav/a[contains(@href,"clever")]';
+  }
 
-	get linkWeather() {
-		return `//nav//a[@href="${SiteUrls.POGODA}/"]`;
-	}
+  static get linkCurrency() {
+    return `//nav//a[@href="${SiteUrls.KURS}/"]`;
+  }
 
-	get textCurrencyRate() {
-		return '//nav//span[contains(text(),"$ ")]';
-	}
+  static get linkWeather() {
+    return `//nav//a[@href="${SiteUrls.POGODA}/"]`;
+  }
 
-	get dropdownNews() {
-		return '//*[contains(@class, "b-main-navigation__dropdown_visible")]';
-	}
+  static get textCurrencyRate() {
+    return '//nav//span[contains(text(),"$ ")]';
+  }
 
-	get dropdownAb() {
-		return '//*[contains(@class, "b-main-navigation__dropdown_visible")]';
-	}
+  static get dropdownNews() {
+    return '//*[contains(@class, "b-main-navigation__dropdown_visible")]';
+  }
 
-	get dropdownRealty() {
-		return '//*[contains(@class, "b-main-navigation__dropdown_visible")]';
-	}
+  static get dropdownAb() {
+    return '//*[contains(@class, "b-main-navigation__dropdown_visible")]';
+  }
 
-	get inputSearch() {
-		return '//input[@name="query"]';
-	}
+  static get dropdownRealty() {
+    return '//*[contains(@class, "b-main-navigation__dropdown_visible")]';
+  }
 
-	get modalSearch() {
-		return '//div[@id="fast-search-modal"]//iframe';
-	}
+  static get inputSearch() {
+    return '//input[@name="query"]';
+  }
 
-	get buttonLogin() {
-		return '//div[text()="Вход"]';
-	}
+  static get modalSearch() {
+    return '//div[@id="fast-search-modal"]//iframe';
+  }
 
-	get buttonFacebook() {
-		return '//*[@id="userbar"]//*[@title="Facebook"]';
-	}
+  static get buttonLogin() {
+    return '//div[text()="Вход"]';
+  }
 
-	get buttonVk() {
-		return '//*[@id="userbar"]//*[@title="ВКонтакте"]';
-	}
+  static get buttonFacebook() {
+    return '//*[@id="userbar"]//*[@title="Facebook"]';
+  }
 
-	get buttonGoogle() {
-		return '//*[@id="userbar"]//*[@title="Google"]';
-	}
+  static get buttonVk() {
+    return '//*[@id="userbar"]//*[@title="ВКонтакте"]';
+  }
 
-	get buttonCart() {
-		return '//*[@id="userbar"]//*[@title="Корзина"]';
-	}
+  static get buttonGoogle() {
+    return '//*[@id="userbar"]//*[@title="Google"]';
+  }
 
-	get profileAvatar() {
-		return '';
-	}
+  static get buttonCart() {
+    return '//*[@id="userbar"]//*[@title="Корзина"]';
+  }
 
-	get menuProfile() {
-		return '//div[@id="userbar"]';
-	}
+  static get profileAvatar() {
+    return '';
+  }
 
-	get labelAdultContent() {
-		return '//nav/div[contains(text(), "18+")]';
-	}
+  static get menuProfile() {
+    return '//div[@id="userbar"]';
+  }
 
-	async getTextFromSearchInput() {
-		try {
-			const placeholderText = await $(this.inputSearch).getAttribute('placeholder');
-			const start = placeholderText.indexOf('"') + 1;
-			const end = placeholderText.indexOf('"', start + 1);
-			return placeholderText.slice(start, end);
-		} catch (error) {
-			throw new Error(`Текст для поиска на основе плейсхолдера не определён: ${error}`);
-		}
-	}
+  static get labelAdultContent() {
+    return '//nav/div[contains(text(), "18+")]';
+  }
+
+  static async getTextFromSearchInput() {
+    try {
+      const placeholderText = await $(BaseHeader.inputSearch).getAttribute('placeholder');
+      const start = placeholderText.indexOf('"') + 1;
+      const end = placeholderText.indexOf('"', start + 1);
+
+      return placeholderText.slice(start, end);
+    } catch (error) {
+      throw new Error(`Текст для поиска на основе плейсхолдера не определён: ${error}`);
+    }
+  }
 }
 
 module.exports = BaseHeader;

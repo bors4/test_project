@@ -1,64 +1,66 @@
 const SiteUrls = require('../../config/site-urls');
 
 class HomePage {
-	constructor() {
-		this.elements = {
-			'Лого сайта': this.siteLogo,
-			'Раздел Каталог': this.sectionCatalog,
-			'Раздел Люди': this.sectionPeople,
-			'Раздел Кошелек': this.sectionWallet,
-			'Раздел Авто': this.sectionAuto,
-			'Раздел Технологии': this.sectionTech,
-			'Раздел Недвижимость': this.sectionRealty,
-			'Раздел Форум': this.sectionForum,
-			'Ссылка Мобильные телефоны': this.linkMobilePhones,
-			'Модальное окно авторизации': this.modalAuth,
-		};
-	}
+  static SiteUrls = SiteUrls;
 
-	get siteLogo() {
-		return `//div//a[@href="${SiteUrls.HOME}"]/img`;
-	}
+  constructor() {
+    this.elements = {
+      'Лого сайта': HomePage.siteLogo,
+      'Раздел Каталог': HomePage.sectionCatalog,
+      'Раздел Люди': HomePage.sectionPeople,
+      'Раздел Кошелек': HomePage.sectionWallet,
+      'Раздел Авто': HomePage.sectionAuto,
+      'Раздел Технологии': HomePage.sectionTech,
+      'Раздел Недвижимость': HomePage.sectionRealty,
+      'Раздел Форум': HomePage.sectionForum,
+      'Ссылка Мобильные телефоны': HomePage.linkMobilePhones,
+      'Модальное окно авторизации': HomePage.modalAuth,
+    };
+  }
 
-	get sectionCatalog() {
-		return '//header/h2/a[contains(text(), "Каталог")]';
-	}
+  static get siteLogo() {
+    return `//div//a[@href="${SiteUrls.HOME}"]/img`;
+  }
 
-	get sectionPeople() {
-		return '//header/h2/a[contains(text(), "Люди")]';
-	}
+  static get sectionCatalog() {
+    return '//header/h2/a[contains(text(), "Каталог")]';
+  }
 
-	get sectionWallet() {
-		return '//header/h2/a[contains(text(), "Кошелек")]';
-	}
+  static get sectionPeople() {
+    return '//header/h2/a[contains(text(), "Люди")]';
+  }
 
-	get sectionAuto() {
-		return '//header/h2/a[contains(text(), "Авто")]';
-	}
+  static get sectionWallet() {
+    return '//header/h2/a[contains(text(), "Кошелек")]';
+  }
 
-	get sectionTech() {
-		return '//header/h2/a[contains(text(), "Технологии")]';
-	}
+  static get sectionAuto() {
+    return '//header/h2/a[contains(text(), "Авто")]';
+  }
 
-	get sectionRealty() {
-		return '//header/h2/a[contains(text(), "Недвижимость")]';
-	}
+  static get sectionTech() {
+    return '//header/h2/a[contains(text(), "Технологии")]';
+  }
 
-	get sectionForum() {
-		return '//header/h2/a[contains(text(), "Форум")]';
-	}
+  static get sectionRealty() {
+    return '//header/h2/a[contains(text(), "Недвижимость")]';
+  }
 
-	get linkMobilePhones() {
-		return `//a[@href="${SiteUrls.CATALOG_MOBILE}"]`;
-	}
+  static get sectionForum() {
+    return '//header/h2/a[contains(text(), "Форум")]';
+  }
 
-	get modalAuth() {
-		return '//div[@id="auth-container"]';
-	}
+  static get linkMobilePhones() {
+    return `//a[@href="${SiteUrls.CATALOG_MOBILE}"]`;
+  }
 
-	getURL() {
-		return SiteUrls.HOME;
-	}
+  static get modalAuth() {
+    return '//div[@id="auth-container"]';
+  }
+
+  static getURL() {
+    return SiteUrls.HOME;
+  }
 }
 
 module.exports = HomePage;

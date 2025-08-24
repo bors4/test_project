@@ -1,19 +1,21 @@
 const SiteUrls = require('../../config/site-urls');
 
 class TasksPage {
-	constructor() {
-		this.elements = {
-			'Заголовок раздела Заказы': this.headerOrdersSection,
-		};
-	}
+  static SiteUrls = SiteUrls;
 
-	get headerOrdersSection() {
-		return '//div[contains(text(), "Заказы")]';
-	}
+  constructor() {
+    this.elements = {
+      'Заголовок раздела Заказы': TasksPage.headerOrdersSection,
+    };
+  }
 
-	getURL() {
-		return SiteUrls.TASKS;
-	}
+  static get headerOrdersSection() {
+    return '//div[contains(text(), "Заказы")]';
+  }
+
+  static getURL() {
+    return SiteUrls.TASKS;
+  }
 }
 
 module.exports = TasksPage;

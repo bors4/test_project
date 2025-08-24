@@ -1,19 +1,21 @@
 const SiteUrls = require('../../config/site-urls');
 
 class PeoplePage {
-	constructor() {
-		this.elements = {
-			'Таб навигации Люди': this.tabPeople,
-		};
-	}
+  static SiteUrls = SiteUrls;
 
-	get tabPeople() {
-		return '//a/span/span[.="Люди"]/parent::span/parent::a';
-	}
+  constructor() {
+    this.elements = {
+      'Таб навигации Люди': PeoplePage.tabPeople,
+    };
+  }
 
-	getURL() {
-		return SiteUrls.PEOPLE;
-	}
+  static get tabPeople() {
+    return '//a/span/span[.="Люди"]/parent::span/parent::a';
+  }
+
+  static getURL() {
+    return SiteUrls.PEOPLE;
+  }
 }
 
 module.exports = PeoplePage;

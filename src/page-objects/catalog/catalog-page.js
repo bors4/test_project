@@ -2,26 +2,28 @@ const SiteUrls = require('../../config/site-urls');
 const BasePage = require('../header/base-header');
 
 class CatalogPage extends BasePage {
-	constructor() {
-		super();
+  static SiteUrls = SiteUrls;
 
-		this.elements = {
-			'Заголовок раздела Каталог': this.headerCatalogSection,
-			'Заголовок раздела Популярные категории': this.headerPopularCategorySection,
-		};
-	}
+  constructor() {
+    super();
 
-	get headerCatalogSection() {
-		return '//h1[contains(text(), "Каталог")]';
-	}
+    this.elements = {
+      'Заголовок раздела Каталог': CatalogPage.headerCatalogSection,
+      'Заголовок раздела Популярные категории': CatalogPage.headerPopularCategorySection,
+    };
+  }
 
-	get headerPopularCategorySection() {
-		return '//h2[contains(text(), "Популярные категории")]';
-	}
+  static get headerCatalogSection() {
+    return '//h1[contains(text(), "Каталог")]';
+  }
 
-	getURL() {
-		return SiteUrls.CATALOG;
-	}
+  static get headerPopularCategorySection() {
+    return '//h2[contains(text(), "Популярные категории")]';
+  }
+
+  static getURL() {
+    return SiteUrls.CATALOG;
+  }
 }
 
 module.exports = CatalogPage;
