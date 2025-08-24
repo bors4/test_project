@@ -1,19 +1,21 @@
 const SiteUrls = require('../../config/site-urls');
 
 class KursPage {
-	constructor() {
-		this.elements = {
-			'Заголовок раздела Лучшие курсы валют': this.headerBestRates,
-		};
-	}
+  static SiteUrls = SiteUrls;
 
-	get headerBestRates() {
-		return '//h1[text()="Лучшие курсы валют"]';
-	}
+  constructor() {
+    this.elements = {
+      'Заголовок раздела Лучшие курсы валют': KursPage.headerBestRates,
+    };
+  }
 
-	getURL() {
-		return SiteUrls.KURS;
-	}
+  static get headerBestRates() {
+    return '//h1[text()="Лучшие курсы валют"]';
+  }
+
+  static getURL() {
+    return SiteUrls.KURS;
+  }
 }
 
 module.exports = KursPage;

@@ -23,6 +23,6 @@ Feature: Поиск товаров в каталоге
         When я обновляю страницу
 
         Examples:
-            | text                |
-            | random_test_text    |
-            | 1111111111111111111 |
+            | text             |
+            | random_test_text |
+            | !@#$%^&*()       |

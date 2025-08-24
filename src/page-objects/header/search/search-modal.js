@@ -1,37 +1,42 @@
-const { switchToIFrame, switchToParent } = require('../../../utils/frame-utils');
+const {switchToIFrame, switchToParent} = require('../../../utils/frame-utils');
+
+const SiteUrls = require('../../../config/site-urls');
+
 class SearchModal {
-	constructor() {
-		this.elements = {
-			'Чекбокс К сравнению': this.checkboxToCompare,
-			'Текст Ничего не найдено': this.textNoResults,
-			'Закрыть окно поиска': this.buttonCloseSearch,
-			'Поле поиска': this.inputSearch,
-		};
-	}
+  static SiteUrls = SiteUrls;
 
-	get checkboxToCompare() {
-		return '//input[contains(@data-bind, "compare")]';
-	}
+  constructor() {
+    this.elements = {
+      'Чекбокс К сравнению': SearchModal.checkboxToCompare,
+      'Текст Ничего не найдено': SearchModal.textNoResults,
+      'Закрыть окно поиска': SearchModal.closeSearchButton,
+      'Поле поиска': SearchModal.inputSearch,
+    };
+  }
 
-	get textNoResults() {
-		return '//div[@class="search__bar"]//div/following-sibling::div[contains(text(), "Ничего не найдено")]';
-	}
+  static get checkboxToCompare() {
+    return '//input[contains(@data-bind, "compare")]';
+  }
 
-	get closeSearchButton() {
-		return '//*/span[@class="search__close"]';
-	}
+  static get textNoResults() {
+    return '//div[@class="search__bar"]//div/following-sibling::div[contains(text(), "Ничего не найдено")]';
+  }
 
-	get inputSearch() {
-		return '//*/input[@placeholder="Поиск"]';
-	}
+  static get closeSearchButton() {
+    return '//*/span[@class="search__close"]';
+  }
 
-	async switchContextTo(sourceContext) {
-		if (sourceContext != 'родительский') {
-			await switchToIFrame(sourceContext);
-		} else {
-			await switchToParent();
-		}
-	}
+  static get inputSearch() {
+    return '//*/input[@placeholder="Поиск"]';
+  }
+
+  static async switchContextTo(sourceContext) {
+    if (sourceContext !== 'родительский') {
+      await switchToIFrame(sourceContext);
+    } else {
+      await switchToParent();
+    }
+  }
 }
 
 module.exports = SearchModal;

@@ -1,29 +1,32 @@
 const SiteUrls = require('../../config/site-urls');
+
 class CatalogPricesPage {
-	constructor() {
-		this.elements = {
-			'Кнопка В корзину': this.buttonInCart,
-			'Боковая панель с рекомендациями': this.sideBarRecommendation,
-			'Кнопка боковой панели Перейти в корзину': this.buttonInCartSideBar,
-			'Заголовок боковой панели с рекомендациями': this.headerRecommendationSideBar,
-		};
-	}
+  static SiteUrls = SiteUrls;
 
-	get buttonInCart() {
-		return '(//a[contains(text(),"В корзину")])[2]';
-	}
+  constructor() {
+    this.elements = {
+      'Кнопка В корзину': CatalogPricesPage.buttonInCart,
+      'Боковая панель с рекомендациями': CatalogPricesPage.sideBarRecommendation,
+      'Кнопка боковой панели Перейти в корзину': CatalogPricesPage.buttonInCartSideBar,
+      'Заголовок боковой панели с рекомендациями': CatalogPricesPage.headerRecommendationSideBar,
+    };
+  }
 
-	get sideBarRecommendation() {
-		return '//div[@class="product-recommended__sidebar-body"]';
-	}
+  static get buttonInCart() {
+    return '(//a[contains(text(),"В корзину")])[2]';
+  }
 
-	get buttonInCartSideBar() {
-		return `//div[@class="product-recommended__sidebar"]//a[@href="${SiteUrls.CART}"]`;
-	}
+  static get sideBarRecommendation() {
+    return '//div[@class="product-recommended__sidebar-body"]';
+  }
 
-	get headerRecommendationSideBar() {
-		return '//div[@class="product-recommended__subheader"][1]';
-	}
+  static get buttonInCartSideBar() {
+    return `//div[@class="product-recommended__sidebar"]//a[@href="${SiteUrls.CART}"]`;
+  }
+
+  static get headerRecommendationSideBar() {
+    return '//div[@class="product-recommended__subheader"][1]';
+  }
 }
 
 module.exports = CatalogPricesPage;

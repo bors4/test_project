@@ -1,1 +1,1 @@
-npm run test -- --spec ab.filter.product.feature
+npm run test -- --spec main.page.sections.links.feature

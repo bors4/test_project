@@ -1,19 +1,21 @@
 const SiteUrls = require('../../config/site-urls');
 
 class ForumPage {
-	constructor() {
-		this.elements = {
-			'Заголовок раздела Форум': this.headerForumSection,
-		};
-	}
+  static SiteUrls = SiteUrls;
 
-	get headerForumSection() {
-		return '//h1[contains(text(), "Форум")]';
-	}
+  constructor() {
+    this.elements = {
+      'Заголовок раздела Форум': ForumPage.headerForumSection,
+    };
+  }
 
-	getURL() {
-		return SiteUrls.FORUM;
-	}
+  static get headerForumSection() {
+    return '//h1[contains(text(), "Форум")]';
+  }
+
+  static getURL() {
+    return SiteUrls.FORUM;
+  }
 }
 
 module.exports = ForumPage;

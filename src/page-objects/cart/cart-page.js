@@ -1,24 +1,26 @@
 const SiteUrls = require('../../config/site-urls');
 
 class CartPage {
-	constructor() {
-		this.elements = {
-			'Заголовок раздела Корзина': this.headerCartSection,
-			'Текст Названия товара': this.textProductName,
-		};
-	}
+  static SiteUrls = SiteUrls;
 
-	get headerCartSection() {
-		return '//div[contains(text(), "Корзина")]';
-	}
+  constructor() {
+    this.elements = {
+      'Заголовок раздела Корзина': CartPage.headerCartSection,
+      'Текст Названия товара': CartPage.textProductName,
+    };
+  }
 
-	get textProductName() {
-		return '//div[@class="cart-form__offers"]//a[contains(@class,"cart-form__link_base-alter")]';
-	}
+  static get headerCartSection() {
+    return '//div[contains(text(), "Корзина")]';
+  }
 
-	getURL() {
-		return SiteUrls.CART;
-	}
+  static get textProductName() {
+    return '//div[@class="cart-form__offers"]//a[contains(@class,"cart-form__link_base-alter")]';
+  }
+
+  static getURL() {
+    return SiteUrls.CART;
+  }
 }
 
 module.exports = CartPage;

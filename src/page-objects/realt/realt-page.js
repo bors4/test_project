@@ -1,19 +1,21 @@
 const SiteUrls = require('../../config/site-urls');
 
 class RealtPage {
-	constructor() {
-		this.elements = {
-			'Таб навигации Недвижимость': this.tabRealtyNavigation,
-		};
-	}
+  static SiteUrls = SiteUrls;
 
-	get tabRealtyNavigation() {
-		return '//a/span[.="Недвижимость"]';
-	}
+  constructor() {
+    this.elements = {
+      'Таб навигации Недвижимость': RealtPage.tabRealtyNavigation,
+    };
+  }
 
-	getURL() {
-		return SiteUrls.REALT;
-	}
+  static get tabRealtyNavigation() {
+    return '//a/span[.="Недвижимость"]';
+  }
+
+  static getURL() {
+    return SiteUrls.REALT;
+  }
 }
 
 module.exports = RealtPage;
