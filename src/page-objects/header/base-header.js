@@ -5,137 +5,137 @@ class BaseHeader {
 
   constructor() {
     this.elements = {
-      'Лого сайта': BaseHeader.siteLogo,
-      'Ссылка Каталог': BaseHeader.linkCatalog,
-      'Ссылка Новости': BaseHeader.linkNews,
-      'Ссылка Автобарахолка': BaseHeader.linkAb,
-      'Ссылка Дома и квартиры': BaseHeader.linkRealty,
-      'Ссылка Услуги': BaseHeader.linkTasks,
-      'Ссылка Барахолка': BaseHeader.linkBaraholka,
-      'Ссылка Форум': BaseHeader.linkForum,
-      'Ссылка Onliner Клевер': BaseHeader.linkClever,
-      'Ссылка Курсы валют': BaseHeader.linkCurrency,
-      'Ссылка Погода': BaseHeader.linkWeather,
-      'Текст курс доллара': BaseHeader.textCurrencyRate,
-      'Дропдаун Новости': BaseHeader.dropdownNews,
-      'Дропдаун Автобарахолка': BaseHeader.dropdownAb,
-      'Дропдаун Дома и квартиры': BaseHeader.dropdownRealty,
-      'Поле поиска': BaseHeader.inputSearch,
-      'Модальное окно поиска': BaseHeader.modalSearch,
-      'Кнопка Вход': BaseHeader.buttonLogin,
-      'Кнопка Facebook': BaseHeader.buttonFacebook,
-      'Кнопка Vkontakte': BaseHeader.buttonVk,
-      'Кнопка Google': BaseHeader.buttonGoogle,
-      'Кнопка Корзина': BaseHeader.buttonCart,
-      'Аватар профиля': BaseHeader.profileAvatar,
-      'Меню профиля': BaseHeader.menuProfile,
-      '18+': BaseHeader.labelAdultContent,
+      'Лого сайта': this.siteLogo,
+      'Ссылка Каталог': this.linkCatalog,
+      'Ссылка Новости': this.linkNews,
+      'Ссылка Автобарахолка': this.linkAb,
+      'Ссылка Дома и квартиры': this.linkRealty,
+      'Ссылка Услуги': this.linkTasks,
+      'Ссылка Барахолка': this.linkBaraholka,
+      'Ссылка Форум': this.linkForum,
+      'Ссылка Onliner Клевер': this.linkClever,
+      'Ссылка Курсы валют': this.linkCurrency,
+      'Ссылка Погода': this.linkWeather,
+      'Текст курс доллара': this.textCurrencyRate,
+      'Дропдаун Новости': this.dropdownNews,
+      'Дропдаун Автобарахолка': this.dropdownAb,
+      'Дропдаун Дома и квартиры': this.dropdownRealty,
+      'Поле поиска': this.inputSearch,
+      'Модальное окно поиска': this.modalSearch,
+      'Кнопка Вход': this.buttonLogin,
+      'Кнопка Facebook': this.buttonFacebook,
+      'Кнопка Vkontakte': this.buttonVk,
+      'Кнопка Google': this.buttonGoogle,
+      'Кнопка Корзина': this.buttonCart,
+      'Аватар профиля': this.profileAvatar,
+      'Меню профиля': this.menuProfile,
+      '18+': this.labelAdultContent,
     };
   }
 
-  static get siteLogo() {
+  get siteLogo() {
     return `//div//a[@href="${SiteUrls.HOME}"]/img`;
   }
 
-  static get linkCatalog() {
+  get linkCatalog() {
     return `//nav//a[@href="${SiteUrls.CATALOG}"]`;
   }
 
-  static get linkNews() {
+  get linkNews() {
     return `//div//a[@href="${SiteUrls.HOME}"]//span[.="Новости"]`;
   }
 
-  static get linkAb() {
+  get linkAb() {
     return `//nav//a[@href="${SiteUrls.AB}"]//span[.="Автобарахолка"]`;
   }
 
-  static get linkRealty() {
+  get linkRealty() {
     return `//nav//li/a[@href="${SiteUrls.R}/pk"]`;
   }
 
-  static get linkTasks() {
+  get linkTasks() {
     return `//nav//a[@href="${SiteUrls.TASKS}"]/span[.="Услуги"]`;
   }
 
-  static get linkBaraholka() {
+  get linkBaraholka() {
     return `//nav//a[@href="${SiteUrls.BARAHOLKA}"]//span[.="Барахолка"]`;
   }
 
-  static get linkForum() {
+  get linkForum() {
     return `//nav//a[@href="${SiteUrls.FORUM}/"]`;
   }
 
-  static get linkClever() {
+  get linkClever() {
     return '//nav/a[contains(@href,"clever")]';
   }
 
-  static get linkCurrency() {
+  get linkCurrency() {
     return `//nav//a[@href="${SiteUrls.KURS}/"]`;
   }
 
-  static get linkWeather() {
+  get linkWeather() {
     return `//nav//a[@href="${SiteUrls.POGODA}/"]`;
   }
 
-  static get textCurrencyRate() {
+  get textCurrencyRate() {
     return '//nav//span[contains(text(),"$ ")]';
   }
 
-  static get dropdownNews() {
+  get dropdownNews() {
     return '//*[contains(@class, "b-main-navigation__dropdown_visible")]';
   }
 
-  static get dropdownAb() {
+  get dropdownAb() {
     return '//*[contains(@class, "b-main-navigation__dropdown_visible")]';
   }
 
-  static get dropdownRealty() {
+  get dropdownRealty() {
     return '//*[contains(@class, "b-main-navigation__dropdown_visible")]';
   }
 
-  static get inputSearch() {
+  get inputSearch() {
     return '//input[@name="query"]';
   }
 
-  static get modalSearch() {
+  get modalSearch() {
     return '//div[@id="fast-search-modal"]//iframe';
   }
 
-  static get buttonLogin() {
+  get buttonLogin() {
     return '//div[text()="Вход"]';
   }
 
-  static get buttonFacebook() {
+  get buttonFacebook() {
     return '//*[@id="userbar"]//*[@title="Facebook"]';
   }
 
-  static get buttonVk() {
+  get buttonVk() {
     return '//*[@id="userbar"]//*[@title="ВКонтакте"]';
   }
 
-  static get buttonGoogle() {
+  get buttonGoogle() {
     return '//*[@id="userbar"]//*[@title="Google"]';
   }
 
-  static get buttonCart() {
+  get buttonCart() {
     return '//*[@id="userbar"]//*[@title="Корзина"]';
   }
 
-  static get profileAvatar() {
+  get profileAvatar() {
     return '';
   }
 
-  static get menuProfile() {
+  get menuProfile() {
     return '//div[@id="userbar"]';
   }
 
-  static get labelAdultContent() {
+  get labelAdultContent() {
     return '//nav/div[contains(text(), "18+")]';
   }
 
-  static async getTextFromSearchInput() {
+  async getTextFromSearchInput() {
     try {
-      const placeholderText = await $(BaseHeader.inputSearch).getAttribute('placeholder');
+      const placeholderText = await $(this.inputSearch).getAttribute('placeholder');
       const start = placeholderText.indexOf('"') + 1;
       const end = placeholderText.indexOf('"', start + 1);
 

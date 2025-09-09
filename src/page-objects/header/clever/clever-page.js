@@ -1,11 +1,11 @@
 class CleverPage {
   constructor() {
     this.elements = {
-      'Кнопка Оформить карту': CleverPage.buttonApplyCard,
+      'Кнопка Оформить карту': this.buttonApplyCard,
     };
   }
 
-  static get buttonApplyCard() {
+  get buttonApplyCard() {
     return '//header//a[.="Оформить карту"]';
   }
 }

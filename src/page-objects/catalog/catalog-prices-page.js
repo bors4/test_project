@@ -5,26 +5,26 @@ class CatalogPricesPage {
 
   constructor() {
     this.elements = {
-      'Кнопка В корзину': CatalogPricesPage.buttonInCart,
-      'Боковая панель с рекомендациями': CatalogPricesPage.sideBarRecommendation,
-      'Кнопка боковой панели Перейти в корзину': CatalogPricesPage.buttonInCartSideBar,
-      'Заголовок боковой панели с рекомендациями': CatalogPricesPage.headerRecommendationSideBar,
+      'Кнопка В корзину': this.buttonInCart,
+      'Боковая панель с рекомендациями': this.sideBarRecommendation,
+      'Кнопка боковой панели Перейти в корзину': this.buttonInCartSideBar,
+      'Заголовок боковой панели с рекомендациями': this.headerRecommendationSideBar,
     };
   }
 
-  static get buttonInCart() {
+  get buttonInCart() {
     return '(//a[contains(text(),"В корзину")])[2]';
   }
 
-  static get sideBarRecommendation() {
+  get sideBarRecommendation() {
     return '//div[@class="product-recommended__sidebar-body"]';
   }
 
-  static get buttonInCartSideBar() {
+  get buttonInCartSideBar() {
     return `//div[@class="product-recommended__sidebar"]//a[@href="${SiteUrls.CART}"]`;
   }
 
-  static get headerRecommendationSideBar() {
+  get headerRecommendationSideBar() {
     return '//div[@class="product-recommended__subheader"][1]';
   }
 }

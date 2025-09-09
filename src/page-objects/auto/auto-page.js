@@ -5,15 +5,15 @@ class AutoPage {
 
   constructor() {
     this.elements = {
-      'Таб навигации Авто': AutoPage.tabAutoNavigation,
+      'Таб навигации Авто': this.tabAutoNavigation,
     };
   }
 
-  static get tabAutoNavigation() {
+  get tabAutoNavigation() {
     return '//a/span[.="Авто"]';
   }
 
-  static getURL() {
+  getURL() {
     return SiteUrls.AUTO;
   }
 }

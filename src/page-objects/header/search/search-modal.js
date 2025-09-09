@@ -7,30 +7,30 @@ class SearchModal {
 
   constructor() {
     this.elements = {
-      'Чекбокс К сравнению': SearchModal.checkboxToCompare,
-      'Текст Ничего не найдено': SearchModal.textNoResults,
-      'Закрыть окно поиска': SearchModal.closeSearchButton,
-      'Поле поиска': SearchModal.inputSearch,
+      'Чекбокс К сравнению': this.checkboxToCompare,
+      'Текст Ничего не найдено': this.textNoResults,
+      'Закрыть окно поиска': this.closeSearchButton,
+      'Поле поиска': this.inputSearch,
     };
   }
 
-  static get checkboxToCompare() {
+  get checkboxToCompare() {
     return '//input[contains(@data-bind, "compare")]';
   }
 
-  static get textNoResults() {
+  get textNoResults() {
     return '//div[@class="search__bar"]//div/following-sibling::div[contains(text(), "Ничего не найдено")]';
   }
 
-  static get closeSearchButton() {
+  get closeSearchButton() {
     return '//*/span[@class="search__close"]';
   }
 
-  static get inputSearch() {
+  get inputSearch() {
     return '//*/input[@placeholder="Поиск"]';
   }
 
-  static async switchContextTo(sourceContext) {
+  async switchContextTo(sourceContext) {
     if (sourceContext !== 'родительский') {
       await switchToIFrame(sourceContext);
     } else {

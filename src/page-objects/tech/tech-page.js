@@ -5,15 +5,15 @@ class TechPage {
 
   constructor() {
     this.elements = {
-      'Таб навигации Технологии': TechPage.tabTechNavigation,
+      'Таб навигации Технологии': this.tabTechNavigation,
     };
   }
 
-  static get tabTechNavigation() {
+  get tabTechNavigation() {
     return '//a/span[.="Технологии"]';
   }
 
-  static getURL() {
+  getURL() {
     return SiteUrls.TECH;
   }
 }

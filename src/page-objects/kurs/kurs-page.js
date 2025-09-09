@@ -5,15 +5,15 @@ class KursPage {
 
   constructor() {
     this.elements = {
-      'Заголовок раздела Лучшие курсы валют': KursPage.headerBestRates,
+      'Заголовок раздела Лучшие курсы валют': this.headerBestRates,
     };
   }
 
-  static get headerBestRates() {
+  get headerBestRates() {
     return '//h1[text()="Лучшие курсы валют"]';
   }
 
-  static getURL() {
+  getURL() {
     return SiteUrls.KURS;
   }
 }

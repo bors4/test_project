@@ -5,15 +5,15 @@ class MoneyPage {
 
   constructor() {
     this.elements = {
-      'Таб навигации Кошелек': MoneyPage.tabWallet,
+      'Таб навигации Кошелек': this.tabWallet,
     };
   }
 
-  static get tabWallet() {
+  get tabWallet() {
     return '//a/span[.="Кошелек"]';
   }
 
-  static getURL() {
+  getURL() {
     return SiteUrls.MONEY;
   }
 }

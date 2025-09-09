@@ -23,8 +23,6 @@ const AuthorizationModal = require('./home/auth-modal');
 require('dotenv').config();
 
 class PageObjects {
-  static PageObjects = PageObjects;
-
   constructor() {
     this.elements = {
       'Кнопка Принять все cookie': this.buttonAcceptAllCookies,
@@ -55,11 +53,11 @@ class PageObjects {
     };
   }
 
-  static get buttonAcceptAllCookies() {
+  get buttonAcceptAllCookies() {
     return '//a[@id="submit-button"]';
   }
 
-  static get frameSearchModal() {
+  get frameSearchModal() {
     return '//*[@id="fast-search-modal"]//iframe';
   }
 
@@ -76,7 +74,6 @@ class PageObjects {
 
   async getElementsByName(elementName, pageName) {
     const elements = await $$(this.getPageObject(pageName).elements[elementName]);
-    await elements[0].waitForExist({timeout: 10000});
 
     return elements;
   }
@@ -110,18 +107,14 @@ class PageObjects {
 
   async openPageByName(pageName) {
     const page = this.getPageObject(pageName);
-    await browser.url(page.constructor.getURL());
+    const element = $(page.siteLogo);
+    await browser.url(page.getURL());
 
     const currentUrl = await browser.getUrl();
-    assert(
-      currentUrl.includes(
-        page.constructor.getURL(),
-        `Для ${pageName} ожидался URL: ${page.constructor.getURL()}, но получен: ${currentUrl}`
-      )
-    );
+    assert(currentUrl.includes(page.getURL(), `Для ${pageName} ожидался URL: ${page.getURL()}, но получен: ${currentUrl}`));
 
     try {
-      await $(HomePage.siteLogo).waitForDisplayed();
+      await element.waitForDisplayed();
     } catch (error) {
       throw new Error(`Логотип сайта отсутствует: ${error}`);
     }
@@ -129,7 +122,7 @@ class PageObjects {
 
   getUrlByPageName(pageName) {
     const page = this.getPageObject(pageName);
-    const pageURL = page.constructor.getURL();
+    const pageURL = page.getURL();
     assert.isNotEmpty(pageURL, `Для ${pageName} не удалось определить URL`);
 
     return pageURL;
@@ -170,8 +163,8 @@ class PageObjects {
     }
   }
 
-  static async cookieAccept() {
-    const cookieButton = await $(PageObjects.buttonAcceptAllCookies);
+  async cookieAccept() {
+    const cookieButton = await $(this.buttonAcceptAllCookies);
     await cookieButton.waitForClickable({timeout: 10000});
     await cookieButton.click();
     await cookieButton.waitForDisplayed({reverse: true, timeout: 10000});

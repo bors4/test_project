@@ -1,1 +1,1 @@
-allure open ../allure-report
+allure open ../allure-report/awesome

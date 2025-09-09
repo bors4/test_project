@@ -5,15 +5,15 @@ class TasksPage {
 
   constructor() {
     this.elements = {
-      'Заголовок раздела Заказы': TasksPage.headerOrdersSection,
+      'Заголовок раздела Заказы': this.headerOrdersSection,
     };
   }
 
-  static get headerOrdersSection() {
+  get headerOrdersSection() {
     return '//div[contains(text(), "Заказы")]';
   }
 
-  static getURL() {
+  getURL() {
     return SiteUrls.TASKS;
   }
 }

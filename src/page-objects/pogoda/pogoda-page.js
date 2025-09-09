@@ -5,30 +5,30 @@ class PogodaPage {
 
   constructor() {
     this.elements = {
-      'Заголовок раздела Сейчас в': PogodaPage.headerCurrentWeatherSection,
-      'Дропдаун списка городов': PogodaPage.dropdownCities,
-      'Список городов': PogodaPage.listCities,
-      'Город Киев': PogodaPage.listItemKyiv,
+      'Заголовок раздела Сейчас в': this.headerCurrentWeatherSection,
+      'Дропдаун списка городов': this.dropdownCities,
+      'Список городов': this.listCities,
+      'Город Киев': this.listItemKyiv,
     };
   }
 
-  static get headerCurrentWeatherSection() {
+  get headerCurrentWeatherSection() {
     return '//p[contains(text(), "Сейчас в")]';
   }
 
-  static get dropdownCities() {
+  get dropdownCities() {
     return '//p[contains(text(), "Сейчас в")]/a';
   }
 
-  static get listCities() {
+  get listCities() {
     return '//div[@class="b-weather-today__city-i"]/div';
   }
 
-  static get listItemKyiv() {
+  get listItemKyiv() {
     return '//div/ul/li/a[contains(text(),"Киев")]';
   }
 
-  static getURL() {
+  getURL() {
     return SiteUrls.POGODA;
   }
 }
