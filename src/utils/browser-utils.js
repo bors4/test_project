@@ -1,5 +1,5 @@
 class BrowserUtils {
-  static async switchWindow() {
+  async switchWindow() {
     const parentWindow = await browser.getWindowHandle();
     const windowID = await browser.getWindowHandles();
 
@@ -22,7 +22,7 @@ class BrowserUtils {
     }
   }
 
-  static async scrollTo(element) {
+  async scrollTo(element) {
     await element.waitForDisplayed();
     await element.scrollIntoView();
     const isElementDisplayed = await element.isDisplayed({withinViewport: true});

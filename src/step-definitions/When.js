@@ -5,10 +5,13 @@ const SearchModal = require('../page-objects/header/search/search-modal');
 const BrowserUtils = require('../utils/browser-utils');
 const {getExchangeRate} = require('../utils/api-utils');
 
+const baseHeader = new BaseHeader();
 const pageobjects = new PageObjects();
+const searchmodal = new SearchModal();
+const browserUtils = new BrowserUtils();
 
 When(/я принимаю cookie/, async () => {
-  await PageObjects.cookieAccept();
+  await pageobjects.cookieAccept();
 });
 
 When(/я ожидаю \[(\d+)\] секунд/, async (timeToWait) => {
@@ -24,7 +27,7 @@ When(/я нажимаю на "([^"]*)"\[(\d+)\] на "([^"]*)"/, async (elementN
 });
 
 When(/я беру текст из примера в плейсхолдере поля поиска и ввожу в "([^"]*)" в "([^"]*)"/, async (elementName, pageName) => {
-  const textToSearch = await BaseHeader.getTextFromSearchInput();
+  const textToSearch = await baseHeader.getTextFromSearchInput();
   await pageobjects.setTextTo(elementName, pageName, textToSearch);
 });
 
@@ -33,7 +36,7 @@ When(/я ввожу "([^"]*)" в "([^"]*)" на "([^"]*)"/, async (text, element
 });
 
 When(/я переключаю контекст на "([^"]*)"/, async (sourceContext) => {
-  await SearchModal.switchContextTo(sourceContext);
+  await searchmodal.switchContextTo(sourceContext);
 });
 
 When(/я навожу указатель мыши на "([^"]*)" на "([^"]*)"/, async (element, pageName) => {
@@ -41,12 +44,12 @@ When(/я навожу указатель мыши на "([^"]*)" на "([^"]*)"/
 });
 
 When(/я перехожу на неактивную вкладку в браузере/, async () => {
-  await BrowserUtils.switchWindow();
+  await browserUtils.switchWindow();
 });
 
 When(/я скролю к "([^"]*)" на "([^"]*)"/, async (elementName, pageName) => {
   const element = await pageobjects.getElementByName(elementName, pageName);
-  await BrowserUtils.scrollTo(element);
+  await browserUtils.scrollTo(element);
 });
 
 When(/я обновляю страницу/, async () => {

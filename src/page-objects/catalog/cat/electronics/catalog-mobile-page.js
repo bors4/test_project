@@ -5,25 +5,25 @@ class CatalogMobileCat {
 
   constructor() {
     this.elements = {
-      'Заголовок раздела Мобильные телефоны': CatalogMobileCat.headerMobilePhonesSection,
-      'Кнопка предложения': CatalogMobileCat.buttonOffer,
-      'Текст Названия товара': CatalogMobileCat.textProductName,
+      'Заголовок раздела Мобильные телефоны': this.headerMobilePhonesSection,
+      'Кнопка предложения': this.buttonOffer,
+      'Текст Названия товара': this.textProductName,
     };
   }
 
-  static get headerMobilePhonesSection() {
+  get headerMobilePhonesSection() {
     return '//h1[contains(text(),"Мобильные телефоны")]';
   }
 
-  static get buttonOffer() {
+  get buttonOffer() {
     return '//a[contains(text(),"предложени")]';
   }
 
-  static get textProductName() {
+  get textProductName() {
     return '//a[contains(@class,"catalog-form__link_font-weight_semibold")]';
   }
 
-  static getURL() {
+  getURL() {
     return SiteUrls.CATALOG_MOBILE;
   }
 }

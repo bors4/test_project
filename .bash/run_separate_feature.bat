@@ -1,1 +1,1 @@
-npm run test -- --spec main.page.sections.links.feature
+npm run test -- --spec authorization.feature

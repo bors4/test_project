@@ -5,20 +5,20 @@ class CartPage {
 
   constructor() {
     this.elements = {
-      'Заголовок раздела Корзина': CartPage.headerCartSection,
-      'Текст Названия товара': CartPage.textProductName,
+      'Заголовок раздела Корзина': this.headerCartSection,
+      'Текст Названия товара': this.textProductName,
     };
   }
 
-  static get headerCartSection() {
+  get headerCartSection() {
     return '//div[contains(text(), "Корзина")]';
   }
 
-  static get textProductName() {
+  get textProductName() {
     return '//div[@class="cart-form__offers"]//a[contains(@class,"cart-form__link_base-alter")]';
   }
 
-  static getURL() {
+  getURL() {
     return SiteUrls.CART;
   }
 }

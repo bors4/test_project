@@ -5,15 +5,15 @@ class ForumPage {
 
   constructor() {
     this.elements = {
-      'Заголовок раздела Форум': ForumPage.headerForumSection,
+      'Заголовок раздела Форум': this.headerForumSection,
     };
   }
 
-  static get headerForumSection() {
+  get headerForumSection() {
     return '//h1[contains(text(), "Форум")]';
   }
 
-  static getURL() {
+  getURL() {
     return SiteUrls.FORUM;
   }
 }

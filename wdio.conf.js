@@ -1,6 +1,5 @@
-import allure from 'allure-commandline';
-
-export const config = {
+/* eslint-disable no-undef */
+exports.config = {
   runner: 'local',
   specs: ['./features/**/*.feature'],
   exclude: [],
@@ -70,20 +69,17 @@ export const config = {
     ignoreUndefinedDefinitions: false,
   },
 
-  before: function (capabilities, specs) {
+  before: function () {
     browser.setWindowSize(1920, 1080);
   },
 
   afterTest: async function (test, context, {error}) {
     if (error) {
       try {
-        // Создаем скриншот
         const screenshot = await browser.takeScreenshot();
 
-        // Прикрепляем скриншот к Allure-отчёту
         allure.addAttachment('Screenshot on Failure', Buffer.from(screenshot, 'base64'), 'image/png');
 
-        // Также сохраняем в файл (опционально)
         const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
         const testName = test.title.replace(/\s+/g, '_');
         const path = `./screenshots/fail_${testName}_${timestamp}.png`;

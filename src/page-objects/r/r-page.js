@@ -5,20 +5,20 @@ class RPage {
 
   constructor() {
     this.elements = {
-      'Блок Карта недвижимости': RPage.blockRealtyMap,
-      'Блок Список квартир': RPage.blockApartmentsList,
+      'Блок Карта недвижимости': this.blockRealtyMap,
+      'Блок Список квартир': this.blockApartmentsList,
     };
   }
 
-  static get blockRealtyMap() {
+  get blockRealtyMap() {
     return '//div[@id="map"]';
   }
 
-  static get blockApartmentsList() {
+  get blockApartmentsList() {
     return '//div[@id="search-filter-results"]';
   }
 
-  static getURL() {
+  getURL() {
     return SiteUrls.R;
   }
 }

@@ -5,15 +5,15 @@ class RealtPage {
 
   constructor() {
     this.elements = {
-      'Таб навигации Недвижимость': RealtPage.tabRealtyNavigation,
+      'Таб навигации Недвижимость': this.tabRealtyNavigation,
     };
   }
 
-  static get tabRealtyNavigation() {
+  get tabRealtyNavigation() {
     return '//a/span[.="Недвижимость"]';
   }
 
-  static getURL() {
+  getURL() {
     return SiteUrls.REALT;
   }
 }

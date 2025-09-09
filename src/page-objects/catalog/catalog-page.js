@@ -8,20 +8,20 @@ class CatalogPage extends BasePage {
     super();
 
     this.elements = {
-      'Заголовок раздела Каталог': CatalogPage.headerCatalogSection,
-      'Заголовок раздела Популярные категории': CatalogPage.headerPopularCategorySection,
+      'Заголовок раздела Каталог': this.headerCatalogSection,
+      'Заголовок раздела Популярные категории': this.headerPopularCategorySection,
     };
   }
 
-  static get headerCatalogSection() {
+  get headerCatalogSection() {
     return '//h1[contains(text(), "Каталог")]';
   }
 
-  static get headerPopularCategorySection() {
+  get headerPopularCategorySection() {
     return '//h2[contains(text(), "Популярные категории")]';
   }
 
-  static getURL() {
+  getURL() {
     return SiteUrls.CATALOG;
   }
 }

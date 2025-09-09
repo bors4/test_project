@@ -7,15 +7,15 @@ class AuthorizationModal {
     };
   }
 
-  static get inputLogin() {
+  get inputLogin() {
     return '//input[@placeholder="Ник или e-mail"]';
   }
 
-  static get inputPassword() {
+  get inputPassword() {
     return '//input[@placeholder="Пароль"]';
   }
 
-  static get buttonLogin() {
+  get buttonLogin() {
     return '//button[normalize-space()="Войти"]';
   }
 }

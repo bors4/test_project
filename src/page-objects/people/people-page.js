@@ -5,15 +5,15 @@ class PeoplePage {
 
   constructor() {
     this.elements = {
-      'Таб навигации Люди': PeoplePage.tabPeople,
+      'Таб навигации Люди': this.tabPeople,
     };
   }
 
-  static get tabPeople() {
+  get tabPeople() {
     return '//a/span/span[.="Люди"]/parent::span/parent::a';
   }
 
-  static getURL() {
+  getURL() {
     return SiteUrls.PEOPLE;
   }
 }

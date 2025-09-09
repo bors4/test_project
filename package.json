@@ -1,7 +1,9 @@
 {
   "name": "test_project",
+  "type": "commonjs",
   "devDependencies": {
-    "@cucumber/cucumber": "^12.1.0",
+    "@cucumber/cucumber": "^12.0.0",
+    "@eslint/js": "^9.35.0",
     "@faker-js/faker": "^9.9.0",
     "@wdio/allure-reporter": "^9.19.2",
     "@wdio/cli": "^9.19.2",
@@ -10,45 +12,52 @@
     "@wdio/mocha-framework": "^9.19.2",
     "@wdio/spec-reporter": "^9.19.2",
     "@wdio/visual-service": "^9.0.0",
+    "allure": "^3.0.0-beta.18",
     "allure-commandline": "^2.34.0",
+    "ansi-regex": "^6.2.2",
+    "ansi-styles": "^6.2.3",
     "chromedriver": "^139.0.2",
     "esbuild": "^0.25.9",
-    "eslint": "^8.57.0",
-    "eslint-config-airbnb": "^19.0.4",
+    "eslint": "^9.35.0",
     "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-import": "^2.25.3",
-    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-cucumber": "^2.0.0",
+    "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-prettier": "^5.5.4",
     "glob": "^11.0.3",
+    "globals": "^16.3.0",
+    "graceful-fs": "^4.2.11",
     "jsdoc": "^4.0.4",
     "minami": "^1.2.3",
-    "mocha": "^11.3.0",
+    "mkdirp": "^3.0.1",
+    "mocha": "^11.7.2",
+    "npm-force-resolutions": "^0.0.10",
     "prettier": "^3.6.2",
     "reflect-metadata": "^0.2.2",
-    "wdio-cucumberjs-json-reporter": "^6.0.1",
+    "rimraf": "^6.0.1",
+    "supports-color": "^10.2.2",
+    "uuid": "^13.0.0",
     "webdriverio": "^9.19.2"
   },
   "dependencies": {
-    "@qavajs/console-formatter": "^1.0.0",
     "axios": "^1.10.0",
     "chai": "^5.2.1",
-    "dotenv": "^17.2.1",
-    "undici": "^7.14.0",
-    "urlpattern-polyfill": "^10.1.0",
-    "uuid": "^11.1.0"
+    "dotenv": "^17.2.1"
   },
   "scripts": {
-    "test": "wdio run ./wdio.conf.mjs",
-    "test_features": "wdio run ./wdio.conf.mjs --spec features/",
-    "test:debug": "wdio run ./wdio.conf.mjs --logLevel=debug",
-    "test:tags": "npx wdio run ./wdio.conf.mjs --cucumberOpts.tags=",
-    "test:open": "wdio run ./wdio.conf.mjs --spec ./test/login.test.js",
+    "test": "wdio run ./wdio.conf.js",
+    "test_features": "wdio run ./wdio.conf.js --spec features/",
+    "test:debug": "wdio run ./wdio.conf.js --logLevel=debug",
+    "test:tags": "npx wdio run ./wdio.conf.js --cucumberOpts.tags=",
+    "test:open": "wdio run ./wdio.conf.js --spec ./test/login.test.js",
     "format": "prettier --write ./",
-    "lint": "set ESLINT_USE_FLAT_CONFIG=false && eslint --config .eslintrc.js ./src",
+    "lint": "eslint ./src",
     "lint:write": "eslint --debug src/ --fix",
     "prettier": "prettier --write src/**/*.js"
   },
   "resolutions": {
+    "@cucumber/cucumber": "^12.0.0"
+  },
+  "overrides": {
     "tmp": ">=0.2.4"
   }
 }
