@@ -1,4 +1,4 @@
-const SiteUrls = require('../../config/site-urls');
+import * as SiteUrls from '../../config/site-urls.js';
 
 class RPage {
   static SiteUrls = SiteUrls;
@@ -19,8 +19,8 @@ class RPage {
   }
 
   getURL() {
-    return SiteUrls.R;
+    return SiteUrls.R_URL;
   }
 }
 
-module.exports = RPage;
+export default RPage;

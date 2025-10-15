@@ -1,26 +1,27 @@
-const {assert} = require('chai');
-const HomePage = require('./home/home-page');
-const AbPage = require('./ab/ab-page');
-const BaseHeader = require('./header/base-header');
-const CatalogPage = require('./catalog/catalog-page');
-const RPage = require('./r/r-page');
-const TasksPage = require('./tasks/tasks-page');
-const ForumPage = require('./forum/forum-page');
-const CleverPage = require('./header/clever/clever-page');
-const KursPage = require('./kurs/kurs-page');
-const PogodaPage = require('./pogoda/pogoda-page');
-const CartPage = require('./cart/cart-page');
-const AutoPage = require('./auto/auto-page');
-const PeoplePage = require('./people/people-page');
-const MoneyPage = require('./money/money-page');
-const TechPage = require('./tech/tech-page');
-const RealtPage = require('./realt/realt-page');
-const SearchModal = require('./header/search/search-modal');
-const CatalogMobileCat = require('./catalog/cat/electronics/catalog-mobile-page');
-const CatalogPricesPage = require('./catalog/catalog-prices-page');
-const AuthorizationModal = require('./home/auth-modal');
+import {assert} from 'chai';
+import HomePage from './home/home-page.js';
+import AbPage from './ab/ab-page.js';
+import BaseHeader from './header/base-header.js';
+import CatalogPage from './catalog/catalog-page.js';
+import RPage from './r/r-page.js';
+import TasksPage from './tasks/tasks-page.js';
+import ForumPage from './forum/forum-page.js';
+import CleverPage from './header/clever/clever-page.js';
+import KursPage from './kurs/kurs-page.js';
+import PogodaPage from './pogoda/pogoda-page.js';
+import CartPage from './cart/cart-page.js';
+import AutoPage from './auto/auto-page.js';
+import PeoplePage from './people/people-page.js';
+import MoneyPage from './money/money-page.js';
+import TechPage from './tech/tech-page.js';
+import RealtPage from './realt/realt-page.js';
+import SearchModal from './header/search/search-modal.js';
+import CatalogMobileCat from './catalog/cat/electronics/catalog-mobile-page.js';
+import CatalogPricesPage from './catalog/catalog-prices-page.js';
+import AuthorizationModal from './home/auth-modal.js';
 
-require('dotenv').config();
+import dotenv from 'dotenv';
+dotenv.config();
 
 class PageObjects {
   constructor() {
@@ -171,4 +172,4 @@ class PageObjects {
   }
 }
 
-module.exports = PageObjects;
+export default PageObjects;

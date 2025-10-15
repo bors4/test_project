@@ -1,4 +1,4 @@
-const SiteUrls = require('../../config/site-urls');
+import * as SiteUrls from '../../config/site-urls.js';
 
 class PeoplePage {
   static SiteUrls = SiteUrls;
@@ -14,8 +14,8 @@ class PeoplePage {
   }
 
   getURL() {
-    return SiteUrls.PEOPLE;
+    return SiteUrls.PEOPLE_URL;
   }
 }
 
-module.exports = PeoplePage;
+export default PeoplePage;

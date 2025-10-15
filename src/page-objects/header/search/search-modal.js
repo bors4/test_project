@@ -1,10 +1,6 @@
-const {switchToIFrame, switchToParent} = require('../../../utils/frame-utils');
-
-const SiteUrls = require('../../../config/site-urls');
+import {switchToIFrame, switchToParent} from '../../../utils/frame-utils.js';
 
 class SearchModal {
-  static SiteUrls = SiteUrls;
-
   constructor() {
     this.elements = {
       'Чекбокс К сравнению': this.checkboxToCompare,
@@ -31,12 +27,12 @@ class SearchModal {
   }
 
   async switchContextTo(sourceContext) {
-    if (sourceContext !== 'родительский') {
-      await switchToIFrame(sourceContext);
-    } else {
+    if (sourceContext === 'родительский') {
       await switchToParent();
+    } else {
+      await switchToIFrame(sourceContext);
     }
   }
 }
 
-module.exports = SearchModal;
+export default SearchModal;

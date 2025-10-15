@@ -1,14 +1,13 @@
-const {When} = require('@wdio/cucumber-framework');
-const BaseHeader = require('../page-objects/header/base-header');
-const PageObjects = require('../page-objects/page-objects');
-const SearchModal = require('../page-objects/header/search/search-modal');
-const BrowserUtils = require('../utils/browser-utils');
-const {getExchangeRate} = require('../utils/api-utils');
+import {When} from '@wdio/cucumber-framework';
+import BaseHeader from '../page-objects/header/base-header.js';
+import PageObjects from '../page-objects/page-objects.js';
+import SearchModal from '../page-objects/header/search/search-modal.js';
+import * as BrowserUtils from '../utils/browser-utils.js';
+import {getExchangeRate} from '../utils/api-utils.js';
 
 const baseHeader = new BaseHeader();
 const pageobjects = new PageObjects();
 const searchmodal = new SearchModal();
-const browserUtils = new BrowserUtils();
 
 When(/я принимаю cookie/, async () => {
   await pageobjects.cookieAccept();
@@ -44,12 +43,12 @@ When(/я навожу указатель мыши на "([^"]*)" на "([^"]*)"/
 });
 
 When(/я перехожу на неактивную вкладку в браузере/, async () => {
-  await browserUtils.switchWindow();
+  await BrowserUtils.switchWindow();
 });
 
 When(/я скролю к "([^"]*)" на "([^"]*)"/, async (elementName, pageName) => {
   const element = await pageobjects.getElementByName(elementName, pageName);
-  await browserUtils.scrollTo(element);
+  await BrowserUtils.scrollTo(element);
 });
 
 When(/я обновляю страницу/, async () => {

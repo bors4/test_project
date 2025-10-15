@@ -1,4 +1,4 @@
-const SiteUrls = require('../../../../config/site-urls');
+import * as SiteUrls from '../../../../config/site-urls.js';
 
 class CatalogMobileCat {
   static SiteUrls = SiteUrls;
@@ -24,8 +24,8 @@ class CatalogMobileCat {
   }
 
   getURL() {
-    return SiteUrls.CATALOG_MOBILE;
+    return SiteUrls.CATALOG_MOBILE_URL;
   }
 }
 
-module.exports = CatalogMobileCat;
+export default CatalogMobileCat;

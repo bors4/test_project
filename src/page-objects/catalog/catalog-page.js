@@ -1,5 +1,5 @@
-const SiteUrls = require('../../config/site-urls');
-const BasePage = require('../header/base-header');
+import * as SiteUrls from '../../config/site-urls.js';
+import BasePage from '../header/base-header.js';
 
 class CatalogPage extends BasePage {
   static SiteUrls = SiteUrls;
@@ -22,8 +22,8 @@ class CatalogPage extends BasePage {
   }
 
   getURL() {
-    return SiteUrls.CATALOG;
+    return SiteUrls.CATALOG_URL;
   }
 }
 
-module.exports = CatalogPage;
+export default CatalogPage;

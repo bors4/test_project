@@ -1,4 +1,4 @@
-const SiteUrls = require('../../config/site-urls');
+import * as SiteUrls from '../../config/site-urls.js';
 
 class ForumPage {
   static SiteUrls = SiteUrls;
@@ -14,8 +14,8 @@ class ForumPage {
   }
 
   getURL() {
-    return SiteUrls.FORUM;
+    return SiteUrls.FORUM_URL;
   }
 }
 
-module.exports = ForumPage;
+export default ForumPage;

@@ -1,32 +1,22 @@
-const SiteUrls = require('../../config/site-urls');
+import * as SiteUrls from '../../config/site-urls.js';
 
 class CatalogPricesPage {
   static SiteUrls = SiteUrls;
 
   constructor() {
     this.elements = {
-      'Кнопка В корзину': this.buttonInCart,
-      'Боковая панель с рекомендациями': this.sideBarRecommendation,
-      'Кнопка боковой панели Перейти в корзину': this.buttonInCartSideBar,
-      'Заголовок боковой панели с рекомендациями': this.headerRecommendationSideBar,
+      'Кнопка Купить': this.buttonOffer,
+      'Кнопка В корзине': this.buttonInCart,
     };
   }
 
+  get buttonOffer() {
+    return '(//a[contains(text(),"Купить")])[2]';
+  }
+
   get buttonInCart() {
-    return '(//a[contains(text(),"В корзину")])[2]';
-  }
-
-  get sideBarRecommendation() {
-    return '//div[@class="product-recommended__sidebar-body"]';
-  }
-
-  get buttonInCartSideBar() {
-    return `//div[@class="product-recommended__sidebar"]//a[@href="${SiteUrls.CART}"]`;
-  }
-
-  get headerRecommendationSideBar() {
-    return '//div[@class="product-recommended__subheader"][1]';
+    return '(//a[contains(text(),"В корзине")])[2]';
   }
 }
 
-module.exports = CatalogPricesPage;
+export default CatalogPricesPage;

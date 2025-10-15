@@ -1,9 +1,10 @@
-const globals = require('globals');
-const js = require('@eslint/js');
-const importPlugin = require('eslint-plugin-import');
-const prettierPlugin = require('eslint-plugin-prettier');
+import globals from 'globals';
+import js from '@eslint/js';
+import importPlugin from 'eslint-plugin-import';
+import prettierPlugin from 'eslint-plugin-prettier';
+import cucumberPlugin from 'eslint-plugin-cucumber';
 
-module.exports = [
+export default [
   {
     ignores: ['node_modules/', 'dist/', 'build/', 'coverage/', '*.min.js', '*.bundle.js'],
   },
@@ -30,6 +31,14 @@ module.exports = [
           ],
         },
       ],
+      'import/extensions': [
+        'error',
+        'ignorePackages',
+        {
+          js: 'always',
+          mjs: 'always',
+        },
+      ],
     },
   },
 
@@ -42,8 +51,17 @@ module.exports = [
     },
   },
 
+  // Правила для Cucumber (применяются к step definitions)
   {
-    files: ['**/*.js'],
+    files: ['**/step-definitions/**/*.js', '**/features/**/*.feature'],
+    plugins: {
+      cucumber: cucumberPlugin,
+    },
+    rules: {},
+  },
+
+  {
+    files: ['**/*.js', '**/*.mjs'],
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',

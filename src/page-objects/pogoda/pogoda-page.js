@@ -1,4 +1,4 @@
-const SiteUrls = require('../../config/site-urls');
+import * as SiteUrls from '../../config/site-urls.js';
 
 class PogodaPage {
   static SiteUrls = SiteUrls;
@@ -29,8 +29,8 @@ class PogodaPage {
   }
 
   getURL() {
-    return SiteUrls.POGODA;
+    return SiteUrls.POGODA_URL;
   }
 }
 
-module.exports = PogodaPage;
+export default PogodaPage;

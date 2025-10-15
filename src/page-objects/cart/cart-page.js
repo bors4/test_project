@@ -1,4 +1,4 @@
-const SiteUrls = require('../../config/site-urls');
+import * as SiteUrls from '../../config/site-urls.js';
 
 class CartPage {
   static SiteUrls = SiteUrls;
@@ -19,8 +19,8 @@ class CartPage {
   }
 
   getURL() {
-    return SiteUrls.CART;
+    return SiteUrls.CART_URL;
   }
 }
 
-module.exports = CartPage;
+export default CartPage;
