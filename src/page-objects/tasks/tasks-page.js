@@ -1,4 +1,4 @@
-const SiteUrls = require('../../config/site-urls');
+import * as SiteUrls from '../../config/site-urls.js';
 
 class TasksPage {
   static SiteUrls = SiteUrls;
@@ -14,8 +14,8 @@ class TasksPage {
   }
 
   getURL() {
-    return SiteUrls.TASKS;
+    return SiteUrls.TASKS_URL;
   }
 }
 
-module.exports = TasksPage;
+export default TasksPage;

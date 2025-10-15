@@ -1,4 +1,4 @@
-const SiteUrls = require('../../config/site-urls');
+import * as SiteUrls from '../../config/site-urls.js';
 
 class HomePage {
   constructor() {
@@ -17,7 +17,7 @@ class HomePage {
   }
 
   get siteLogo() {
-    return `//div//a[@href="${SiteUrls.HOME}"]/img`;
+    return `//div//a[@href="${SiteUrls.HOME_URL}"]/img`;
   }
 
   get sectionCatalog() {
@@ -49,7 +49,7 @@ class HomePage {
   }
 
   get linkMobilePhones() {
-    return `//a[@href="${SiteUrls.CATALOG_MOBILE}"]`;
+    return `//a[@href="${SiteUrls.CATALOG_MOBILE_URL}"]`;
   }
 
   get modalAuth() {
@@ -57,8 +57,8 @@ class HomePage {
   }
 
   getURL() {
-    return SiteUrls.HOME;
+    return SiteUrls.HOME_URL;
   }
 }
 
-module.exports = HomePage;
+export default HomePage;

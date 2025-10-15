@@ -1,4 +1,4 @@
-const SiteUrls = require('../../config/site-urls');
+import * as SiteUrls from '../../config/site-urls.js';
 
 /**
  * Класс для использования на странице "Автобарахолка".
@@ -104,8 +104,8 @@ class AbPage {
   }
 
   getURL() {
-    return SiteUrls.AB;
+    return SiteUrls.AB_URL;
   }
 }
 
-module.exports = AbPage;
+export default AbPage;

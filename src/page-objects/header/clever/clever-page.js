@@ -10,4 +10,4 @@ class CleverPage {
   }
 }
 
-module.exports = CleverPage;
+export default CleverPage;

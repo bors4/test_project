@@ -1,5 +1,10 @@
-/* eslint-disable no-undef */
-exports.config = {
+/* eslint-disable no-console */
+/* eslint-disable prefer-arrow-callback */
+/* eslint-disable padding-line-between-statements */
+/* eslint-disable object-shorthand */
+import allure from 'allure-commandline';
+
+export const config = {
   runner: 'local',
   specs: ['./features/**/*.feature'],
   exclude: [],
@@ -78,10 +83,13 @@ exports.config = {
       try {
         const screenshot = await browser.takeScreenshot();
 
-        allure.addAttachment('Screenshot on Failure', Buffer.from(screenshot, 'base64'), 'image/png');
+        // Исправлено: используем глобальный объект allure из репортера
+        if (globalThis.allure !== undefined) {
+          globalThis.allure.addAttachment('Screenshot on Failure', Buffer.from(screenshot, 'base64'), 'image/png');
+        }
 
-        const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-        const testName = test.title.replace(/\s+/g, '_');
+        const timestamp = new Date().toISOString().replaceAll(/[:.]/g, '-');
+        const testName = test.title.replaceAll(/\s+/g, '_');
         const path = `./screenshots/fail_${testName}_${timestamp}.png`;
         await browser.saveScreenshot(path);
         console.log(`Скриншот сохранён: ${path}`);
@@ -92,11 +100,13 @@ exports.config = {
   },
 
   onComplete: function () {
-    const generation = allure(['generate', 'allure-results', '--clean']);
+    // Исправлено: используем импортированный allure
+    const reportGenerator = allure(['generate', 'allure-results', '--clean']);
+
     return new Promise((resolve, reject) => {
       const generationTimeout = setTimeout(() => reject(new Error('Could not generate Allure report')), 30000);
 
-      generation.on('exit', function (exitCode) {
+      reportGenerator.on('exit', function (exitCode) {
         clearTimeout(generationTimeout);
         if (exitCode !== 0) {
           return reject(new Error('Allure report generation failed'));

@@ -1,4 +1,4 @@
-const SiteUrls = require('../../config/site-urls');
+import * as SiteUrls from '../../config/site-urls.js';
 
 class RealtPage {
   static SiteUrls = SiteUrls;
@@ -14,8 +14,8 @@ class RealtPage {
   }
 
   getURL() {
-    return SiteUrls.REALT;
+    return SiteUrls.REALT_URL;
   }
 }
 
-module.exports = RealtPage;
+export default RealtPage;

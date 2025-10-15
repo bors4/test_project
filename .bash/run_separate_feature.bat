@@ -1,1 +1,1 @@
-npm run test -- --spec authorization.feature
+npm run test -- --spec open.r.page.feature

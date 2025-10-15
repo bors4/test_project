@@ -1,6 +1,6 @@
-const {expect: expectChai} = require('chai');
-const {Then} = require('@wdio/cucumber-framework');
-const PageObjects = require('../page-objects/page-objects');
+import {expect as expectChai} from 'chai';
+import {Then} from '@wdio/cucumber-framework';
+import PageObjects from '../page-objects/page-objects.js';
 
 const pageobjects = new PageObjects();
 
@@ -44,6 +44,9 @@ Then(
   }
 );
 
+/***
+ * @todo переписать с использованием parseFloat()
+ */
 Then(/я вижу что курсы валют равны/, function () {
   expectChai(this.elementText).to.equal(`$ ${this.apiExchangeRate.replace('.', ',')}`);
 });
@@ -56,7 +59,6 @@ Then(/я вижу что "([^"]*)"\[(\d+)\] на "([^"]*)" равен сохра
 /**
  * @todo доработать шаг: добавить обработку операторов сравнения
  */
-
 Then(
   /я вижу что кол-во "([^"]*)" на "([^"]*)" "([^"]*)" "(\d+)"/,
   async function (elementName, pageName, operator, itemCount) {

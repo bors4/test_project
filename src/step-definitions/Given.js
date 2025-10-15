@@ -1,8 +1,8 @@
-const {Given} = require('@wdio/cucumber-framework');
-const HomePage = require('../page-objects/home/home-page');
-const PageObjects = require('../page-objects/page-objects');
-
-require('dotenv').config();
+import {Given} from '@wdio/cucumber-framework';
+import HomePage from '../page-objects/home/home-page.js';
+import PageObjects from '../page-objects/page-objects.js';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const pageobjects = new PageObjects();
 const homePage = new HomePage();

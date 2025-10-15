@@ -20,4 +20,4 @@ class AuthorizationModal {
   }
 }
 
-module.exports = AuthorizationModal;
+export default AuthorizationModal;

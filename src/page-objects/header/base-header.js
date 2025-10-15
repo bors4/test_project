@@ -1,4 +1,4 @@
-const SiteUrls = require('../../config/site-urls');
+import * as SiteUrls from '../../config/site-urls.js';
 
 class BaseHeader {
   static SiteUrls = SiteUrls;
@@ -34,35 +34,35 @@ class BaseHeader {
   }
 
   get siteLogo() {
-    return `//div//a[@href="${SiteUrls.HOME}"]/img`;
+    return `//div//a[@href="${SiteUrls.HOME_URL}"]/img`;
   }
 
   get linkCatalog() {
-    return `//nav//a[@href="${SiteUrls.CATALOG}"]`;
+    return `//nav//a[@href="${SiteUrls.CATALOG_URL}"]`;
   }
 
   get linkNews() {
-    return `//div//a[@href="${SiteUrls.HOME}"]//span[.="Новости"]`;
+    return `//div//a[@href="${SiteUrls.HOME_URL}"]//span[.="Новости"]`;
   }
 
   get linkAb() {
-    return `//nav//a[@href="${SiteUrls.AB}"]//span[.="Автобарахолка"]`;
+    return `//nav//a[@href="${SiteUrls.AB_URL}"]//span[.="Автобарахолка"]`;
   }
 
   get linkRealty() {
-    return `//nav//li/a[@href="${SiteUrls.R}/pk"]`;
+    return `//nav//li/a[@href="${SiteUrls.R_URL}/pk"]`;
   }
 
   get linkTasks() {
-    return `//nav//a[@href="${SiteUrls.TASKS}"]/span[.="Услуги"]`;
+    return `//nav//a[@href="${SiteUrls.TASKS_URL}"]/span[.="Услуги"]`;
   }
 
   get linkBaraholka() {
-    return `//nav//a[@href="${SiteUrls.BARAHOLKA}"]//span[.="Барахолка"]`;
+    return `//nav//a[@href="${SiteUrls.BARAHOLKA_URL}"]//span[.="Барахолка"]`;
   }
 
   get linkForum() {
-    return `//nav//a[@href="${SiteUrls.FORUM}/"]`;
+    return `//nav//a[@href="${SiteUrls.FORUM_URL}/"]`;
   }
 
   get linkClever() {
@@ -70,11 +70,11 @@ class BaseHeader {
   }
 
   get linkCurrency() {
-    return `//nav//a[@href="${SiteUrls.KURS}/"]`;
+    return `//nav//a[@href="${SiteUrls.KURS_URL}/"]`;
   }
 
   get linkWeather() {
-    return `//nav//a[@href="${SiteUrls.POGODA}/"]`;
+    return `//nav//a[@href="${SiteUrls.POGODA_URL}/"]`;
   }
 
   get textCurrencyRate() {
@@ -146,4 +146,4 @@ class BaseHeader {
   }
 }
 
-module.exports = BaseHeader;
+export default BaseHeader;

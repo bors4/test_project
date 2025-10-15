@@ -1,4 +1,4 @@
-const SiteUrls = require('../../config/site-urls');
+import * as SiteUrls from '../../config/site-urls.js';
 
 class AutoPage {
   static SiteUrls = SiteUrls;
@@ -14,8 +14,8 @@ class AutoPage {
   }
 
   getURL() {
-    return SiteUrls.AUTO;
+    return SiteUrls.AUTO_URL;
   }
 }
 
-module.exports = AutoPage;
+export default AutoPage;

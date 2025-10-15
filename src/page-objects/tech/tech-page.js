@@ -1,4 +1,4 @@
-const SiteUrls = require('../../config/site-urls');
+import * as SiteUrls from '../../config/site-urls.js';
 
 class TechPage {
   static SiteUrls = SiteUrls;
@@ -14,8 +14,8 @@ class TechPage {
   }
 
   getURL() {
-    return SiteUrls.TECH;
+    return SiteUrls.TECH_URL;
   }
 }
 
-module.exports = TechPage;
+export default TechPage;

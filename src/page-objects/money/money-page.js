@@ -1,4 +1,4 @@
-const SiteUrls = require('../../config/site-urls');
+import * as SiteUrls from '../../config/site-urls.js';
 
 class MoneyPage {
   static SiteUrls = SiteUrls;
@@ -14,8 +14,8 @@ class MoneyPage {
   }
 
   getURL() {
-    return SiteUrls.MONEY;
+    return SiteUrls.MONEY_URL;
   }
 }
 
-module.exports = MoneyPage;
+export default MoneyPage;
