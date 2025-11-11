@@ -6,7 +6,7 @@ class CatalogPricesPage {
   constructor() {
     this.elements = {
       'Кнопка Купить': this.buttonOffer,
-      'Кнопка В корзине': this.buttonInCart,
+      'Кнопка Перейти в корзину': this.buttonInCart,
     };
   }
 
@@ -15,7 +15,7 @@ class CatalogPricesPage {
   }
 
   get buttonInCart() {
-    return '(//a[contains(text(),"В корзине")])[2]';
+    return '(//a[contains(text(),"Перейти в корзину")])';
   }
 }
 

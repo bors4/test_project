@@ -1,1 +1,0 @@
-npm run test -- --spec open.r.page.feature

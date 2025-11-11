@@ -1,0 +1,41 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": false,
+    "strictFunctionTypes": false,
+    "checkJs": false,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@pages/*": ["src/pageobjects/*"],
+      "@helpers/*": ["src/helpers/*"],
+      "@steps/*": ["src/steps/*"],
+      "@support/*": ["src/support/*"],
+      "@tests/*": ["tests/*"]
+    },
+    "typeRoots": ["./node_modules/@types", "./types"],
+    "types": ["node"],
+    "noImplicitAny": false,
+    "noImplicitThis": false,
+    "strictNullChecks": false,
+    "alwaysStrict": false
+  },
+  "include": [
+    "src/**/*",
+    "tests/**/*",
+    "features/**/*",
+    "wdio.conf.js",
+    "cucumber.js",
+    "cucumber.conf.js",
+    "types/**/*"
+  ],
+  "exclude": ["node_modules", "dist", "coverage", ".git", "reports", "logs"]
+}

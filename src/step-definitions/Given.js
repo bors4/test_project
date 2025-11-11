@@ -1,8 +1,6 @@
 import {Given} from '@wdio/cucumber-framework';
 import HomePage from '../page-objects/home/home-page.js';
 import PageObjects from '../page-objects/page-objects.js';
-import dotenv from 'dotenv';
-dotenv.config();
 
 const pageobjects = new PageObjects();
 const homePage = new HomePage();
@@ -24,5 +22,5 @@ Given(/устанавливаю cookie региона доставки "([^"]*)"
 });
 
 Given(/я удаляю cookie/, async () => {
-  await browser.deleteAllCookies();
+  await browser.deleteCookies();
 });
