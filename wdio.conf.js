@@ -1,14 +1,70 @@
 /* eslint-disable no-console */
-/* eslint-disable prefer-arrow-callback */
-/* eslint-disable padding-line-between-statements */
 /* eslint-disable object-shorthand */
-import allure from 'allure-commandline';
+import {exec} from 'node:child_process';
+import {promisify} from 'node:util';
+
+const execPromise = promisify(exec);
+
+const chromeArgs = [
+  //'--disable-gpu',
+  '--disable-blink-features=AutomationControlled',
+  '--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36',
+  '--blink-settings=imagesEnabled=false,fontsEnabled=false',
+  '--mute-audio',
+  '--disable-sync',
+  '--disable-default-apps',
+  '--disable-extensions',
+  '--disable-background-mode',
+  '--disable-features=AutofillServerCommunication,BackgroundFetchAPI,NotificationPermissions,ChromeWhatsNewUI,GooglePortals,InterestFeedContentSuggestions,Translate,TranslateUI,WebRTC',
+  '--disable-background-sync',
+  '--disable-background-networking',
+  '--disable-backgrounding-occluded-windows',
+  '--disable-renderer-backgrounding',
+  '--no-sandbox',
+  '--no-first-run',
+  '--no-default-browser-check',
+  '--disable-translate',
+  '--disable-web-security',
+  '--disable-crash-reporter',
+  '--log-level=3',
+  '--disable-ipc-flooding-protection',
+  '--disable-background-timer-throttling',
+  '--enable-aggressive-domstorage-flushing',
+];
+
+const HEADLESS = process.env.HEADLESS !== 'false';
+const RECORD_VIDEO = process.env.RECORD_VIDEO === 'true';
+const DEBUG_MODE = process.env.DEBUG_MODE === 'true';
+
+if (HEADLESS) {
+  chromeArgs.push('--headless=new');
+}
+
+// Видео требует devtools
+const services = [];
+
+if (RECORD_VIDEO) {
+  services.push(['devtools']);
+}
+
+const reporters = ['spec'];
+
+if (RECORD_VIDEO) {
+  reporters.push([
+    '@wdio/video-reporter',
+    {
+      saveAllVideos: DEBUG_MODE,
+      outputDir: './videos',
+      videoSlowdownMultiplier: 1,
+    },
+  ]);
+}
 
 export const config = {
   runner: 'local',
   specs: ['./features/**/*.feature'],
   exclude: [],
-  maxInstances: 3,
+  maxInstances: 1,
 
   capabilities: [
     {
@@ -19,15 +75,21 @@ export const config = {
           'profile.managed_default_content_settings.fonts': 2,
           'profile.default_content_setting_values.fonts': 2,
         },
-        args: ['--blink-settings=imagesEnabled=false', '--disable-fonts', '--blink-settings=fontsEnabled=false'],
+        args: chromeArgs,
+      },
+      'goog:loggingPrefs': {
+        browser: 'OFF',
+        driver: 'OFF',
       },
     },
   ],
 
+  restartBrowserForEachTest: false, // Изменено на false, чтобы избежать проблем с сессией
+
   logLevel: 'error',
   bail: 0,
-  waitforTimeout: 10000,
-  connectionRetryTimeout: 120000,
+  waitforTimeout: 30000, // Увеличен таймаут
+  connectionRetryTimeout: 180000, // Увеличен таймаут для подключения
   connectionRetryCount: 3,
   services: ['visual'],
   framework: 'cucumber',
@@ -52,7 +114,7 @@ export const config = {
   ],
 
   cucumberOpts: {
-    require: ['./src/step-definitions/*.js'],
+    require: ['./src/step-definitions/*.js', './src/step-definitions/hooks.js'],
     format: ['json:./reports/cucumber-report.json'],
     formatOptions: {
       console: {
@@ -70,50 +132,56 @@ export const config = {
     source: true,
     strict: false,
     tagExpression: '',
-    timeout: 60000,
+    timeout: 90000, // Увеличен таймаут для сценариев
     ignoreUndefinedDefinitions: false,
   },
 
-  before: function () {
-    browser.setWindowSize(1920, 1080);
+  before: async function () {
+    const dotenvx = await import('@dotenvx/dotenvx');
+    dotenvx.config();
+    await browser.setWindowSize(1920, 1080);
+    await browser.execute(() => {
+      Object.defineProperty(navigator, 'webdriver', {get: () => undefined});
+    });
   },
 
-  afterTest: async function (test, context, {error}) {
-    if (error) {
+  // eslint-disable-next-line no-unused-vars
+  afterTest: function (test, context, {error, result, duration, passed, retries}) {
+    // Не закрываем браузер принудительно после каждого теста
+  },
+
+  // eslint-disable-next-line no-unused-vars
+  onComplete: async function (exitCode, config, capabilities) {
+    console.log('Generating Allure report...');
+
+    try {
+      await execPromise('npx allure generate allure-results -o allure-report');
+      console.log('Allure report successfully generated in allure-report directory');
+    } catch (error) {
+      console.error('Allure report generation failed:', error);
+
+      // Fallback to allure-commandline
       try {
-        const screenshot = await browser.takeScreenshot();
+        const allure = (await import('allure-commandline')).default;
+        const reportGenerator = allure(['generate', 'allure-results', '--clean', '-o', 'allure-report']);
 
-        // Исправлено: используем глобальный объект allure из репортера
-        if (globalThis.allure !== undefined) {
-          globalThis.allure.addAttachment('Screenshot on Failure', Buffer.from(screenshot, 'base64'), 'image/png');
-        }
+        return new Promise((resolve, reject) => {
+          const generationTimeout = setTimeout(() => reject(new Error('Could not generate Allure report')), 30000);
 
-        const timestamp = new Date().toISOString().replaceAll(/[:.]/g, '-');
-        const testName = test.title.replaceAll(/\s+/g, '_');
-        const path = `./screenshots/fail_${testName}_${timestamp}.png`;
-        await browser.saveScreenshot(path);
-        console.log(`Скриншот сохранён: ${path}`);
-      } catch (err) {
-        console.error('Не удалось сохранить скриншот:', err);
+          reportGenerator.on('exit', (exitCode) => {
+            clearTimeout(generationTimeout);
+
+            if (exitCode !== 0) {
+              return reject(new Error('Allure report generation failed'));
+            }
+
+            console.log('Allure report successfully generated');
+            resolve();
+          });
+        });
+      } catch (fallbackError) {
+        console.error('Allure fallback also failed:', fallbackError);
       }
     }
-  },
-
-  onComplete: function () {
-    // Исправлено: используем импортированный allure
-    const reportGenerator = allure(['generate', 'allure-results', '--clean']);
-
-    return new Promise((resolve, reject) => {
-      const generationTimeout = setTimeout(() => reject(new Error('Could not generate Allure report')), 30000);
-
-      reportGenerator.on('exit', function (exitCode) {
-        clearTimeout(generationTimeout);
-        if (exitCode !== 0) {
-          return reject(new Error('Allure report generation failed'));
-        }
-        console.log('Allure report successfully generated');
-        resolve();
-      });
-    });
   },
 };

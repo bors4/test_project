@@ -20,9 +20,6 @@ import CatalogMobileCat from './catalog/cat/electronics/catalog-mobile-page.js';
 import CatalogPricesPage from './catalog/catalog-prices-page.js';
 import AuthorizationModal from './home/auth-modal.js';
 
-import dotenv from 'dotenv';
-dotenv.config();
-
 class PageObjects {
   constructor() {
     this.elements = {
@@ -62,23 +59,55 @@ class PageObjects {
     return '//*[@id="fast-search-modal"]//iframe';
   }
 
+  /**
+   * @param {string} pageName
+   */
   getPageObject(pageName) {
     return this.pages[pageName];
   }
 
+  /**
+   * @param {string} elementName
+   * @param {string} pageName
+   */
   async getElementByName(elementName, pageName) {
-    const element = await $(this.getPageObject(pageName).elements[elementName]);
-    await element.waitForExist({timeout: 10000});
+    const selector = this.getPageObject(pageName).elements[elementName];
+    const element = $(selector);
+
+    await element.waitForExist({
+      timeout: 10_000,
+      timeoutMsg: `Элемент "${elementName}" не найден на странице "${pageName}" по селектору: ${selector}`,
+    });
 
     return element;
   }
 
+  /**
+   * @param {string} elementName
+   * @param {string} pageName
+   */
   async getElementsByName(elementName, pageName) {
-    const elements = await $$(this.getPageObject(pageName).elements[elementName]);
+    const selector = this.getPageObject(pageName).elements[elementName];
 
-    return elements;
+    await browser.waitUntil(
+      async () => {
+        const foundElements = await $$(selector);
+
+        return foundElements.length > 0;
+      },
+      {
+        timeout: 3000,
+        timeoutMsg: `Элементы "${elementName}" на странице "${pageName}" не появились за 3 секунды.`,
+      }
+    );
+
+    return await $$(selector);
   }
 
+  /**
+   * @param {string} elementName
+   * @param {string} pageName
+   */
   async getElementText(elementName, pageName) {
     const element = await this.getElementByName(elementName, pageName);
     const elementText = await element.getText();
@@ -87,14 +116,41 @@ class PageObjects {
     return elementText;
   }
 
+  /**
+   * @param {string} elementName
+   * @param {number} index
+   * @param {string} pageName
+   */
   async getElementTextByIndex(elementName, index, pageName) {
     const elements = await this.getElementsByName(elementName, pageName);
-    const elementText = await elements[index].getText();
-    assert.isNotEmpty(elementText, `Для "${elementName}"[${index}] на "${pageName}" текст не определён`);
 
-    return elementText;
+    if (index >= elements.length) {
+      throw new Error(
+        `Индекс ${index} выходит за пределы списка "${elementName}" (всего элементов: ${elements.length})`
+      );
+    }
+
+    const element = elements[index];
+
+    await browser.waitUntil(
+      async () => {
+        const text = await element.getText();
+
+        return text.length > 0;
+      },
+      {
+        timeout: 5000,
+        timeoutMsg: `Текст для "${elementName}"[${index}] на странице "${pageName}" не появился за 5 секунд`,
+      }
+    );
+
+    return await element.getText();
   }
 
+  /**
+   * @param {string} elementName
+   * @param {string} pageName
+   */
   async hoverElement(elementName, pageName) {
     const element = await this.getElementByName(elementName, pageName);
     await element.moveTo();
@@ -106,13 +162,18 @@ class PageObjects {
     }
   }
 
+  /**
+   * @param {string} pageName
+   */
   async openPageByName(pageName) {
     const page = this.getPageObject(pageName);
     const element = $(page.siteLogo);
     await browser.url(page.getURL());
 
     const currentUrl = await browser.getUrl();
-    assert(currentUrl.includes(page.getURL(), `Для ${pageName} ожидался URL: ${page.getURL()}, но получен: ${currentUrl}`));
+    assert(
+      currentUrl.includes(page.getURL(), `Для ${pageName} ожидался URL: ${page.getURL()}, но получен: ${currentUrl}`)
+    );
 
     try {
       await element.waitForDisplayed();
@@ -121,6 +182,9 @@ class PageObjects {
     }
   }
 
+  /**
+   * @param {string} pageName
+   */
   getUrlByPageName(pageName) {
     const page = this.getPageObject(pageName);
     const pageURL = page.getURL();
@@ -129,18 +193,44 @@ class PageObjects {
     return pageURL;
   }
 
+  /**
+   * @param {string} elementName
+   * @param {string} pageName
+   */
   async clickOnElement(elementName, pageName) {
-    const element = await this.getElementByName(elementName, pageName);
-    await element.waitForClickable();
-    await element.click();
+    try {
+      const element = await this.getElementByName(elementName, pageName);
+      await element.waitForClickable({timeout: 3000});
+      await element.click();
+    } catch (error) {
+      throw new Error(`Не удалось нажать на элемент "${elementName}" на странице "${pageName}": ${error.message}`);
+    }
   }
 
+  /**
+   * @param {string} elementName
+   * @param {number} index
+   * @param {string} pageName
+   */
   async clickOnElementByIndex(elementName, index, pageName) {
     const elements = await this.getElementsByName(elementName, pageName);
-    await elements[index].waitForClickable();
+
+    try {
+      await elements[index].waitForDisplayed({timeout: 5000});
+      await elements[index].waitForClickable();
+      await elements[index].isDisplayed({withinViewport: true});
+    } catch (error) {
+      throw new Error(`Элемент "${elements[index]}" не находится в области видимости: ${error}`);
+    }
+
     await elements[index].click();
   }
 
+  /**
+   * @param {string} elementName
+   * @param {string} pageName
+   * @param {string} textToInsert
+   */
   async setTextTo(elementName, pageName, textToInsert) {
     const element = await this.getElementByName(elementName, pageName);
     await element.waitForDisplayed();
@@ -157,11 +247,16 @@ class PageObjects {
       return;
     }
 
-    try {
-      await element.setValue(textToInsert);
-    } catch (error) {
-      throw new Error(`Текст не был вставлен: ${error}`);
-    }
+    await element.setValue(textToInsert);
+    await element.waitUntil(
+      async function () {
+        return (await this.getValue()) === textToInsert;
+      },
+      {
+        timeout: 5000,
+        timeoutMsg: `Текст "${textToInsert}" не появился в элементе`,
+      }
+    );
   }
 
   async cookieAccept() {

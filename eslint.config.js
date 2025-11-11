@@ -51,7 +51,6 @@ export default [
     },
   },
 
-  // Правила для Cucumber (применяются к step definitions)
   {
     files: ['**/step-definitions/**/*.js', '**/features/**/*.feature'],
     plugins: {

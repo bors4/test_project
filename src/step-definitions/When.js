@@ -25,10 +25,13 @@ When(/я нажимаю на "([^"]*)"\[(\d+)\] на "([^"]*)"/, async (elementN
   await pageobjects.clickOnElementByIndex(elementName, index, pageName);
 });
 
-When(/я беру текст из примера в плейсхолдере поля поиска и ввожу в "([^"]*)" в "([^"]*)"/, async (elementName, pageName) => {
-  const textToSearch = await baseHeader.getTextFromSearchInput();
-  await pageobjects.setTextTo(elementName, pageName, textToSearch);
-});
+When(
+  /я беру текст из примера в плейсхолдере поля поиска и ввожу в "([^"]*)" в "([^"]*)"/,
+  async (elementName, pageName) => {
+    const textToSearch = await baseHeader.getTextFromSearchInput();
+    await pageobjects.setTextTo(elementName, pageName, textToSearch);
+  }
+);
 
 When(/я ввожу "([^"]*)" в "([^"]*)" на "([^"]*)"/, async (text, elementName, pageName) => {
   await pageobjects.setTextTo(elementName, pageName, text);

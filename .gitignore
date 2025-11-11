@@ -7,3 +7,10 @@ package-lock.json
 reports
 .allure/history.jsonl
 .prettierignore
+.vscode
+qwen.md
+.continue/README.md
+.continue/prompts/new-prompt.md
+.qwen/PROJECT_SUMMARY.md
+.gitignore
+_results_

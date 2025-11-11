@@ -1,4 +1,4 @@
-import {expect as expectChai} from 'chai';
+import {expect, expect as expectChai} from 'chai';
 import {Then} from '@wdio/cucumber-framework';
 import PageObjects from '../page-objects/page-objects.js';
 
@@ -14,9 +14,17 @@ Then(/я вижу "([^"]*)" на "([^"]*)"/, async (elementName, pageName) => {
 });
 
 Then(/я вижу текст "([^"]*)" в "([^"]*)" для "([^"]*)"/, async (text, elementName, pageName) => {
-  const searchInput = pageobjects.getElementByName(elementName, pageName);
-  if (text.includes('Например')) expect(searchInput.toHaveAttr('placeholder', expect.stringContaining('Например')));
-  else expect(await pageobjects.getElementsByName('Текст Ничего не найдено', pageName)).toHaveText('Ничего не найдено');
+  const searchInput = await pageobjects.getElementByName(elementName, pageName);
+
+  if (text.includes('Например')) {
+    const placeholder = await searchInput.getAttribute('placeholder');
+    expect(placeholder).to.include('Например');
+  } else {
+    const elements = await pageobjects.getElementsByName('Текст Ничего не найдено', pageName);
+    expect(elements[0]).to.exist;
+    const elementText = await elements[0].getText();
+    expect(elementText).to.equal('Ничего не найдено');
+  }
 });
 
 Then(/я вижу что "([^"]*)" на "([^"]*)" содержит текст "([^"]*)"/, async (elementName, pageName, elementText) => {
@@ -25,8 +33,17 @@ Then(/я вижу что "([^"]*)" на "([^"]*)" содержит текст "(
 });
 
 Then(/я проверяю что нахожусь на "([^"]*)"/, async (pageName) => {
-  await browser.setTimeout({pageLoad: 10000});
-  await expect(browser).toHaveUrl(expect.stringContaining(pageobjects.getUrlByPageName(pageName)));
+  await browser.waitUntil(
+    async () => {
+      const currentUrl = await browser.getUrl();
+
+      return currentUrl.includes(pageobjects.getUrlByPageName(pageName));
+    },
+    {
+      timeout: 10000,
+      timeoutMsg: `Expected to be on page ${pageName} but still on different page after 10s`,
+    }
+  );
 });
 
 Then(
@@ -63,6 +80,8 @@ Then(
   /я вижу что кол-во "([^"]*)" на "([^"]*)" "([^"]*)" "(\d+)"/,
   async function (elementName, pageName, operator, itemCount) {
     const elements = await pageobjects.getElementsByName(elementName, pageName);
-    expectChai(elements.length, `Условие не удовлетворяет ${elements.length} меньше ${itemCount}`).to.be.lessThan(itemCount);
+    expectChai(elements.length, `Условие не удовлетворяет ${elements.length} меньше ${itemCount}`).to.be.lessThan(
+      itemCount
+    );
   }
 );

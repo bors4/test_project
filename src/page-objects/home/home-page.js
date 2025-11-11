@@ -52,6 +52,8 @@ class HomePage {
     return `//a[@href="${SiteUrls.CATALOG_MOBILE_URL}"]`;
   }
 
+  //a[@href="https://catalog.onliner.by/mobile"]
+
   get modalAuth() {
     return '//div[@id="auth-container"]';
   }
