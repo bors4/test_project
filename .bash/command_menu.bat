@@ -2,6 +2,8 @@
 chcp 65001 >nul
 setlocal enabledelayedexpansion
 
+for /f "delims=" %%i in ("%~dp0..") do set "PROJECT_DIR=%%~fi"
+
 :title
 cls
 echo ========================================
@@ -52,7 +54,7 @@ goto title
 :jsdoc
 echo.
 echo Generating JSDoc Documentation...
-cd /d "D:\git-directory\test_project"
+cd /d "!PROJECT_DIR!"
 npx jsdoc -c jsdoc.config.json
 pause
 goto title
@@ -60,7 +62,7 @@ goto title
 :allure_open
 echo.
 echo Opening Allure Report...
-cd /d "D:\git-directory\test_project"
+cd /d "!PROJECT_DIR!"
 npm run allure:open
 pause
 goto title
@@ -68,7 +70,7 @@ goto title
 :allure_check
 echo.
 echo Checking Allure Results Directory...
-cd /d "D:\git-directory\test_project"
+cd /d "!PROJECT_DIR!"
 dir "allure-results" /b
 pause
 goto title
@@ -76,7 +78,7 @@ goto title
 :allure_generate
 echo.
 echo Generating Allure Report...
-cd /d "D:\git-directory\test_project"
+cd /d "!PROJECT_DIR!"
 npm run allure:generate
 pause
 goto title
@@ -84,7 +86,7 @@ goto title
 :allure_generate_history
 echo.
 echo Generating Allure Report (with history)...
-cd /d "D:\git-directory\test_project"
+cd /d "!PROJECT_DIR!"
 npm run allure:generate:history
 pause
 goto title
@@ -92,7 +94,7 @@ goto title
 :allure_watch
 echo.
 echo Watching Allure Results (Live Report)...
-cd /d "D:\git-directory\test_project"
+cd /d "!PROJECT_DIR!"
 npm run allure:watch
 pause
 goto title
@@ -100,7 +102,7 @@ goto title
 :run_all
 echo.
 echo Running all feature files (headless)...
-cd /d "D:\git-directory\test_project"
+cd /d "!PROJECT_DIR!"
 npm run test
 pause
 goto title
@@ -108,7 +110,7 @@ goto title
 :run_all_debug
 echo.
 echo Running all feature files (with UI)...
-cd /d "D:\git-directory\test_project"
+cd /d "!PROJECT_DIR!"
 npm run test:debug
 pause
 goto title
@@ -116,7 +118,7 @@ goto title
 :run_all_video
 echo.
 echo Running all feature files (with video recording)...
-cd /d "D:\git-directory\test_project"
+cd /d "!PROJECT_DIR!"
 npm run test:video
 pause
 goto title
@@ -124,7 +126,7 @@ goto title
 :run_all_debug_video
 echo.
 echo Running all feature files (debug with video)...
-cd /d "D:\git-directory\test_project"
+cd /d "!PROJECT_DIR!"
 npm run test:debug:video
 pause
 goto title
@@ -133,26 +135,27 @@ goto title
 echo.
 echo Available feature files in features directory:
 echo.
-dir "D:\git-directory\test_project\features" /b
+dir "!PROJECT_DIR!\features" /b
 echo.
 set /p feature_name="Enter feature file name (e.g., open.r.page.feature): "
-cd /d "D:\git-directory\test_project"
+cd /d "!PROJECT_DIR!"
 npm run test:feature -- !feature_name!
 pause
 goto title
 
 :run_tags
 echo.
-set /p tags="Enter tags to run (e.g., @smoke): "
-cd /d "D:\git-directory\test_project"
-npm run test:tags -- !tags!
+echo Enter tags to run (e.g., @smoke or @smoke and @regression or not @slow or @smoke and not @wip)
+set /p tags="Enter tags: "
+cd /d "!PROJECT_DIR!"
+npx wdio run ./wdio.conf.js --spec --cucumberOpts.tagExpression="!tags!"
 pause
 goto title
 
 :format_files
 echo.
 echo Running prettier...
-cd /d "D:\git-directory\test_project"
+cd /d "!PROJECT_DIR!"
 npm run format
 pause
 goto title
@@ -160,7 +163,7 @@ goto title
 :lint_files
 echo.
 echo Running eslint...
-cd /d "D:\git-directory\test_project"
+cd /d "!PROJECT_DIR!"
 npm run lint
 pause
 goto title

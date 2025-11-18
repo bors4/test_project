@@ -1,8 +1,6 @@
-import * as SiteUrls from '../../config/site-urls.js';
+import siteUrls from '../../config/site-urls.js';
 
 class PeoplePage {
-  static SiteUrls = SiteUrls;
-
   constructor() {
     this.elements = {
       'Таб навигации Люди': this.tabPeople,
@@ -14,7 +12,7 @@ class PeoplePage {
   }
 
   getURL() {
-    return SiteUrls.PEOPLE_URL;
+    return siteUrls.PEOPLE_URL;
   }
 }
 

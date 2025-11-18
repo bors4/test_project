@@ -9,8 +9,9 @@ reports
 .prettierignore
 .vscode
 qwen.md
-.continue/README.md
-.continue/prompts/new-prompt.md
-.qwen/PROJECT_SUMMARY.md
+.continue/
+.qwen/
 .gitignore
 _results_
+INSTRUCTION.md
+.idea/

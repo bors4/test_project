@@ -1,8 +1,6 @@
-import * as SiteUrls from '../../config/site-urls.js';
+import siteUrls from '../../config/site-urls.js';
 
 class MoneyPage {
-  static SiteUrls = SiteUrls;
-
   constructor() {
     this.elements = {
       'Таб навигации Кошелек': this.tabWallet,
@@ -14,7 +12,7 @@ class MoneyPage {
   }
 
   getURL() {
-    return SiteUrls.MONEY_URL;
+    return siteUrls.MONEY_URL;
   }
 }
 

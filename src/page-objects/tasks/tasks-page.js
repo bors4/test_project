@@ -1,8 +1,6 @@
-import * as SiteUrls from '../../config/site-urls.js';
+import siteUrls from '../../config/site-urls.js';
 
 class TasksPage {
-  static SiteUrls = SiteUrls;
-
   constructor() {
     this.elements = {
       'Заголовок раздела Заказы': this.headerOrdersSection,
@@ -14,7 +12,7 @@ class TasksPage {
   }
 
   getURL() {
-    return SiteUrls.TASKS_URL;
+    return siteUrls.TASKS_URL;
   }
 }
 

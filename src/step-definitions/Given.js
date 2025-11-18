@@ -10,7 +10,7 @@ Given(/^ссылка на сайт/, async () => {
 });
 
 Given(/я нахожусь на "([^"]*)"/, async (pageName) => {
-  pageobjects.openPageByName(pageName);
+  await pageobjects.openPageByName(pageName);
 });
 
 Given(/устанавливаю cookie региона доставки "([^"]*)"/, async (regionName) => {

@@ -40,7 +40,6 @@ if (HEADLESS) {
   chromeArgs.push('--headless=new');
 }
 
-// Видео требует devtools
 const services = [];
 
 if (RECORD_VIDEO) {
@@ -84,12 +83,12 @@ export const config = {
     },
   ],
 
-  restartBrowserForEachTest: false, // Изменено на false, чтобы избежать проблем с сессией
+  restartBrowserForEachTest: false,
 
   logLevel: 'error',
   bail: 0,
-  waitforTimeout: 30000, // Увеличен таймаут
-  connectionRetryTimeout: 180000, // Увеличен таймаут для подключения
+  waitforTimeout: 30000,
+  connectionRetryTimeout: 180000,
   connectionRetryCount: 3,
   services: ['visual'],
   framework: 'cucumber',
@@ -114,7 +113,7 @@ export const config = {
   ],
 
   cucumberOpts: {
-    require: ['./src/step-definitions/*.js', './src/step-definitions/hooks.js'],
+    require: ['./src/step-definitions/**/*.js', './src/step-definitions/hooks.js'],
     format: ['json:./reports/cucumber-report.json'],
     formatOptions: {
       console: {
@@ -132,7 +131,7 @@ export const config = {
     source: true,
     strict: false,
     tagExpression: '',
-    timeout: 90000, // Увеличен таймаут для сценариев
+    timeout: 90000,
     ignoreUndefinedDefinitions: false,
   },
 
@@ -146,9 +145,7 @@ export const config = {
   },
 
   // eslint-disable-next-line no-unused-vars
-  afterTest: function (test, context, {error, result, duration, passed, retries}) {
-    // Не закрываем браузер принудительно после каждого теста
-  },
+  afterTest: function (test, context, {error, result, duration, passed, retries}) {},
 
   // eslint-disable-next-line no-unused-vars
   onComplete: async function (exitCode, config, capabilities) {
@@ -160,7 +157,6 @@ export const config = {
     } catch (error) {
       console.error('Allure report generation failed:', error);
 
-      // Fallback to allure-commandline
       try {
         const allure = (await import('allure-commandline')).default;
         const reportGenerator = allure(['generate', 'allure-results', '--clean', '-o', 'allure-report']);

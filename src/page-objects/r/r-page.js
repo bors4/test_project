@@ -1,8 +1,6 @@
-import * as SiteUrls from '../../config/site-urls.js';
+import siteUrls from '../../config/site-urls.js';
 
 class RPage {
-  static SiteUrls = SiteUrls;
-
   constructor() {
     this.elements = {
       'Блок Карта недвижимости': this.blockRealtyMap,
@@ -19,7 +17,7 @@ class RPage {
   }
 
   getURL() {
-    return SiteUrls.R_URL;
+    return siteUrls.R_URL;
   }
 }
 

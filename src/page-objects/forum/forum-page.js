@@ -1,8 +1,6 @@
-import * as SiteUrls from '../../config/site-urls.js';
+import siteUrls from '../../config/site-urls.js';
 
 class ForumPage {
-  static SiteUrls = SiteUrls;
-
   constructor() {
     this.elements = {
       'Заголовок раздела Форум': this.headerForumSection,
@@ -14,7 +12,7 @@ class ForumPage {
   }
 
   getURL() {
-    return SiteUrls.FORUM_URL;
+    return siteUrls.FORUM_URL;
   }
 }
 

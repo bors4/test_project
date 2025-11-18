@@ -1,8 +1,6 @@
-import * as SiteUrls from '../../../../config/site-urls.js';
+import siteUrls from '../../../../config/site-urls.js';
 
 class CatalogMobileCat {
-  static SiteUrls = SiteUrls;
-
   constructor() {
     this.elements = {
       'Заголовок раздела Мобильные телефоны': this.headerMobilePhonesSection,
@@ -24,7 +22,7 @@ class CatalogMobileCat {
   }
 
   getURL() {
-    return SiteUrls.CATALOG_MOBILE_URL;
+    return siteUrls.CATALOG_MOBILE_URL;
   }
 }
 

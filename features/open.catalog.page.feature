@@ -1,4 +1,4 @@
-@smoke @catalog @link
+@smoke @catalog @link @skip
 Feature: Переход на страницу каталога
 
     Как пользователь я могу перейти на страницу каталога

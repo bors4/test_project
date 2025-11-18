@@ -13,7 +13,7 @@ When(/я принимаю cookie/, async () => {
   await pageobjects.cookieAccept();
 });
 
-When(/я ожидаю \[(\d+)\] секунд/, async (timeToWait) => {
+When(/я ожидаю \[(\d+)] секунд/, async (timeToWait) => {
   await browser.pause(timeToWait * 1000);
 });
 
@@ -21,7 +21,7 @@ When(/я нажимаю на "([^"]*)" на "([^"]*)"/, async (elementName, page
   await pageobjects.clickOnElement(elementName, pageName);
 });
 
-When(/я нажимаю на "([^"]*)"\[(\d+)\] на "([^"]*)"/, async (elementName, index, pageName) => {
+When(/я нажимаю на "([^"]*)"\[(\d+)] на "([^"]*)"/, async (elementName, index, pageName) => {
   await pageobjects.clickOnElementByIndex(elementName, index, pageName);
 });
 
@@ -59,7 +59,7 @@ When(/я обновляю страницу/, async () => {
 });
 
 When(/я нажимаю на кнопку "([^"]*)" браузера/, async (actionName) => {
-  BrowserUtils.browserAction(actionName);
+  await BrowserUtils.browserAction(actionName);
 });
 
 When(/я с помощью API НБ РБ получаю курс "([^"]*)" на "([^"]*)"/, async function (currencyName, onDate) {
@@ -70,7 +70,7 @@ When(/я сохраняю текст элемента "([^"]*)" на "([^"]*)"/,
   this.elementText = await pageobjects.getElementText(elementName, pageName);
 });
 
-When(/я сохраняю текст элемента "([^"]*)"\[(\d+)\] на "([^"]*)"/, async function (elementName, index, pageName) {
+When(/я сохраняю текст элемента "([^"]*)"\[(\d+)] на "([^"]*)"/, async function (elementName, index, pageName) {
   this.elementText = await pageobjects.getElementTextByIndex(elementName, index, pageName);
 });
 

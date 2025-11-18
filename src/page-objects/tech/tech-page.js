@@ -1,8 +1,6 @@
-import * as SiteUrls from '../../config/site-urls.js';
+import siteUrls from '../../config/site-urls.js';
 
 class TechPage {
-  static SiteUrls = SiteUrls;
-
   constructor() {
     this.elements = {
       'Таб навигации Технологии': this.tabTechNavigation,
@@ -14,7 +12,7 @@ class TechPage {
   }
 
   getURL() {
-    return SiteUrls.TECH_URL;
+    return siteUrls.TECH_URL;
   }
 }
 

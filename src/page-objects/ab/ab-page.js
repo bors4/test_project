@@ -1,4 +1,4 @@
-import * as SiteUrls from '../../config/site-urls.js';
+import siteUrls from '../../config/site-urls.js';
 
 /**
  * Класс для использования на странице "Автобарахолка".
@@ -6,8 +6,6 @@ import * as SiteUrls from '../../config/site-urls.js';
  */
 
 class AbPage {
-  static SiteUrls = SiteUrls;
-
   constructor() {
     this.elements = {
       'Заголовок раздела Автобарахолка': this.headerAbSection,
@@ -104,7 +102,7 @@ class AbPage {
   }
 
   getURL() {
-    return SiteUrls.AB_URL;
+    return siteUrls.AB_URL;
   }
 }
 

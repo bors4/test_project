@@ -17,7 +17,7 @@ Then(/я вижу текст "([^"]*)" в "([^"]*)" для "([^"]*)"/, async (te
   const searchInput = await pageobjects.getElementByName(elementName, pageName);
 
   if (text.includes('Например')) {
-    const placeholder = await searchInput.getAttribute('placeholder');
+    const placeholder = searchInput.getAttribute('placeholder');
     expect(placeholder).to.include('Например');
   } else {
     const elements = await pageobjects.getElementsByName('Текст Ничего не найдено', pageName);
@@ -65,11 +65,13 @@ Then(
  * @todo переписать с использованием parseFloat()
  */
 Then(/я вижу что курсы валют равны/, function () {
+  // noinspection JSUnresolvedVariable
   expectChai(this.elementText).to.equal(`$ ${this.apiExchangeRate.replace('.', ',')}`);
 });
 
-Then(/я вижу что "([^"]*)"\[(\d+)\] на "([^"]*)" равен сохранённому/, async function (elementName, index, pageName) {
+Then(/я вижу что "([^"]*)"\[(\d+)] на "([^"]*)" равен сохранённому/, async function (elementName, index, pageName) {
   const elementText = await pageobjects.getElementTextByIndex(elementName, index, pageName);
+  // noinspection JSUnresolvedVariable
   expectChai(elementText).to.equal(this.elementText);
 });
 

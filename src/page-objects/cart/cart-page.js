@@ -1,8 +1,6 @@
-import * as SiteUrls from '../../config/site-urls.js';
+import siteUrls from '../../config/site-urls.js';
 
 class CartPage {
-  static SiteUrls = SiteUrls;
-
   constructor() {
     this.elements = {
       'Заголовок раздела Корзина': this.headerCartSection,
@@ -19,7 +17,7 @@ class CartPage {
   }
 
   getURL() {
-    return SiteUrls.CART_URL;
+    return siteUrls.CART_URL;
   }
 }
 
