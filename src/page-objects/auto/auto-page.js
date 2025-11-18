@@ -1,8 +1,6 @@
-import * as SiteUrls from '../../config/site-urls.js';
+import siteUrls from '../../config/site-urls.js';
 
 class AutoPage {
-  static SiteUrls = SiteUrls;
-
   constructor() {
     this.elements = {
       'Таб навигации Авто': this.tabAutoNavigation,
@@ -14,7 +12,7 @@ class AutoPage {
   }
 
   getURL() {
-    return SiteUrls.AUTO_URL;
+    return siteUrls.AUTO_URL;
   }
 }
 

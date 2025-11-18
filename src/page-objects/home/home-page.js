@@ -1,4 +1,4 @@
-import * as SiteUrls from '../../config/site-urls.js';
+import siteUrls from '../../config/site-urls.js';
 
 class HomePage {
   constructor() {
@@ -17,7 +17,7 @@ class HomePage {
   }
 
   get siteLogo() {
-    return `//div//a[@href="${SiteUrls.HOME_URL}"]/img`;
+    return `//div//a[@href="${siteUrls.HOME_URL}"]/img`;
   }
 
   get sectionCatalog() {
@@ -49,7 +49,7 @@ class HomePage {
   }
 
   get linkMobilePhones() {
-    return `//a[@href="${SiteUrls.CATALOG_MOBILE_URL}"]`;
+    return `//a[@href="${siteUrls.CATALOG_MOBILE_URL}"]`;
   }
 
   //a[@href="https://catalog.onliner.by/mobile"]
@@ -59,7 +59,7 @@ class HomePage {
   }
 
   getURL() {
-    return SiteUrls.HOME_URL;
+    return siteUrls.HOME_URL;
   }
 }
 

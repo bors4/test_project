@@ -1,8 +1,6 @@
-import * as SiteUrls from '../../config/site-urls.js';
+import siteUrls from '../../config/site-urls.js';
 
 class RealtPage {
-  static SiteUrls = SiteUrls;
-
   constructor() {
     this.elements = {
       'Таб навигации Недвижимость': this.tabRealtyNavigation,
@@ -14,7 +12,7 @@ class RealtPage {
   }
 
   getURL() {
-    return SiteUrls.REALT_URL;
+    return siteUrls.REALT_URL;
   }
 }
 

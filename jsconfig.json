@@ -15,11 +15,10 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
+      "@utils/*": ["src/utils/*"],
       "@pages/*": ["src/pageobjects/*"],
       "@helpers/*": ["src/helpers/*"],
-      "@steps/*": ["src/steps/*"],
-      "@support/*": ["src/support/*"],
-      "@tests/*": ["tests/*"]
+      "@steps/*": ["src/step-definition/*"]
     },
     "typeRoots": ["./node_modules/@types", "./types"],
     "types": ["node"],

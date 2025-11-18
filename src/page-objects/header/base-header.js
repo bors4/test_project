@@ -1,8 +1,6 @@
-import * as SiteUrls from '../../config/site-urls.js';
+import siteUrls from '../../config/site-urls.js';
 
 class BaseHeader {
-  static SiteUrls = SiteUrls;
-
   constructor() {
     this.elements = {
       'Лого сайта': this.siteLogo,
@@ -34,35 +32,35 @@ class BaseHeader {
   }
 
   get siteLogo() {
-    return `//div//a[@href="${SiteUrls.HOME_URL}"]/img`;
+    return `//div//a[@href="${siteUrls.HOME_URL}"]/img`;
   }
 
   get linkCatalog() {
-    return `//nav//a[@href="${SiteUrls.CATALOG_URL}"]`;
+    return `//nav//a[@href="${siteUrls.CATALOG_URL}"]`;
   }
 
   get linkNews() {
-    return `//div//a[@href="${SiteUrls.HOME_URL}"]//span[.="Новости"]`;
+    return `//div//a[@href="${siteUrls.HOME_URL}"]//span[.="Новости"]`;
   }
 
   get linkAb() {
-    return `//nav//a[@href="${SiteUrls.AB_URL}"]//span[.="Автобарахолка"]`;
+    return `//nav//a[@href="${siteUrls.AB_URL}"]//span[.="Автобарахолка"]`;
   }
 
   get linkRealty() {
-    return `//nav//li/a[@href="${SiteUrls.R_URL}/pk"]`;
+    return `//nav//li/a[@href="${siteUrls.R_URL}/pk"]`;
   }
 
   get linkTasks() {
-    return `//nav//a[@href="${SiteUrls.TASKS_URL}"]/span[.="Услуги"]`;
+    return `//nav//a[@href="${siteUrls.TASKS_URL}"]/span[.="Услуги"]`;
   }
 
   get linkBaraholka() {
-    return `//nav//a[@href="${SiteUrls.BARAHOLKA_URL}"]//span[.="Барахолка"]`;
+    return `//nav//a[@href="${siteUrls.BARAHOLKA_URL}"]//span[.="Барахолка"]`;
   }
 
   get linkForum() {
-    return `//nav//a[@href="${SiteUrls.FORUM_URL}/"]`;
+    return `//nav//a[@href="${siteUrls.FORUM_URL}/"]`;
   }
 
   get linkClever() {
@@ -70,11 +68,11 @@ class BaseHeader {
   }
 
   get linkCurrency() {
-    return `//nav//a[@href="${SiteUrls.KURS_URL}/"]`;
+    return `//nav//a[@href="${siteUrls.KURS_URL}/"]`;
   }
 
   get linkWeather() {
-    return `//nav//a[@href="${SiteUrls.POGODA_URL}/"]`;
+    return `//nav//a[@href="${siteUrls.POGODA_URL}/"]`;
   }
 
   get textCurrencyRate() {

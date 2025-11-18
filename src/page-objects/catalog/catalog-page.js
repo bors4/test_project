@@ -1,9 +1,7 @@
-import * as SiteUrls from '../../config/site-urls.js';
+import siteUrls from '../../config/site-urls.js';
 import BasePage from '../header/base-header.js';
 
 class CatalogPage extends BasePage {
-  static SiteUrls = SiteUrls;
-
   constructor() {
     super();
 
@@ -22,7 +20,7 @@ class CatalogPage extends BasePage {
   }
 
   getURL() {
-    return SiteUrls.CATALOG_URL;
+    return siteUrls.CATALOG_URL;
   }
 }
 

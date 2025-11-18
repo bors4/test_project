@@ -1,16 +1,18 @@
-export const HOME_URL = 'https://www.onliner.by';
-export const CATALOG_URL = 'https://catalog.onliner.by';
-export const PEOPLE_URL = 'https://people.onliner.by';
-export const MONEY_URL = 'https://money.onliner.by';
-export const AUTO_URL = 'https://auto.onliner.by';
-export const TECH_URL = 'https://tech.onliner.by';
-export const R_URL = 'https://r.onliner.by';
-export const AB_URL = 'https://ab.onliner.by';
-export const CART_URL = 'https://cart.onliner.by';
-export const POGODA_URL = 'https://pogoda.onliner.by';
-export const REALT_URL = 'https://realt.onliner.by';
-export const TASKS_URL = 'https://s.onliner.by/tasks';
-export const BARAHOLKA_URL = 'https://baraholka.onliner.by';
-export const FORUM_URL = 'https://forum.onliner.by';
-export const KURS_URL = 'https://kurs.onliner.by';
-export const CATALOG_MOBILE_URL = 'https://catalog.onliner.by/mobile';
+export default {
+  HOME_URL: 'https://www.onliner.by',
+  CATALOG_URL: 'https://catalog.onliner.by',
+  PEOPLE_URL: 'https://people.onliner.by',
+  MONEY_URL: 'https://money.onliner.by',
+  AUTO_URL: 'https://auto.onliner.by',
+  TECH_URL: 'https://tech.onliner.by',
+  R_URL: 'https://r.onliner.by',
+  AB_URL: 'https://ab.onliner.by',
+  CART_URL: 'https://cart.onliner.by',
+  POGODA_URL: 'https://pogoda.onliner.by',
+  REALT_URL: 'https://realt.onliner.by',
+  TASKS_URL: 'https://s.onliner.by/tasks',
+  BARAHOLKA_URL: 'https://baraholka.onliner.by',
+  FORUM_URL: 'https://forum.onliner.by',
+  KURS_URL: 'https://kurs.onliner.by',
+  CATALOG_MOBILE_URL: 'https://catalog.onliner.by/mobile',
+};

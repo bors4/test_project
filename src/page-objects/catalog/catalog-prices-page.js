@@ -1,8 +1,4 @@
-import * as SiteUrls from '../../config/site-urls.js';
-
 class CatalogPricesPage {
-  static SiteUrls = SiteUrls;
-
   constructor() {
     this.elements = {
       'Кнопка Купить': this.buttonOffer,

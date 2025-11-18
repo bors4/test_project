@@ -1,8 +1,6 @@
-import * as SiteUrls from '../../config/site-urls.js';
+import siteUrls from '../../config/site-urls.js';
 
 class PogodaPage {
-  static SiteUrls = SiteUrls;
-
   constructor() {
     this.elements = {
       'Заголовок раздела Сейчас в': this.headerCurrentWeatherSection,
@@ -29,7 +27,7 @@ class PogodaPage {
   }
 
   getURL() {
-    return SiteUrls.POGODA_URL;
+    return siteUrls.POGODA_URL;
   }
 }
 

@@ -30,24 +30,24 @@ class PageObjects {
     this.pages = {
       'Главная страница': new HomePage(),
       'Заголовок страницы': new BaseHeader(),
+      'Модальное окно авторизации': new AuthorizationModal(),
+      'Модальное окно поиска': new SearchModal(),
+      'Страница Авто': new AutoPage(),
       'Страница Автобарахолка': new AbPage(),
-      'Страница Каталог': new CatalogPage(),
       'Страница Дома и квартиры': new RPage(),
+      'Страница Каталог': new CatalogPage(),
+      'Страница Клевер Onliner': new CleverPage(),
+      'Страница Корзина': new CartPage(),
+      'Страница Кошелек': new MoneyPage(),
+      'Страница Курсы валют': new KursPage(),
+      'Страница Люди': new PeoplePage(),
+      'Страница Недвижимость': new RealtPage(),
+      'Страница Погода': new PogodaPage(),
+      'Страница Предложения продавцов': new CatalogPricesPage(),
+      'Страница Технологии': new TechPage(),
       'Страница Услуги': new TasksPage(),
       'Страница Форум': new ForumPage(),
-      'Модальное окно поиска': new SearchModal(),
-      'Страница Клевер Onliner': new CleverPage(),
-      'Страница Курсы валют': new KursPage(),
-      'Страница Погода': new PogodaPage(),
-      'Страница Корзина': new CartPage(),
-      'Страница Люди': new PeoplePage(),
-      'Страница Авто': new AutoPage(),
-      'Страница Кошелек': new MoneyPage(),
-      'Страница Технологии': new TechPage(),
-      'Страница Недвижимость': new RealtPage(),
       'Страница каталог Мобильные телефоны': new CatalogMobileCat(),
-      'Страница Предложения продавцов': new CatalogPricesPage(),
-      'Модальное окно авторизации': new AuthorizationModal(),
     };
   }
 
@@ -101,7 +101,7 @@ class PageObjects {
       }
     );
 
-    return await $$(selector);
+    return $$(selector);
   }
 
   /**

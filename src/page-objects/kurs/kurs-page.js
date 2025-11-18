@@ -1,8 +1,6 @@
-import * as SiteUrls from '../../config/site-urls.js';
+import siteUrls from '../../config/site-urls.js';
 
 class KursPage {
-  static SiteUrls = SiteUrls;
-
   constructor() {
     this.elements = {
       'Заголовок раздела Лучшие курсы валют': this.headerBestRates,
@@ -14,7 +12,7 @@ class KursPage {
   }
 
   getURL() {
-    return SiteUrls.KURS_URL;
+    return siteUrls.KURS_URL;
   }
 }
 
