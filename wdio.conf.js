@@ -144,11 +144,7 @@ export const config = {
     });
   },
 
-  // eslint-disable-next-line no-unused-vars
-  afterTest: function (test, context, {error, result, duration, passed, retries}) {},
-
-  // eslint-disable-next-line no-unused-vars
-  onComplete: async function (exitCode, config, capabilities) {
+  onComplete: async function () {
     console.log('Generating Allure report...');
 
     try {

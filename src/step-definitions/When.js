@@ -62,8 +62,8 @@ When(/я нажимаю на кнопку "([^"]*)" браузера/, async (ac
   await BrowserUtils.browserAction(actionName);
 });
 
-When(/я с помощью API НБ РБ получаю курс "([^"]*)" на "([^"]*)"/, async function (currencyName, onDate) {
-  this.apiExchangeRate = await getExchangeRate(currencyName, onDate);
+When(/я с помощью API НБ РБ получаю курс "([^"]*)" на "([^"]*)"/, async function (currencyName) {
+  this.apiExchangeRate = await getExchangeRate(currencyName);
 });
 
 When(/я сохраняю текст элемента "([^"]*)" на "([^"]*)"/, async function (elementName, pageName) {

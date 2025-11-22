@@ -1,6 +1,7 @@
 import {expect, expect as expectChai} from 'chai';
 import {Then} from '@wdio/cucumber-framework';
 import PageObjects from '../page-objects/page-objects.js';
+import {COMPARATORS} from '../config/operators.js';
 
 const pageobjects = new PageObjects();
 
@@ -61,9 +62,6 @@ Then(
   }
 );
 
-/***
- * @todo переписать с использованием parseFloat()
- */
 Then(/я вижу что курсы валют равны/, function () {
   // noinspection JSUnresolvedVariable
   expectChai(this.elementText).to.equal(`$ ${this.apiExchangeRate.replace('.', ',')}`);
@@ -76,14 +74,20 @@ Then(/я вижу что "([^"]*)"\[(\d+)] на "([^"]*)" равен сохра�
 });
 
 /**
- * @todo доработать шаг: добавить обработку операторов сравнения
+ * Сравнивает фактическое и ожидаемое количество элементов
+ * @param {('больше'|'меньше'|'равно'|'не меньше'|'не больше')} operator - Оператор сравнения
+ * @param {number} itemCount - Ожидаемое количество
+ * @example Then я вижу что кол-во "Карточка продаваемого авто" на "Страница Автобарахолка" "меньше" "50"
  */
+
 Then(
   /я вижу что кол-во "([^"]*)" на "([^"]*)" "([^"]*)" "(\d+)"/,
   async function (elementName, pageName, operator, itemCount) {
     const elements = await pageobjects.getElementsByName(elementName, pageName);
-    expectChai(elements.length, `Условие не удовлетворяет ${elements.length} меньше ${itemCount}`).to.be.lessThan(
-      itemCount
-    );
+    const op = COMPARATORS[operator];
+    if (!op) throw `Неизвестный оператор ${operator}. Допустимые: ${Object.keys(op).join(', ')}`;
+    const comparsionResult = op.fn(elements.length, itemCount);
+    console.log(`Кол-во элементов на странице ${elements.length} ${operator} ${itemCount}`);
+    expectChai(comparsionResult, `Условие не удовлетворяет: ${elements.length} < ${itemCount}`).to.be.true;
   }
 );
