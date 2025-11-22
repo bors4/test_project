@@ -6,8 +6,8 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": false,
-    "strictFunctionTypes": false,
-    "checkJs": false,
+    "strictFunctionTypes": true,
+    "checkJs": true,
     "noEmit": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
@@ -18,10 +18,8 @@
       "@utils/*": ["src/utils/*"],
       "@pages/*": ["src/pageobjects/*"],
       "@helpers/*": ["src/helpers/*"],
-      "@steps/*": ["src/step-definition/*"]
+      "@steps/*": ["src/step-definitions/*"]
     },
-    "typeRoots": ["./node_modules/@types", "./types"],
-    "types": ["node"],
     "noImplicitAny": false,
     "noImplicitThis": false,
     "strictNullChecks": false,

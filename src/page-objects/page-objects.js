@@ -172,7 +172,8 @@ class PageObjects {
 
     const currentUrl = await browser.getUrl();
     assert(
-      currentUrl.includes(page.getURL(), `Для ${pageName} ожидался URL: ${page.getURL()}, но получен: ${currentUrl}`)
+      currentUrl.includes(page.getURL()),
+      `Для ${pageName} ожидался URL: ${page.getURL()}, но получен: ${currentUrl}`
     );
 
     try {
@@ -199,7 +200,7 @@ class PageObjects {
    */
   async clickOnElement(elementName, pageName) {
     try {
-      const element = await this.getElementByName(elementName, pageName);
+      const element = /** @type {WebdriverIO.Element} */ await this.getElementByName(elementName, pageName);
       await element.waitForClickable({timeout: 3000});
       await element.click();
     } catch (error) {
@@ -260,7 +261,7 @@ class PageObjects {
   }
 
   async cookieAccept() {
-    const cookieButton = await $(this.buttonAcceptAllCookies);
+    const cookieButton = /** @type {WebdriverIO.Element} */ await $(this.buttonAcceptAllCookies);
     await cookieButton.waitForClickable({timeout: 10000});
     await cookieButton.click();
     await cookieButton.waitForDisplayed({reverse: true, timeout: 10000});
