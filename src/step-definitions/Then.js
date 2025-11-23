@@ -1,4 +1,4 @@
-import {expect, expect as expectChai} from 'chai';
+import {expect as expectChai} from 'chai';
 import {Then} from '@wdio/cucumber-framework';
 import PageObjects from '../page-objects/page-objects.js';
 import {COMPARATORS} from '../config/operators.js';
@@ -86,8 +86,8 @@ Then(
     const elements = await pageobjects.getElementsByName(elementName, pageName);
     const op = COMPARATORS[operator];
     if (!op) throw `Неизвестный оператор ${operator}. Допустимые: ${Object.keys(op).join(', ')}`;
-    const comparsionResult = op.fn(elements.length, itemCount);
+    const comparsionResult = op.fn(elements.length, +itemCount);
     console.log(`Кол-во элементов на странице ${elements.length} ${operator} ${itemCount}`);
-    expectChai(comparsionResult, `Условие не удовлетворяет: ${elements.length} < ${itemCount}`).to.be.true;
+    expectChai(comparsionResult, `Условие не удовлетворяет: ${elements.length} ${op.lable} ${itemCount}`).to.be.true;
   }
 );

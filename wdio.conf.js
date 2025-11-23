@@ -21,6 +21,7 @@ const chromeArgs = [
   '--disable-backgrounding-occluded-windows',
   '--disable-renderer-backgrounding',
   '--no-sandbox',
+  '--disable-dev-shm-usage',
   '--no-first-run',
   '--no-default-browser-check',
   '--disable-translate',
