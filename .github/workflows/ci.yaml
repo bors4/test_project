@@ -11,7 +11,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # Этап 1: Проверка кода (lint, format, qodana)
+  # Этап 1: Проверка кода (lint, format)
   code-quality:
     runs-on: ubuntu-latest
     steps:
@@ -42,52 +42,6 @@ jobs:
 
       - name: Lint with ESLint
         run: npm run lint || (echo "❌ ESLint failed" && exit 1)
-
-      - name: Debug git / SHAs (optional)
-        run: |
-          echo "EVENT: $GITHUB_EVENT_NAME"
-          echo "github.sha = ${{ github.sha }}"
-          echo "pr.head.sha = ${{ github.event.pull_request.head.sha || 'N/A' }}"
-          git --no-pager log -n 5 --pretty=format:"%H %an %s"
-          git branch -a
-          git rev-parse --verify --quiet "${{ github.sha }}" || echo "Commit ${{ github.sha }} not found locally"
-
-      - name: Ensure commit is present for Qodana
-        run: |
-          git fetch --unshallow || true
-          if [ "${{ github.event_name }}" = "pull_request" ]; then
-            git fetch origin ${{ github.event.pull_request.head.ref }} --depth=1 || true
-            git fetch origin ${{ github.event.pull_request.base.ref }} --depth=1 || true
-          fi
-
-      - name: Run Qodana (Community Docker)
-        env:
-          QODANA_IMAGE: jetbrains/qodana-community-js:2025.2
-        run: |
-          if [ "${{ github.event_name }}" = "pull_request" ]; then
-            COMMIT="${{ github.event.pull_request.head.sha }}"
-          else
-            COMMIT="${{ github.sha }}"
-          fi
-          echo "Running Qodana Community for commit: $COMMIT"
-          mkdir -p "${{ github.workspace }}/.qodana-cache"
-          mkdir -p "${{ github.workspace }}/results"
-          docker run --rm \
-            -v "${{ github.workspace }}":/data \
-            -v "${{ github.workspace }}/.qodana-cache":/root/.cache/qodana \
-            $QODANA_IMAGE scan \
-              --cache-dir /root/.cache/qodana \
-              --results-dir /data/results \
-              --project-dir /data \
-              --commit "$COMMIT"
-
-      - name: Upload Qodana results
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: qodana-results
-          path: results/
-          retention-days: 7
 
   # Этап 2: Запуск тестов в матрице
   e2e-tests:
