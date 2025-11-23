@@ -14,3 +14,5 @@ qwen.md
 _results_
 INSTRUCTION.md
 .idea/
+/.env.keys
+/qodana.yaml
