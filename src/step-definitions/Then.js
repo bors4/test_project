@@ -22,9 +22,9 @@ Then(/я вижу текст "([^"]*)" в "([^"]*)" для "([^"]*)"/, async (te
     expect(placeholder).to.include('Например');
   } else {
     const elements = await pageobjects.getElementsByName('Текст Ничего не найдено', pageName);
-    expect(elements[0]).to.exist;
+    expectChai(elements[0]).to.exist;
     const elementText = await elements[0].getText();
-    expect(elementText).to.equal('Ничего не найдено');
+    expectChai(elementText).to.equal('Ничего не найдено');
   }
 });
 
