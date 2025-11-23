@@ -41,10 +41,8 @@ jobs:
       - name: Lint with ESLint
         run: npm run lint || (echo "❌ ESLint failed" && exit 1)
 
-      - name: Run Qodana analysis
-        uses: JetBrains/qodana-action@v2025.2
-        with:
-          linter: jetbrains/qodana-js:2025.2
+      - name: Run Qodana
+        run: qodana scan --cache-dir ./cache --results-dir ./results
           # Отчёт будет в artifacts/qodana
 
   # Этап 2: Запуск тестов в матрице
