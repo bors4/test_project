@@ -22,23 +22,3 @@ jobs:
         run: npm run test
         env:
           DOTENVX_LOG: off
-
-      - name: Upload videos (on failure)
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: test-videos
-          path: videos/
-
-      - name: Generate and upload Allure report
-        if: always()
-        run: |
-          npx allure generate allure-results -o allure-report --clean
-        continue-on-error: true
-
-      - name: Upload report
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: allure-report
-          path: allure-report/
