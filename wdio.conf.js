@@ -86,7 +86,7 @@ export const config = {
 
   restartBrowserForEachTest: false,
 
-  logLevel: 'warn',
+  logLevel: 'error',
   bail: 0,
   waitforTimeout: 30000,
   connectionRetryTimeout: 180000,
