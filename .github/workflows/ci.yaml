@@ -2,6 +2,9 @@ name: Run Tests
 
 on: [push, pull_request]
 
+env:
+  DOTENV_PRIVATE_KEY: ${{ secrets.DOTENV_PRIVATE_KEY }}
+
 jobs:
   test:
     runs-on: ubuntu-latest
