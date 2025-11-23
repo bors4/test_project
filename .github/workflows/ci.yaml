@@ -15,8 +15,11 @@ jobs:
   code-quality:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout code (full fetch)
         uses: actions/checkout@v4
+        with:
+          # Важно: полный fetch, чтобы Qodana и git команды могли найти нужные SHA/merge-refs
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -41,9 +44,39 @@ jobs:
       - name: Lint with ESLint
         run: npm run lint || (echo "❌ ESLint failed" && exit 1)
 
+      # Опциональный отладочный шаг, полезно при диагностике проблем с SHA
+      - name: Debug git / SHAs (optional)
+        run: |
+          echo "GITHUB_EVENT_NAME = $GITHUB_EVENT_NAME"
+          echo "github.sha = ${{ github.sha }}"
+          echo "pr.head.sha = ${{ github.event.pull_request.head.sha || 'N/A' }}"
+          git --no-pager log -n 3 --pretty=format:"%H %an %s"
+          git branch -a
+          git rev-parse --verify --quiet "${{ github.sha }}" || echo "Commit ${{ github.sha }} not found locally"
+
+      # Убедимся, что локальный клон содержит нужный коммит (если он был shallow)
+      - name: Ensure commit is present for Qodana
+        run: |
+          # Попытка unshallow - безопасно, если не shallow
+          git fetch --unshallow || true
+          # Если это PR, можно подгрузить head/base явным fetch'ем (защитный шаг)
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            git fetch origin ${{ github.event.pull_request.head.ref }} --depth=1 || true
+            git fetch origin ${{ github.event.pull_request.base.ref }} --depth=1 || true
+          fi
+
       - name: Run Qodana
-        run: qodana scan --cache-dir ./cache --results-dir ./results --commit "${{ github.sha }}"
-          # Отчёт будет в artifacts/qodana
+        run: |
+          # Выбираем корректный SHA: для PR — head SHA, иначе — github.sha
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            COMMIT="${{ github.event.pull_request.head.sha }}"
+          else
+            COMMIT="${{ github.sha }}"
+          fi
+          echo "Running qodana scan for commit: $COMMIT"
+          qodana scan --cache-dir ./cache --results-dir ./results --commit "$COMMIT"
+        # При желании убрать скрипт выше и использовать просто qodana без --commit,
+        # но тогда Qodana может попытаться вычислять merge-base и снова наткнуться на отсутствие рефа.
 
   # Этап 2: Запуск тестов в матрице
   e2e-tests:
@@ -55,13 +88,14 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
         browser: [chrome, firefox]
         include:
-          # Дополнительно: мобильная эмуляция (только в Chrome на Linux)
           - os: ubuntu-latest
             browser: chrome-mobile
 
     steps:
-      - name: Checkout code
+      - name: Checkout code (full fetch)
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
