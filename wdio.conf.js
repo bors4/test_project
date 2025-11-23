@@ -86,11 +86,12 @@ export const config = {
 
   restartBrowserForEachTest: false,
 
-  logLevel: 'error',
+  logLevel: 'warn',
   bail: 0,
   waitforTimeout: 30000,
   connectionRetryTimeout: 180000,
   connectionRetryCount: 3,
+  specFileRetries: 1,
   services: ['visual'],
   framework: 'cucumber',
 

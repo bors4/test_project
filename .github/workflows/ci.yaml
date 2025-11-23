@@ -1,11 +1,65 @@
-name: Run Tests
+name: CI Pipeline
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  test:
+  # Этап 1: Проверка кода (lint, format, qodana)
+  code-quality:
     runs-on: ubuntu-latest
-    environment: onliner-autotests
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check formatting with Prettier
+        run: npm run format || (echo "❌ Prettier failed" && exit 1)
+
+      - name: Lint with ESLint
+        run: npm run lint || (echo "❌ ESLint failed" && exit 1)
+
+      - name: Run Qodana analysis
+        uses: JetBrains/qodana-action@v2025.2
+        with:
+          linter: jetbrains/qodana-js:2025.2
+          # Отчёт будет в artifacts/qodana
+
+  # Этап 2: Запуск тестов в матрице
+  e2e-tests:
+    needs: code-quality
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        browser: [chrome, firefox]
+        include:
+          # Дополнительно: мобильная эмуляция (только в Chrome на Linux)
+          - os: ubuntu-latest
+            browser: chrome-mobile
 
     steps:
       - name: Checkout code
@@ -15,12 +69,75 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: npm
+
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
       - name: Install dependencies
         run: npm ci
 
+      - name: Set up Chrome (for Linux/macOS/Windows)
+        if: matrix.browser == 'chrome' || matrix.browser == 'chrome-mobile'
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: stable
+
+      - name: Set up Firefox
+        if: matrix.browser == 'firefox'
+        uses: browser-actions/setup-firefox@v1
+        with:
+          firefox-version: stable
+
       - name: Run tests
-        run: npm run test
+        run: |
+          if [ "${{ matrix.browser }}" = "chrome-mobile" ]; then
+            npm run test:mobile
+          else
+            npm run test:browser -- --browser=${{ matrix.browser }}
+          fi
         env:
           DOTENV_PRIVATE_KEY: ${{ secrets.DOTENV_PRIVATE_KEY }}
           DOTENVX_LOG: off
+          BROWSER: ${{ matrix.browser }}
+
+      - name: Generate Allure report
+        if: always()
+        run: npx allure generate allure-results -o allure-report --clean
+
+      - name: Upload videos (on failure)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: videos-${{ matrix.os }}-${{ matrix.browser }}
+          path: videos/
+          retention-days: 7
+
+      - name: Upload Allure report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report-${{ matrix.os }}-${{ matrix.browser }}
+          path: allure-report/
+          retention-days: 7
+
+  # Этап 3: Уведомление в Telegram (только если есть падения)
+  notify-telegram:
+    needs: e2e-tests
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Telegram notification
+        run: |
+          curl -s -X POST https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage \
+            -d chat_id=${{ secrets.TELEGRAM_CHAT_ID }} \
+            -d text="🚨 CI упал в репозитории ${{ github.repository }}
+            Ветка: ${{ github.ref_name }}
+            Коммит: ${{ github.event.head_commit.message }}
+            Автор: ${{ github.event.head_commit.author.name }}
+            Ссылка: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
