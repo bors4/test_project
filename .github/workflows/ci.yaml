@@ -42,7 +42,7 @@ jobs:
         run: npm run lint || (echo "❌ ESLint failed" && exit 1)
 
       - name: Run Qodana
-        run: qodana scan --cache-dir ./cache --results-dir ./results
+        run: qodana scan --cache-dir ./cache --results-dir ./results --commit "${{ github.sha }}"
           # Отчёт будет в artifacts/qodana
 
   # Этап 2: Запуск тестов в матрице
