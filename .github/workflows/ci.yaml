@@ -18,7 +18,6 @@ jobs:
       - name: Checkout code (full fetch)
         uses: actions/checkout@v4
         with:
-          # Важно: полный fetch, чтобы Qodana и git команды могли найти нужные SHA/merge-refs
           fetch-depth: 0
 
       - name: Setup Node.js
@@ -44,7 +43,6 @@ jobs:
       - name: Lint with ESLint
         run: npm run lint || (echo "❌ ESLint failed" && exit 1)
 
-      # Отладочный шаг — покажем какие SHA доступны локально
       - name: Debug git / SHAs (optional)
         run: |
           echo "EVENT: $GITHUB_EVENT_NAME"
@@ -54,31 +52,26 @@ jobs:
           git branch -a
           git rev-parse --verify --quiet "${{ github.sha }}" || echo "Commit ${{ github.sha }} not found locally"
 
-      # Гарантируем, что локальный клон содержит нужный коммит (на случай shallow/fork)
       - name: Ensure commit is present for Qodana
         run: |
           git fetch --unshallow || true
           if [ "${{ github.event_name }}" = "pull_request" ]; then
-            # Подтянем head и base рефы PR, если нужно
             git fetch origin ${{ github.event.pull_request.head.ref }} --depth=1 || true
             git fetch origin ${{ github.event.pull_request.base.ref }} --depth=1 || true
           fi
 
-      - name: Run Qodana (Docker)
+      - name: Run Qodana (Community Docker)
         env:
-          QODANA_IMAGE: jetbrains/qodana-js:2025.2
+          QODANA_IMAGE: jetbrains/qodana-community-js:2025.2
         run: |
-          # Выбираем корректный SHA: для PR — head SHA, иначе — github.sha
           if [ "${{ github.event_name }}" = "pull_request" ]; then
             COMMIT="${{ github.event.pull_request.head.sha }}"
           else
             COMMIT="${{ github.sha }}"
           fi
-          echo "Running Qodana for commit: $COMMIT"
-          # Создаём директории для cache/results в workspace
+          echo "Running Qodana Community for commit: $COMMIT"
           mkdir -p "${{ github.workspace }}/.qodana-cache"
           mkdir -p "${{ github.workspace }}/results"
-          # Запуск Qodana через docker (образ будет скачан при необходимости)
           docker run --rm \
             -v "${{ github.workspace }}":/data \
             -v "${{ github.workspace }}/.qodana-cache":/root/.cache/qodana \
@@ -184,7 +177,6 @@ jobs:
     steps:
       - name: Send Telegram notification
         run: |
-          # При PR/разных событиях head_commit может быть пуст — используем защищённый вывод
           COMMIT_MSG="${{ github.event.head_commit.message || github.event.pull_request.title || 'N/A' }}"
           AUTHOR="${{ github.event.head_commit.author.name || github.event.pull_request.user.login || 'N/A' }}"
           curl -s -X POST https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage \
