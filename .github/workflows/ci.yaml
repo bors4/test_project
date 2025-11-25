@@ -89,15 +89,20 @@ jobs:
         if: matrix.browser == 'firefox'
         uses: browser-actions/setup-firefox@v1
         with:
-          firefox-version: stable
+          firefox-version: latest
 
-      - name: Run tests
-        run: |
-          if [ "${{ matrix.browser }}" = "chrome-mobile" ]; then
-            npm run test:mobile
-          else
-            npm run test:browser -- --browser=${{ matrix.browser }}
-          fi
+      - name: Run mobile tests
+        if: matrix.browser == 'chrome-mobile'
+        run: npm run test:mobile
+        env:
+          DOTENV_PRIVATE_KEY: ${{ secrets.DOTENV_PRIVATE_KEY }}
+          DOTENVX_LOG: off
+          environment: onliner-autotests
+          BROWSER: ${{ matrix.browser }}
+
+      - name: Run browser tests
+        if: matrix.browser != 'chrome-mobile'
+        run: npm run test:browser -- --browser=${{ matrix.browser }}
         env:
           DOTENV_PRIVATE_KEY: ${{ secrets.DOTENV_PRIVATE_KEY }}
           DOTENVX_LOG: off
