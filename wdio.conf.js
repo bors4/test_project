@@ -36,6 +36,8 @@ const chromeArgs = [
 const HEADLESS = process.env.HEADLESS !== 'false';
 const RECORD_VIDEO = process.env.RECORD_VIDEO === 'true';
 const DEBUG_MODE = process.env.DEBUG_MODE === 'true';
+const {DEVICE} = process.env;
+const cucumberTags = process.env.CUCUMBER_TAGS;
 
 if (HEADLESS) {
   chromeArgs.push('--headless=new');
@@ -132,7 +134,7 @@ export const config = {
     snippets: true,
     source: true,
     strict: false,
-    tagExpression: '',
+    tags: cucumberTags,
     timeout: 90000,
     ignoreUndefinedDefinitions: false,
   },
@@ -140,7 +142,13 @@ export const config = {
   before: async function () {
     const dotenvx = await import('@dotenvx/dotenvx');
     dotenvx.config();
-    await browser.setWindowSize(1920, 1080);
+
+    if (DEVICE === 'desktop' || DEVICE === undefined) {
+      await browser.setWindowSize(1920, 1080);
+    } else if (DEVICE === 'mobile') {
+      await browser.setWindowSize(400, 700);
+    }
+
     await browser.execute(() => {
       Object.defineProperty(navigator, 'webdriver', {get: () => undefined});
     });

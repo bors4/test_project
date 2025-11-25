@@ -57,7 +57,7 @@
     "test:feature": "cross-env HEADLESS=false RECORD_VIDEO=true wdio run ./wdio.conf.js --spec",
     "test:tags": "cross-env HEADLESS=false RECORD_VIDEO=true wdio run ./wdio.conf.js --spec",
     "test:browser": "cross-env HEADLESS=true wdio run ./wdio.conf.js",
-    "test:mobile": "cross-env HEADLESS=true MOBILE=true wdio run ./wdio.conf.js",
+    "test:mobile": "cross-env HEADLESS=false DEVICE=mobile CUCUMBER_TAGS='@mobile' wdio run ./wdio.conf.js",
     "format": "prettier --write ./",
     "lint": "eslint ./src",
     "lint:write": "eslint --debug src/ --fix",
