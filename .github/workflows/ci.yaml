@@ -1,24 +1,128 @@
-name: Run Tests
+name: CI Pipeline
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  test:
+  # Этап 1: Проверка кода (lint, format)
+  code-quality:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
+      - name: Checkout code (full fetch)
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: npm
+
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Run tests
-        run: npm run test
+      - name: Check formatting with Prettier
+        run: npm run format || (echo "❌ Prettier failed" && exit 1)
+
+      - name: Lint with ESLint
+        run: npm run lint || (echo "❌ ESLint failed" && exit 1)
+
+  # Этап 2: Запуск тестов в матрице
+  e2e-tests:
+    needs: code-quality
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        browser: [chrome, firefox]
+        include:
+          - os: ubuntu-latest
+            browser: chrome-mobile
+
+    steps:
+      - name: Checkout code (full fetch)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Set up Chrome (for Linux/macOS/Windows)
+        if: matrix.browser == 'chrome' || matrix.browser == 'chrome-mobile'
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: stable
+
+      - name: Set up Firefox
+        if: matrix.browser == 'firefox'
+        uses: browser-actions/setup-firefox@v1
+        with:
+          firefox-version: latest
+
+      - name: Run mobile tests
+        if: matrix.browser == 'chrome-mobile'
+        run: npm run test:mobile
         env:
+          DOTENV_PRIVATE_KEY: ${{ secrets.DOTENV_PRIVATE_KEY }}
           DOTENVX_LOG: off
+          environment: onliner-autotests
+          BROWSER: ${{ matrix.browser }}
+
+      - name: Run browser tests
+        if: matrix.browser != 'chrome-mobile'
+        run: npm run test:browser -- --browser=${{ matrix.browser }}
+        env:
+          DOTENV_PRIVATE_KEY: ${{ secrets.DOTENV_PRIVATE_KEY }}
+          DOTENVX_LOG: off
+          environment: onliner-autotests
+          BROWSER: ${{ matrix.browser }}
+
+  # Этап 3: Уведомление в Telegram (только если есть падения)
+  notify-telegram:
+    needs: e2e-tests
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Telegram notification
+        run: |
+          COMMIT_MSG="${{ github.event.head_commit.message || github.event.pull_request.title || 'N/A' }}"
+          AUTHOR="${{ github.event.head_commit.author.name || github.event.pull_request.user.login || 'N/A' }}"
+          curl -s -X POST https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage \
+            -d chat_id=${{ secrets.TELEGRAM_CHAT_ID }} \
+            -d text="🚨 CI упал в репозитории ${{ github.repository }}
+            Ветка: ${{ github.ref_name }}
+            Коммит: $COMMIT_MSG
+            Автор: $AUTHOR
+            Ссылка: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"

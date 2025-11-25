@@ -3,7 +3,6 @@ allure*
 screen*
 *.env
 jsdoc.config.json
-package-lock.json
 reports
 .allure/history.jsonl
 .prettierignore
@@ -15,3 +14,5 @@ qwen.md
 _results_
 INSTRUCTION.md
 .idea/
+/.env.keys
+/qodana.yaml

@@ -7,7 +7,6 @@ export async function switchWindow() {
   if (windowID.length < 2) throw new Error('Новая вкладка не открыта');
   const targetWindow = windowID.find((id) => id !== parentWindow) || windowID[0];
   await browser.switchWindow(targetWindow);
-  await browser.execute((done) => setTimeout(done, 5000));
 }
 
 /**
