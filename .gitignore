@@ -8,11 +8,13 @@ reports
 .prettierignore
 .vscode
 qwen.md
-.continue/
 .qwen/
 .gitignore
 _results_
-INSTRUCTION.md
 .idea/
 /.env.keys
-/qodana.yaml
+test_project.rar
+README.md
+.continue/
+package-lock.json
+*.bak

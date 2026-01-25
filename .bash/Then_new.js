@@ -25,7 +25,7 @@ Then(/я вижу текст "([^"]*)" в "([^"]*)" для "([^"]*)"/, async (te
     expectChai(placeholder).to.include('Например');
   } else {
     const elements = await pageobjects.getElementsByName('Текст Ничего не найдено', pageName);
-    expectChai(elements[0], `Элемент ${elements[0]} не найден`).to.exist;
+    expectChai(elements[0]).to.exist;
     const elementText = await elements[0].getText();
     expectChai(elementText).to.equal('Ничего не найдено');
   }
@@ -68,11 +68,7 @@ Then(
 
 Then(/я вижу что курсы валют равны/, function () {
   // noinspection JSUnresolvedVariable
-  console.log(
-    `this.elementText = ${this.elementText[0]} and this.apiExchangeRate =` +
-      `$ ${this.apiExchangeRate.replace('.', ',')}`
-  );
-  expectChai(this.elementText[0]).to.equal(`$ ${this.apiExchangeRate.replace('.', ',')}`);
+  expectChai(this.elementText).to.equal(`$ ${this.apiExchangeRate.replace('.', ',')}`);
 });
 
 Then(/я вижу что "([^"]*)"\[(\d+)] на "([^"]*)" равен сохранённому/, async function (elementName, index, pageName) {
@@ -98,7 +94,7 @@ Then(
     if (!op) throw new Error(`Неизвестный оператор ${operator}. Допустимые: ${Object.keys(op).join(', ')}`);
     const comparsionResult = op.fn(elements.length, +itemCount);
     console.log(`Кол-во элементов на странице ${elements.length} ${operator} ${itemCount}`);
-    const errorMessage = new Error(`Условие не удовлетворяет: ${elements.length} ${op.label} ${itemCount}`);
+    const errorMessage = `Условие не удовлетворяет: ${elements.length} ${op.label} ${itemCount}`;
     expectChai(comparsionResult, errorMessage).to.be.true;
   }
 );
