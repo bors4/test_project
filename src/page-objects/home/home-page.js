@@ -13,6 +13,12 @@ class HomePage {
       'Раздел Форум': this.sectionForum,
       'Ссылка Мобильные телефоны': this.linkMobilePhones,
       'Модальное окно авторизации': this.modalAuth,
+      'Ссылка Автобарахолка (новости)': this.linkAbNewsSection,
+      'Блок Автобарахолка': this.blockAb,
+      'Селект Марка автомобиля': this.selectCarBrand,
+      'Селект Модель автомобиля': this.selectCarModel,
+      'Селект Цена автомобиля': this.selectCarPrice,
+      'Кнопка Найти': this.buttonSearch,
     };
   }
 
@@ -52,10 +58,34 @@ class HomePage {
     return `//a[@href="${siteUrls.CATALOG_MOBILE_URL}"]`;
   }
 
-  //a[@href="https://catalog.onliner.by/mobile"]
+  //a[@href="https://catalog.onliner.aby/mobile"]
 
   get modalAuth() {
     return '//div[@id="auth-container"]';
+  }
+
+  get linkAbNewsSection() {
+    return '//*[@class="b-ab-layer"]//a[text()="Автобарахолка"]';
+  }
+
+  get blockAb() {
+    return "//div[contains(@class, 'b-main-page-ab-layer')]";
+  }
+
+  get selectCarBrand() {
+    return '//span[@id="car-1"]/select';
+  }
+
+  get selectCarModel() {
+    return '//span[@id="car-2"]/select';
+  }
+
+  get selectCarPrice() {
+    return '//span[@id="car-3"]/select';
+  }
+
+  get buttonSearch() {
+    return "//a[text()='Найти']";
   }
 
   getURL() {

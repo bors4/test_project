@@ -7,7 +7,7 @@ class CatalogPage extends BasePage {
 
     this.elements = {
       'Заголовок раздела Каталог': this.headerCatalogSection,
-      'Заголовок раздела Популярные категории': this.headerPopularCategorySection,
+      'Заголовок раздела Популярные разделы': this.headerPopularCategorySection,
     };
   }
 
@@ -16,7 +16,7 @@ class CatalogPage extends BasePage {
   }
 
   get headerPopularCategorySection() {
-    return '//h2[contains(text(), "Популярные категории")]';
+    return '//h2[contains(text(), "Популярные разделы")]';
   }
 
   getURL() {

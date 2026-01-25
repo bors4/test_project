@@ -5,34 +5,24 @@
     "moduleResolution": "Bundler",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "strict": false,
     "strictFunctionTypes": true,
-    "checkJs": true,
     "noEmit": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "baseUrl": ".",
+    "types": ["@wdio/types", "node"],
     "paths": {
-      "@/*": ["src/*"],
-      "@utils/*": ["src/utils/*"],
-      "@pages/*": ["src/pageobjects/*"],
-      "@helpers/*": ["src/helpers/*"],
-      "@steps/*": ["src/step-definitions/*"]
+      "@/*": ["./src/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@pages/*": ["./src/pageobjects/*"],
+      "@helpers/*": ["./src/helpers/*"],
+      "@steps/*": ["./src/step-definitions/*"]
     },
     "noImplicitAny": false,
     "noImplicitThis": false,
     "strictNullChecks": false,
     "alwaysStrict": false
   },
-  "include": [
-    "src/**/*",
-    "tests/**/*",
-    "features/**/*",
-    "wdio.conf.js",
-    "cucumber.js",
-    "cucumber.conf.js",
-    "types/**/*"
-  ],
+  "include": ["src/**/*", "tests/**/*", "features/**/*", "wdio.conf.js", "cucumber.js", "cucumber.conf.js"],
   "exclude": ["node_modules", "dist", "coverage", ".git", "reports", "logs"]
 }

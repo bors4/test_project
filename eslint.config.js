@@ -3,8 +3,9 @@ import js from '@eslint/js';
 import importPlugin from 'eslint-plugin-import';
 import prettierPlugin from 'eslint-plugin-prettier';
 import cucumberPlugin from 'eslint-plugin-cucumber';
+import {defineConfig} from 'eslint/config';
 
-export default [
+export default defineConfig([
   {
     ignores: ['node_modules/', 'dist/', 'build/', 'coverage/', '*.min.js', '*.bundle.js'],
   },
@@ -132,4 +133,4 @@ export default [
       'max-len': ['error', {code: 120}],
     },
   },
-];
+]);

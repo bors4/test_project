@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Home - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Classes</li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="AbPage.html">AbPage</a></span></li><li class="nav-heading"><a href="global.html">Globals</a></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#CURRENCY_INFO">CURRENCY_INFO</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#EXCHANGE_RATE">EXCHANGE_RATE</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#browserAction">browserAction</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getExchangeRate">getExchangeRate</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#scrollTo">scrollTo</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#switchToIFrame">switchToIFrame</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#switchToParent">switchToParent</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#switchWindow">switchWindow</a></span></li>
+</nav>
+
+<div id="main">
+    
+
+    
+
+
+
+    
+
+
+
+
+
+
+
+
+
+    
+
+
+    <section class="readme">
+        <article><p><a href="https://bors4.github.io/test_project">Документация</a> по проекту</p>
+<h1>Инструкция по работе с тестовым фреймворком для onliner.by</h1>
+<h2>Общее описание</h2>
+<p>Это проект автоматизированного тестирования веб-интерфейса сайта Onliner.by, созданный на основе WebdriverIO v9 и Cucumber BDD. Проект использует Page Object Model для структурирования тестов и поддерживает различные режимы выполнения тестов.</p>
+<h2>Структура проекта</h2>
+<ul>
+<li>features/ - Gherkin-фичи с описанием тестовых сценариев</li>
+<li>src/page-objects/ - Реализации Page Object для различных страниц сайта</li>
+<li>src/step-definitions/ - Реализации шагов для фич-файлов</li>
+<li>src/utils/ - Вспомогательные утилиты</li>
+<li>src/config/ - Файлы конфигурации</li>
+<li>.bash/command_menu.bat - Командное меню для быстрого запуска различных команд</li>
+</ul>
+<h2>Требования</h2>
+<ul>
+<li>Node.js (версия, поддерживаемая зависимостями в package.json)</li>
+</ul>
+<h2>Установка</h2>
+<ol>
+<li>Убедитесь, что Node.js установлен</li>
+<li>Клонируйте репозиторий</li>
+<li>Выполните установку зависимостей:</li>
+</ol>
+<pre class="prettyprint source"><code>npm install
+</code></pre>
+<h2>Запуск тестов</h2>
+<ul>
+<li>npm run test – Запуск всех тестов в headless режиме</li>
+<li>npm run test:debug – Запуск всех тестов с UI для отладки</li>
+<li>npm run test:video – Запуск с записью видео</li>
+<li>npm run test:debug:video – Отладочный запуск с записью видео</li>
+<li>npm run test:feature -- &lt;имя_файла&gt; – Запуск отдельного feature файла</li>
+<li>npm run test:tags -- &lt;тег&gt; – Запуск по тегам (например, @smoke)</li>
+</ul>
+<h2>Использование командного меню</h2>
+<p>Вы можете использовать command_menu.bat в каталоге .bash для удобного выбора нужной команды через интерфейс меню.</p>
+<h2>Линтер и форматирование</h2>
+<ul>
+<li>npm run lint – Проверка кода линтером</li>
+<li>npm run format – Форматирование кода с помощью Prettier</li>
+<li>npm run lint:write – Исправление ошибок линтера</li>
+</ul>
+<h2>Отчеты</h2>
+<ul>
+<li>Все тесты генерируют Allure отчеты</li>
+<li>npm run allure:generate – Генерация отчета</li>
+<li>npm run allure:open – Открытие отчета в браузере</li>
+<li>npm run allure:watch – Просмотр отчета в реальном времени</li>
+</ul>
+<h2>Конфигурация</h2>
+<ul>
+<li>wdio.conf.js – Основной конфигурационный файл WebdriverIO</li>
+<li>.env – Файл с переменными окружения (логины, пароли и т.д.)</li>
+</ul></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

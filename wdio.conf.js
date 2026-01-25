@@ -63,7 +63,10 @@ if (RECORD_VIDEO) {
 }
 
 export const config = {
-  runner: 'local',
+  // runner: 'local',
+  hostname: '192.168.1.100', // IP-адрес машины с Selenium Server
+  port: 4444,
+  path: '/', // В Selenium Grid 4 путь именно такой!
   specs: ['./features/**/*.feature'],
   exclude: [],
   maxInstances: 1,
