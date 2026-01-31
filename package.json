@@ -17,11 +17,11 @@
     "@wdio/spec-reporter": "^9.23.2",
     "@wdio/types": "^9.23.2",
     "@wdio/visual-service": "^9.1.2",
-    "allure": "^3.0.1",
+    "allure": "^3.1.0",
     "allure-commandline": "^2.36.0",
     "ansi-regex": "^6.2.2",
     "ansi-styles": "^6.2.3",
-    "chromedriver": "^144.0.0",
+    "chromedriver": "^145.0.0",
     "cross-env": "^10.1.0",
     "esbuild": "^0.27.2",
     "eslint": "^9.39.2",
@@ -47,7 +47,7 @@
     "webdriverio": "^9.23.2"
   },
   "dependencies": {
-    "axios": "^1.13.2",
+    "axios": "^1.13.4",
     "chai": "^6.2.2"
   },
   "scripts": {

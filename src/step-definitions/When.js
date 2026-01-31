@@ -17,10 +17,6 @@ When(/я ожидаю \[(\d+)] секунд/, async (timeToWait) => {
   await browser.pause(timeToWait * 1000);
 });
 
-/**
- * @todo Разобраться куда делся шаг для @method clickOnElement
- */
-
 When(/я нажимаю на "([^"]*)" на "([^"]*)"/, async (elementName, pageName) => {
   await pageobjects.clickOnElement(elementName, pageName);
 });
