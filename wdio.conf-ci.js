@@ -63,9 +63,7 @@ if (RECORD_VIDEO) {
 }
 
 export const config = {
-  hostname: '192.168.1.100',
-  port: 4444,
-  path: '/',
+  runner: 'local',
   specs: ['./features/**/*.feature'],
   exclude: [],
   maxInstances: 1,
