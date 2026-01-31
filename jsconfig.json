@@ -23,6 +23,6 @@
     "strictNullChecks": false,
     "alwaysStrict": false
   },
-  "include": ["src/**/*", "tests/**/*", "features/**/*", "wdio.conf.js", "cucumber.js", "cucumber.conf.js"],
+  "include": ["src/**/*", "tests/**/*", "features/**/*", "wdio.conf-ci.js", "cucumber.js", "cucumber.conf.js"],
   "exclude": ["node_modules", "dist", "coverage", ".git", "reports", "logs"]
 }
