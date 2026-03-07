@@ -27,8 +27,11 @@ echo 12. Watch Allure Results (Live)
 echo 13. Format files
 echo 14. Lint files
 echo 15. Exit
+echo 16. RAG Index (Knowledge Base)
+echo 17. RAG Reindex (Force)
+echo 18. RAG Search
 echo.
-set /p choice="Enter number (1-15): "
+set /p choice="Enter number (1-18): "
 
 if "!choice!"=="1" goto jsdoc
 if "!choice!"=="2" goto allure_open
@@ -45,6 +48,9 @@ if "!choice!"=="12" goto allure_watch
 if "!choice!"=="13" goto format_files
 if "!choice!"=="14" goto lint_files
 if "!choice!"=="15" goto exit_script
+if "!choice!"=="16" goto rag_index
+if "!choice!"=="17" goto rag_reindex
+if "!choice!"=="18" goto rag_search
 
 echo.
 echo Invalid choice. Please try again.
@@ -165,6 +171,31 @@ echo.
 echo Running eslint...
 cd /d "!PROJECT_DIR!"
 npm run lint
+pause
+goto title
+
+:rag_index
+echo.
+echo Running RAG Index (Knowledge Base)...
+cd /d "!PROJECT_DIR!"
+npm run rag:index
+pause
+goto title
+
+:rag_reindex
+echo.
+echo Running RAG Reindex (Force)...
+cd /d "!PROJECT_DIR!"
+npm run rag:reindex
+pause
+goto title
+
+:rag_search
+echo.
+echo Enter search query:
+set /p query="Query: "
+cd /d "!PROJECT_DIR!"
+npm run rag:query -- "!query!"
 pause
 goto title
 

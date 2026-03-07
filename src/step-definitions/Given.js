@@ -14,13 +14,21 @@ Given(/я нахожусь на "([^"]*)"/, async (pageName) => {
 });
 
 Given(/устанавливаю cookie региона доставки "([^"]*)"/, async (regionName) => {
-  await browser.setCookies({
-    name: 'delivery-region-id',
-    value: regionName,
-    domain: '.onliner.by',
-  });
+  try {
+    await browser.setCookies({
+      name: 'delivery-region-id',
+      value: regionName,
+      domain: '.onliner.by',
+    });
+  } catch (error) {
+    console.error(error);
+  }
 });
 
 Given(/я удаляю cookie/, async () => {
-  await browser.deleteCookies();
+  try {
+    await browser.deleteCookies();
+  } catch (error) {
+    console.error(error);
+  }
 });
