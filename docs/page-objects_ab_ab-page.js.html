@@ -1,53 +1,32 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width,initial-scale=1" />
-		<title>page-objects/ab/ab-page.js - Documentation</title>
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: page-objects/ab/ab-page.js</title>
 
-		<script src="scripts/prettify/prettify.js"></script>
-		<script src="scripts/prettify/lang-css.js"></script>
-		<!--[if lt IE 9]>
-			<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
-		<link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
-		<link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css" />
-		<link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css" />
-	</head>
-	<body>
-		<input type="checkbox" id="nav-trigger" class="nav-trigger" />
-		<label for="nav-trigger" class="navicon-button x">
-			<div class="navicon"></div>
-		</label>
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
 
-		<label for="nav-trigger" class="overlay"></label>
+<body>
 
-		<nav>
-			<li class="nav-link nav-home-link"><a href="index.html">Home</a></li>
-			<li class="nav-heading">Classes</li>
-			<li class="nav-heading">
-				<span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="APIConfig.html">APIConfig</a></span>
-			</li>
-			<li class="nav-heading">
-				<span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="AbPage.html">AbPage</a></span>
-			</li>
-			<li class="nav-heading"><a href="global.html">Globals</a></li>
-			<li class="nav-item">
-				<span class="nav-item-type type-function">F</span
-				><span class="nav-item-name"><a href="global.html#switchToIFrame">switchToIFrame</a></span>
-			</li>
-			<li class="nav-item">
-				<span class="nav-item-type type-function">F</span
-				><span class="nav-item-name"><a href="global.html#switchToParent">switchToParent</a></span>
-			</li>
-		</nav>
+<div id="main">
 
-		<div id="main">
-			<h1 class="page-title">page-objects/ab/ab-page.js</h1>
+    <h1 class="page-title">Source: page-objects/ab/ab-page.js</h1>
 
-			<section>
-				<article>
-					<pre class="prettyprint source linenums"><code>const SiteUrls = require('../../config/site-urls');
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import siteUrls from '../../config/site-urls.js';
 
 /**
  * Класс для использования на странице "Автобарахолка".
@@ -55,122 +34,132 @@
  */
 
 class AbPage {
-	constructor() {
-		this.elements = {
-			'Заголовок раздела Автобарахолка': this.headerAbSection,
-			'Поле ввода страны раздела фильтра': this.inputCountryFilterSection,
-			'Дропдаун списка стран для фильтра': this.dropdownCountriesList,
-			'Контейнер дропдауна списка марок авто для фильтра': this.containerDropdownCarModelList,
-			'Поле ввода названия страны фильтра': this.inputCountryFilter,
-			'Список стран фильтра': this.listCountries,
-			'Марка авто BMW': this.carBrandBMW,
-			'Поле ввода марки авто раздела фильтра': this.inputCarBrandFilterSection,
-			'Тайтл фильтра Местонахождение': this.titleLocation,
-			'Тайтл фильтра Марка': this.titleCarBrand,
-			'Тайтл Цена': this.titlePrice,
-			'Ссылка валюты покупки USD': this.linkCurrencyUSD,
-			'Поле стоимости авто До': this.inputAutoPriceLess,
-			'Тайтл Год выпуска': this.titleYearMade,
-			'Список Год выпуска С': this.selectYearMadeOptions,
-			'Чекбокс Тип двигателя Бензин': this.checkboxPetrolEngine,
-			'Список Тегов фильтра': this.listFilterTags,
-			'Карточка продаваемого авто': this.vehicleOfferItem,
-		};
-	}
+  constructor() {
+    this.elements = {
+      'Заголовок раздела Автобарахолка': this.headerAbSection,
+      'Поле ввода страны раздела фильтра': this.inputCountryFilterSection,
+      'Дропдаун списка стран для фильтра': this.dropdownCountriesList,
+      'Контейнер дропдауна списка марок авто для фильтра': this.containerDropdownCarModelList,
+      'Поле ввода названия страны фильтра': this.inputCountryFilter,
+      'Список стран фильтра': this.listCountries,
+      'Марка авто BMW': this.carBrandBMW,
+      'Поле ввода марки авто раздела фильтра': this.inputCarBrandFilterSection,
+      'Тайтл фильтра Местонахождение': this.titleLocation,
+      'Тайтл фильтра Марка': this.titleCarBrand,
+      'Тайтл Цена': this.titlePrice,
+      'Ссылка валюты покупки USD': this.linkCurrencyUSD,
+      'Поле стоимости авто До': this.inputAutoPriceLess,
+      'Тайтл Год выпуска': this.titleYearMade,
+      'Список Год выпуска С': this.selectYearMadeOptions,
+      'Чекбокс Тип двигателя Бензин': this.checkboxPetrolEngine,
+      'Список Тегов фильтра': this.listFilterTags,
+      'Карточки продаваемых авто': this.vehicleOfferItem,
+      'Марка продаваемого авто': this.vehicleModelOffer,
+    };
+  }
 
-	get headerAbSection() {
-		return '//h1[contains(text(), "Автобарахолка")]';
-	}
+  get headerAbSection() {
+    return '//h1[contains(text(), "Автобарахолка")]';
+  }
 
-	get inputCountryFilterSection() {
-		return '(//div[contains(@class,"vehicle-form__line")]/div/div[1])[1]/div[1]';
-	}
+  get inputCountryFilterSection() {
+    return '(//div[contains(@class,"vehicle-form__line")]/div/div[1])[1]/div[1]';
+  }
 
-	get inputCarBrandFilterSection() {
-		return '(//div[contains(@class,"vehicle-form__line")]/div/div[1])[5]/div[1]';
-	}
+  get inputCarBrandFilterSection() {
+    return '(//div[contains(@class,"vehicle-form__line")]/div/div[1])[5]/div[1]';
+  }
 
-	get dropdownCountriesList() {
-		return '(//div[contains(@class,"vehicle-form__line")]/div/div[1])[1]/div[1]//div[contains(@class,"dropdown-style_right")]';
-	}
+  get dropdownCountriesList() {
+    return '(//div[contains(@class,"vehicle-form__line")]/div/div[1])[1]/div[1]//div[contains(@class,"dropdown-style_right")]';
+  }
 
-	get inputCountryFilter() {
-		return '//input[@placeholder="Найти страну"]';
-	}
+  get inputCountryFilter() {
+    return '//input[@placeholder="Найти страну"]';
+  }
 
-	get listCountries() {
-		return `(//div[contains(@class,"dropdown-style_right")])[1]//ul[@tabindex="0"]/li`;
-	}
+  get listCountries() {
+    return `(//div[contains(@class,"dropdown-style_right")])[1]//ul[@tabindex="0"]/li`;
+  }
 
-	get carBrandBMW() {
-		return '//div[text()="BMW"]';
-	}
+  get carBrandBMW() {
+    return '//div[text()="BMW"]';
+  }
 
-	get titleLocation() {
-		return '//div[contains(text(),"Местонахождение")]';
-	}
+  get titleLocation() {
+    return '//div[contains(text(),"Местонахождение")]';
+  }
 
-	get titleCarBrand() {
-		return '//div[contains(text(),"Марка")]';
-	}
+  get titleCarBrand() {
+    return '//div[contains(text(),"Марка")]';
+  }
 
-	get titlePrice() {
-		return '(//div[contains(text(),"Цена")])[1]';
-	}
+  get titlePrice() {
+    return '(//div[contains(text(),"Цена")])[1]';
+  }
 
-	get containerDropdownCarModelList() {
-		return '(//div[@class="dropdown-style__container"])[4]';
-	}
+  get containerDropdownCarModelList() {
+    return '(//div[@class="dropdown-style__container"])[4]';
+  }
 
-	get linkCurrencyUSD() {
-		return '(//div/a[contains(@class,"vehicle-form__link_base")])[2]';
-	}
+  get linkCurrencyUSD() {
+    return '(//div/a[contains(@class,"vehicle-form__link_base")])[2]';
+  }
 
-	get inputAutoPriceLess() {
-		return '(//input[@placeholder="до"])[1]';
-	}
+  get inputAutoPriceLess() {
+    return '(//input[@placeholder="до"])[1]';
+  }
 
-	get titleYearMade() {
-		return '//div[text()="Год выпуска"]';
-	}
+  get titleYearMade() {
+    return '//div[text()="Год выпуска"]';
+  }
 
-	get selectYearMadeOptions() {
-		return '//div[normalize-space()="с"]/following-sibling::select';
-	}
+  get selectYearMadeOptions() {
+    return '//div[normalize-space()="с"]/following-sibling::select';
+  }
 
-	get checkboxPetrolEngine() {
-		return '//div[normalize-space()="Бензин"]/../../div[@class="i-checkbox__faux"]';
-	}
+  get checkboxPetrolEngine() {
+    return '//div[normalize-space()="Бензин"]/../../div[@class="i-checkbox__faux"]';
+  }
 
-	get vehicleOfferItem() {
-		return '//div[@class="vehicle-form__offers-item"]';
-	}
+  get vehicleOfferItem() {
+    return '//div[@class="vehicle-form__offers-item"]';
+  }
 
-	get listFilterTags() {
-		return '//div[contains(@class,"vehicle-form__button_tag")]';
-	}
+  get vehicleModelOffer() {
+    return '//div[@class="vehicle-form__offers-item"]//div[contains(@class,"vehicle-form__link")]';
+  }
 
-	getURL() {
-		return SiteUrls.AB;
-	}
+  get listFilterTags() {
+    return '//div[contains(@class,"vehicle-form__button_tag")]';
+  }
+
+  getURL() {
+    return siteUrls.AB_URL;
+  }
 }
 
-module.exports = AbPage;
+export default AbPage;
 </code></pre>
-				</article>
-			</section>
-		</div>
+        </article>
+    </section>
 
-		<br class="clear" />
 
-		<footer>
-			Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.4</a> on Tue Aug 05 2025 22:47:04 GMT+0300 (Москва, стандартное время)
-			using the Minami theme.
-		</footer>
 
-		<script>
-			prettyPrint();
-		</script>
-		<script src="scripts/linenumber.js"></script>
-	</body>
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AbPage.html">AbPage</a></li></ul><h3>Global</h3><ul><li><a href="global.html#CURRENCY_INFO">CURRENCY_INFO</a></li><li><a href="global.html#EXCHANGE_RATE">EXCHANGE_RATE</a></li><li><a href="global.html#browserAction">browserAction</a></li><li><a href="global.html#getExchangeRate">getExchangeRate</a></li><li><a href="global.html#scrollTo">scrollTo</a></li><li><a href="global.html#switchToIFrame">switchToIFrame</a></li><li><a href="global.html#switchToParent">switchToParent</a></li><li><a href="global.html#switchWindow">switchWindow</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Fri Mar 06 2026 14:57:13 GMT+0300 (Москва, стандартное время)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
 </html>
