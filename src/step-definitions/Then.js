@@ -140,9 +140,9 @@ Then(
     const elements = await pageobjects.getElementsByName(elementName, pageName);
     const op = COMPARATORS[operator];
     if (!op) throw new Error(`Неизвестный оператор ${operator}. Допустимые: ${Object.keys(op).join(', ')}`);
-    const comparsionResult = op.fn(elements.length, +itemCount);
+    const comparisonResult = op.fn(elements.length, +itemCount);
     console.log(`Кол-во элементов на странице ${elements.length} ${operator} ${itemCount}`);
     const errorMessage = new Error(`Условие не удовлетворяет: ${elements.length} ${op.label} ${itemCount}`);
-    expectChai(comparsionResult, errorMessage).to.be.true;
+    expectChai(comparisonResult, errorMessage).to.be.true;
   }
 );

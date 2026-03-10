@@ -58,6 +58,11 @@ When(/я скролю к "([^"]*)" на "([^"]*)"/, async (elementName, pageName
   await BrowserUtils.scrollTo(element);
 });
 
+When(/я скролю к "([^"]*)"\[(\d+)] на "([^"]*)"/, async (elementName, index, pageName) => {
+  const element = await pageobjects.getElementByIndex(elementName, index, pageName);
+  await BrowserUtils.scrollTo(element);
+});
+
 When(/я обновляю страницу/, async () => {
   await browser.refresh();
 });
