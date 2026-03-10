@@ -88,7 +88,6 @@ class PageObjects {
    */
   async getElementsByName(elementName, pageName) {
     const selector = this.getPageObject(pageName).elements[elementName];
-
     await browser.waitUntil(
       async () => {
         const foundElements = await $$(selector);
@@ -269,6 +268,20 @@ class PageObjects {
     await cookieButton.waitForClickable({timeout: 10000});
     await cookieButton.click();
     await cookieButton.waitForDisplayed({reverse: true, timeout: 10000});
+  }
+
+  async getElementByIndex(elementName, index, pageName) {
+    const elements = await this.getElementsByName(elementName, pageName);
+
+    if (index >= elements.length) {
+      throw new Error(
+        `Индекс ${index} выходит за пределы списка "${elementName}" (всего элементов: ${elements.length})`
+      );
+    }
+
+    const element = elements[index];
+
+    return await element;
   }
 }
 

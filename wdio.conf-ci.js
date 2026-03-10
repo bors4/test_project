@@ -93,7 +93,7 @@ export const config = {
   waitforTimeout: 30000,
   connectionRetryTimeout: 180000,
   connectionRetryCount: 3,
-  specFileRetries: 1,
+  specFileRetries: 0,
   services: ['visual'],
   framework: 'cucumber',
 
