@@ -7,7 +7,7 @@ class CatalogPricesPage {
   }
 
   get buttonOffer() {
-    return '(//a[contains(text(),"Купить")])[2]';
+    return '//div[contains(@class, "offers-list__part_action_specific")]//a[contains(text(), "Купить")]';
   }
 
   get buttonInCart() {

@@ -1,1 +1,9 @@
 docs/
+.venv/
+.ai/
+.aiassistant/
+.github/
+.prettierrc.json
+package-lock.json
+package.json
+qodana.yaml

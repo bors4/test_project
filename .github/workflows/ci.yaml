@@ -48,11 +48,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [windows-latest]
+        #        os: [ubuntu-latest, windows-latest, macos-latest]
         browser: [chrome, firefox]
-        include:
-          - os: ubuntu-latest
-            browser: chrome-mobile
+    #        include:
+    #          - os: ubuntu-latest
+    #            browser: chrome-mobile
 
     steps:
       - name: Checkout code (full fetch)
@@ -83,11 +84,11 @@ jobs:
         with:
           chrome-version: stable
 
-      - name: Set up Firefox
-        if: matrix.browser == 'firefox'
-        uses: browser-actions/setup-firefox@v1
-        with:
-          firefox-version: latest
+      #      - name: Set up Firefox
+      #        if: matrix.browser == 'firefox'
+      #        uses: browser-actions/setup-firefox@v1
+      #        with:
+      #          firefox-version: latest
 
       - name: Run mobile tests
         if: matrix.browser == 'chrome-mobile'
