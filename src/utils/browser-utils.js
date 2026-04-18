@@ -18,7 +18,7 @@ export async function scrollTo(element) {
   await element.waitForDisplayed();
   await element.scrollIntoView();
 
-  return element.isDisplayed({withinViewport: true});
+  return element.isDisplayed({ withinViewport: true });
 }
 
 /**

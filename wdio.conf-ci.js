@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 /* eslint-disable object-shorthand */
-import {exec} from 'node:child_process';
-import {promisify} from 'node:util';
+import { exec } from 'node:child_process';
+import { promisify } from 'node:util';
 
 const execPromise = promisify(exec);
 
@@ -36,7 +36,7 @@ const chromeArgs = [
 const HEADLESS = process.env.HEADLESS !== 'false';
 const RECORD_VIDEO = process.env.RECORD_VIDEO === 'true';
 const DEBUG_MODE = process.env.DEBUG_MODE === 'true';
-const {DEVICE} = process.env;
+const { DEVICE } = process.env;
 const cucumberTags = process.env.CUCUMBER_TAGS;
 
 if (HEADLESS) {
@@ -150,7 +150,7 @@ export const config = {
     }
 
     await browser.execute(() => {
-      Object.defineProperty(navigator, 'webdriver', {get: () => undefined});
+      Object.defineProperty(navigator, 'webdriver', { get: () => undefined });
     });
   },
 

@@ -1,7 +1,8 @@
-import {expect as expectChai} from 'chai';
-import {Then} from '@wdio/cucumber-framework';
+import { Then } from '@wdio/cucumber-framework';
+import { expect as expectChai } from 'chai';
+
+import { COMPARATORS } from '../config/operators.js';
 import PageObjects from '../page-objects/page-objects.js';
-import {COMPARATORS} from '../config/operators.js';
 
 const pageobjects = new PageObjects();
 
@@ -47,7 +48,7 @@ Then(/я вижу текст "([^"]*)" в "([^"]*)" для "([^"]*)"/, async (te
  * @example <caption>Example in feature file:</caption>
  * Then я вижу что "Список авто" на "Страница Автобарахолка" содержит текст "Renault Duster"
  */
-Then(/я вижу что "([^"]*)" на "([^"]*)" содержит текст "([^"]*)"/, async (elementName, pageName, elementText) => {
+Then(/^я вижу что "([^"]*)" на "([^"]*)" содержит текст "([^"]*)"$/u, async (elementName, pageName, elementText) => {
   const text = await pageobjects.getElementText(elementName, pageName);
   const filteredText = text.filter((el) => !el.includes(elementText));
   expectChai(filteredText.length).to.equal(0, `Некоторые элементы не содержат текст "${elementText}"`);
