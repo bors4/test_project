@@ -7,9 +7,10 @@
   "jsxSingleQuote": true,
   "trailingComma": "es5",
   "quoteProps": "as-needed",
-  "bracketSpacing": false,
+  "bracketSpacing": true,
   "arrowParens": "always",
   "rangeStart": 0,
   "proseWrap": "preserve",
-  "endOfLine": "lf"
+  "endOfLine": "lf",
+  "singleAttributePerLine": false
 }

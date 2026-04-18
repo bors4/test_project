@@ -19,6 +19,8 @@ class HomePage {
       'Селект Модель автомобиля': this.selectCarModel,
       'Селект Цена автомобиля': this.selectCarPrice,
       'Кнопка Найти': this.buttonSearch,
+      Футер: this.footer,
+      'Ссылка О компании': this.linkAbout,
     };
   }
 
@@ -86,6 +88,14 @@ class HomePage {
 
   get buttonSearch() {
     return "//a[text()='Найти']";
+  }
+
+  get footer() {
+    return '//footer';
+  }
+
+  get linkAbout() {
+    return '//footer//a[contains(text(), "О компании")]';
   }
 
   getURL() {

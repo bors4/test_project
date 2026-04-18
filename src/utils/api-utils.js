@@ -1,5 +1,6 @@
 import axios from 'axios';
-import {EXCHANGE_RATE} from '../config/api-config.js';
+
+import { EXCHANGE_RATE } from '../config/api-config.js';
 
 /**
  * Получить курс валюты по её аббревиатуре
