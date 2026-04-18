@@ -51,32 +51,30 @@ export async function switchWindow() {
 }
 
 /**
- * Скролл к элементу
+ * Прокручивает страницу к указанному элементу
+ * @param {WebdriverIO.Element} element - Элемент, к которому нужно прокрутить страницу
+ * @returns {Promise&lt;boolean>} Виден ли элемент в области просмотра после прокрутки
  */
 export async function scrollTo(element) {
   await element.waitForDisplayed();
   await element.scrollIntoView();
 
-  return await element.isDisplayed({withinViewport: true});
+  return element.isDisplayed({ withinViewport: true });
 }
 
 /**
- * Действия браузера
+ * Выполняет навигационные действия браузера
+ * @param {'обновить' | 'назад' | 'вперёд'} action - Тип навигационного действия
  */
 export async function browserAction(action) {
-  switch (action) {
-    case 'обновить':
-      await browser.refresh();
-      break;
-    case 'назад':
-      await browser.back();
-      break;
-    case 'вперёд':
-      await browser.forward();
-      break;
-    default:
-      await browser.refresh();
-  }
+  const navigationActions = {
+    обновить: () => browser.refresh(),
+    назад: () => browser.back(),
+    вперёд: () => browser.forward(),
+  };
+
+  const executeAction = navigationActions[action] || navigationActions.обновить;
+  await executeAction();
 }
 </code></pre>
         </article>

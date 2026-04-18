@@ -1,4 +1,4 @@
-import {switchToIFrame, switchToParent} from '../../../utils/frame-utils.js';
+import { switchToIFrame, switchToParent } from '../../../utils/frame-utils.js';
 
 class SearchModal {
   constructor() {

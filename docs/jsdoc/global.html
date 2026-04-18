@@ -253,16 +253,16 @@
 
     
 
-    <h4 class="name" id="browserAction"><span class="type-signature"></span>browserAction<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="browserAction"><span class="type-signature"></span>browserAction<span class="signature">(action)</span><span class="type-signature"></span></h4>
 
     
-    <p class="summary"><p>Действия браузера</p>.</p>
+    <p class="summary"><p>Выполняет навигационные действия браузера</p>.</p>
     
 
 
 
 <div class="description">
-    <p>Действия браузера</p>
+    <p>Выполняет навигационные действия браузера</p>
 </div>
 
 
@@ -298,7 +298,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="utils_browser-utils.js.html">utils/browser-utils.js</a>, <a href="utils_browser-utils.js.html#line25">line 25</a>
+        <a href="utils_browser-utils.js.html">utils/browser-utils.js</a>, <a href="utils_browser-utils.js.html#line28">line 28</a>
     </li></ul></dd>
     
 
@@ -315,6 +315,64 @@
 
 
 
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>action</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>'обновить'</code></span>
+|
+
+<span class="param-type"><code>'назад'</code></span>
+|
+
+<span class="param-type"><code>'вперёд'</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <p>Тип навигационного действия</p>
+                
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -383,7 +441,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="utils_api-utils.js.html">utils/api-utils.js</a>, <a href="utils_api-utils.js.html#line9">line 9</a>
+        <a href="utils_api-utils.js.html">utils/api-utils.js</a>, <a href="utils_api-utils.js.html#line10">line 10</a>
     </li></ul></dd>
     
 
@@ -496,16 +554,16 @@
 
     
 
-    <h4 class="name" id="scrollTo"><span class="type-signature"></span>scrollTo<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="scrollTo"><span class="type-signature"></span>scrollTo<span class="signature">(element)</span><span class="type-signature"> &rarr; {Promise.&lt;boolean>}</span></h4>
 
     
-    <p class="summary"><p>Скролл к элементу</p>.</p>
+    <p class="summary"><p>Прокручивает страницу к указанному элементу</p>.</p>
     
 
 
 
 <div class="description">
-    <p>Скролл к элементу</p>
+    <p>Прокручивает страницу к указанному элементу</p>
 </div>
 
 
@@ -541,7 +599,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="utils_browser-utils.js.html">utils/browser-utils.js</a>, <a href="utils_browser-utils.js.html#line15">line 15</a>
+        <a href="utils_browser-utils.js.html">utils/browser-utils.js</a>, <a href="utils_browser-utils.js.html#line17">line 17</a>
     </li></ul></dd>
     
 
@@ -560,6 +618,56 @@
 
 
 
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>element</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>WebdriverIO.Element</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <p>Элемент, к которому нужно прокрутить страницу</p>
+                
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -571,6 +679,33 @@
 
 
 
+
+
+
+<div class="section-returns">
+<h5>Returns:</h5>
+
+        
+
+<dl class="param-type">
+    <dt>
+        Type:
+    </dt>
+    <dd>
+        
+<span class="param-type"><code>Promise.&lt;boolean></code></span>
+
+
+    </dd>
+</dl>
+
+
+<div class="param-desc">
+    <p>Виден ли элемент в области просмотра после прокрутки</p>
+</div>
+
+    
+</div>
 
 
 

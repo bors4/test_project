@@ -1,6 +1,7 @@
-import {After, Status} from '@cucumber/cucumber';
 import fs from 'node:fs/promises';
 import path from 'node:path';
+
+import { After, Status } from '@cucumber/cucumber';
 
 After(async function (scenario) {
   if (scenario.result && scenario.result.status === Status.FAILED) {
@@ -18,7 +19,7 @@ After(async function (scenario) {
       const screenshotsDir = path.join(process.cwd(), 'screenshots');
       const fullPath = path.join(screenshotsDir, filename);
 
-      await fs.mkdir(screenshotsDir, {recursive: true});
+      await fs.mkdir(screenshotsDir, { recursive: true });
 
       await browser.saveScreenshot(fullPath);
       console.log(`[Cucumber Hook] Скриншот сохранён: ${fullPath}`);

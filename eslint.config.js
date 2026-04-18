@@ -1,13 +1,24 @@
-import globals from 'globals';
 import js from '@eslint/js';
 import importPlugin from 'eslint-plugin-import';
 import prettierPlugin from 'eslint-plugin-prettier';
 import cucumberPlugin from 'eslint-plugin-cucumber';
-import {defineConfig} from 'eslint/config';
+import { defineConfig } from 'eslint/config';
+
+import globals from 'globals';
 
 export default defineConfig([
   {
-    ignores: ['node_modules/', 'dist/', 'build/', 'coverage/', '*.min.js', '*.bundle.js', 'docs/'],
+    ignores: [
+      'node_modules/',
+      'dist/',
+      'build/',
+      'coverage/',
+      '*.min.js',
+      '*.bundle.js',
+      'docs/',
+      'allure-results/',
+      'allure-report/',
+    ],
   },
 
   js.configs.recommended,
@@ -28,7 +39,7 @@ export default defineConfig([
             '**/wdio.conf*.js',
             '**/*.config.js',
             '**/allure.config.js',
-            '**eslint*',
+            '**/eslint*',
           ],
         },
       ],
@@ -40,6 +51,14 @@ export default defineConfig([
           mjs: 'always',
         },
       ],
+      'import/order': [
+        'error',
+        {
+          groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
+          'newlines-between': 'always',
+          alphabetize: { order: 'asc', caseInsensitive: true },
+        },
+      ],
     },
   },
 
@@ -48,7 +67,13 @@ export default defineConfig([
       prettier: prettierPlugin,
     },
     rules: {
+      // ✅ Отключаем prettier для feature-файлов
       'prettier/prettier': 'error',
+    },
+    settings: {
+      prettier: {
+        usePrettierrc: true,
+      },
     },
   },
 
@@ -57,7 +82,14 @@ export default defineConfig([
     plugins: {
       cucumber: cucumberPlugin,
     },
-    rules: {},
+    rules: {
+      'no-multi-spaces': 'off',
+      'no-trailing-spaces': 'off',
+      'spaced-comment': 'off',
+      'comma-spacing': 'off',
+      'key-spacing': 'off',
+      'keyword-spacing': 'off',
+    },
   },
 
   {
@@ -79,6 +111,9 @@ export default defineConfig([
       },
     },
     rules: {
+      'no-multi-spaces': 'off',
+      'no-trailing-spaces': 'off',
+      'spaced-comment': 'off',
       'no-var': 'error',
       'prefer-const': 'error',
       'arrow-body-style': ['error', 'as-needed'],
@@ -106,13 +141,24 @@ export default defineConfig([
       ],
       'padding-line-between-statements': [
         'error',
-        {blankLine: 'always', prev: ['const', 'let'], next: ['block']},
-        {blankLine: 'always', prev: ['block'], next: ['const', 'let']},
-        {blankLine: 'always', prev: ['block'], next: ['*']},
-        {blankLine: 'always', prev: ['*'], next: ['block']},
-        {blankLine: 'always', prev: ['block-like'], next: ['*']},
-        {blankLine: 'always', prev: ['*'], next: ['block-like']},
-        {blankLine: 'always', prev: ['*'], next: ['return']},
+        { blankLine: 'always', prev: ['const', 'let'], next: ['block'] },
+        { blankLine: 'always', prev: ['block'], next: ['const', 'let'] },
+        { blankLine: 'always', prev: ['block'], next: ['*'] },
+        { blankLine: 'always', prev: ['*'], next: ['block'] },
+        { blankLine: 'always', prev: ['block-like'], next: ['*'] },
+        { blankLine: 'always', prev: ['*'], next: ['block-like'] },
+        { blankLine: 'always', prev: ['*'], next: ['return'] },
+      ],
+
+      'max-len': [
+        'warn',
+        {
+          code: 120,
+          ignoreStrings: true,
+          ignoreTemplateLiterals: true,
+          ignoreComments: true,
+          ignoreRegExpLiterals: true,
+        },
       ],
     },
   },
@@ -123,6 +169,7 @@ export default defineConfig([
       'func-names': 'off',
       'prefer-arrow-callback': 'off',
       'no-console': 'off',
+      'no-unused-vars': 'warn', // ⚠️ Мягче для шаг-дефиниций
     },
   },
 
@@ -130,7 +177,19 @@ export default defineConfig([
     files: ['**/*.test.js', '**/*.spec.js'],
     rules: {
       'no-console': 'off',
-      'max-len': ['error', {code: 120}],
+      'max-len': ['error', { code: 120 }],
+      'no-unused-vars': 'warn',
+    },
+  },
+  {
+    files: ['**/*.feature'],
+    rules: {
+      'no-unused-vars': 'off',
+      'no-undef': 'off',
+      'prettier/prettier': 'off',
+    },
+    languageOptions: {
+      sourceType: 'script',
     },
   },
 ]);

@@ -39,27 +39,29 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import {assert} from 'chai';
-import HomePage from './home/home-page.js';
+            <pre class="prettyprint source linenums"><code>import { assert } from 'chai';
+
 import AbPage from './ab/ab-page.js';
-import BaseHeader from './header/base-header.js';
-import CatalogPage from './catalog/catalog-page.js';
-import RPage from './r/r-page.js';
-import TasksPage from './tasks/tasks-page.js';
-import ForumPage from './forum/forum-page.js';
-import CleverPage from './header/clever/clever-page.js';
-import KursPage from './kurs/kurs-page.js';
-import PogodaPage from './pogoda/pogoda-page.js';
-import CartPage from './cart/cart-page.js';
 import AutoPage from './auto/auto-page.js';
-import PeoplePage from './people/people-page.js';
-import MoneyPage from './money/money-page.js';
-import TechPage from './tech/tech-page.js';
-import RealtPage from './realt/realt-page.js';
-import SearchModal from './header/search/search-modal.js';
+import AboutPage from './blog/about-page.js';
+import CartPage from './cart/cart-page.js';
 import CatalogMobileCat from './catalog/cat/electronics/catalog-mobile-page.js';
+import CatalogPage from './catalog/catalog-page.js';
 import CatalogPricesPage from './catalog/catalog-prices-page.js';
+import ForumPage from './forum/forum-page.js';
+import BaseHeader from './header/base-header.js';
+import CleverPage from './header/clever/clever-page.js';
+import SearchModal from './header/search/search-modal.js';
 import AuthorizationModal from './home/auth-modal.js';
+import HomePage from './home/home-page.js';
+import KursPage from './kurs/kurs-page.js';
+import MoneyPage from './money/money-page.js';
+import PeoplePage from './people/people-page.js';
+import PogodaPage from './pogoda/pogoda-page.js';
+import RPage from './r/r-page.js';
+import RealtPage from './realt/realt-page.js';
+import TasksPage from './tasks/tasks-page.js';
+import TechPage from './tech/tech-page.js';
 
 class PageObjects {
   constructor() {
@@ -70,6 +72,7 @@ class PageObjects {
 
     this.pages = {
       'Главная страница': new HomePage(),
+      'Страница About': new AboutPage(),
       'Заголовок страницы': new BaseHeader(),
       'Модальное окно авторизации': new AuthorizationModal(),
       'Модальное окно поиска': new SearchModal(),
@@ -129,7 +132,6 @@ class PageObjects {
    */
   async getElementsByName(elementName, pageName) {
     const selector = this.getPageObject(pageName).elements[elementName];
-
     await browser.waitUntil(
       async () => {
         const foundElements = await $$(selector);
@@ -149,9 +151,13 @@ class PageObjects {
    * @param {string} elementName
    * @param {string} pageName
    */
+  /**
+   * @todo описать метод таким образом, чтобы он принимал любое кол-во элементов
+   * и возвращал elementText, если все элементы содержат один и тот же текст.
+   */
   async getElementText(elementName, pageName) {
-    const element = await this.getElementByName(elementName, pageName);
-    const elementText = await element.getText();
+    const element = await this.getElementsByName(elementName, pageName);
+    const elementText = await element.map((el) => el.getText());
     assert.isNotEmpty(elementText, `Для "${elementName}" на "${pageName}" текст не определён`);
 
     return elementText;
@@ -197,7 +203,7 @@ class PageObjects {
     await element.moveTo();
 
     try {
-      await element.isDisplayed({withinViewport: true});
+      await element.isDisplayed({ withinViewport: true });
     } catch (error) {
       throw new Error(`Элемент "${element}" не находится в области видимости: ${error}`);
     }
@@ -242,7 +248,7 @@ class PageObjects {
   async clickOnElement(elementName, pageName) {
     try {
       const element = /** @type {WebdriverIO.Element} */ await this.getElementByName(elementName, pageName);
-      await element.waitForClickable({timeout: 3000});
+      await element.waitForClickable({ timeout: 3000 });
       await element.click();
     } catch (error) {
       throw new Error(`Не удалось нажать на элемент "${elementName}" на странице "${pageName}": ${error.message}`);
@@ -258,9 +264,9 @@ class PageObjects {
     const elements = await this.getElementsByName(elementName, pageName);
 
     try {
-      await elements[index].waitForDisplayed({timeout: 5000});
+      await elements[index].waitForDisplayed({ timeout: 5000 });
       await elements[index].waitForClickable();
-      await elements[index].isDisplayed({withinViewport: true});
+      await elements[index].isDisplayed({ withinViewport: true });
     } catch (error) {
       throw new Error(`Элемент "${elements[index]}" не находится в области видимости: ${error}`);
     }
@@ -303,9 +309,23 @@ class PageObjects {
 
   async cookieAccept() {
     const cookieButton = /** @type {WebdriverIO.Element} */ await $(this.buttonAcceptAllCookies);
-    await cookieButton.waitForClickable({timeout: 10000});
+    await cookieButton.waitForClickable({ timeout: 10000 });
     await cookieButton.click();
-    await cookieButton.waitForDisplayed({reverse: true, timeout: 10000});
+    await cookieButton.waitForDisplayed({ reverse: true, timeout: 10000 });
+  }
+
+  async getElementByIndex(elementName, index, pageName) {
+    const elements = await this.getElementsByName(elementName, pageName);
+
+    if (index >= elements.length) {
+      throw new Error(
+        `Индекс ${index} выходит за пределы списка "${elementName}" (всего элементов: ${elements.length})`
+      );
+    }
+
+    const element = elements[index];
+
+    return await element;
   }
 }
 

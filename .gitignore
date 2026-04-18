@@ -1,7 +1,7 @@
 node_modules
 allure*
 screen*
-*.env
+*.env*
 reports
 .vscode
 .idea/
@@ -9,10 +9,16 @@ reports
 jsdoc.config.json
 gha-creds-*.json
 rag/
-/.roo
+.roo/
 .roomodes
 docs/rag-usage.md
 .rooignore
 .github/workflows/qwen*
 rag-usage.md
 /.aiignore
+qodana.yaml
+.venv/
+.qwen/
+.ai*
+*aider*
+.zed
